@@ -1,0 +1,507 @@
+/* ============================================
+   MEDIA QUERIES & RESPONSIVE DESIGN
+   ============================================ */
+
+/* ===========================================
+   MOBILE DEVICES (max-width: 640px)
+   =========================================== */
+
+@media (max-width: 640px) {
+    /* Navigation */
+    .nav-container {
+        padding: var(--space-3) var(--space-4);
+    }
+    
+    .nav-links {
+        display: none;
+    }
+    
+    /* Hero */
+    .hero {
+        min-height: 50vh;
+    }
+    
+    .hero-title {
+        font-size: var(--text-4xl);
+    }
+    
+    .hero-subtitle {
+        font-size: var(--text-lg);
+    }
+    
+    .hero-badges {
+        justify-content: center;
+    }
+    
+    /* Sections */
+    .main-content {
+        padding: 0 var(--space-4);
+    }
+    
+    .section {
+        margin-bottom: var(--space-12);
+    }
+    
+    .section-header {
+        margin-bottom: var(--space-8);
+    }
+    
+    /* Color Grid */
+    .color-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: var(--space-3);
+    }
+    
+    .color-preview {
+        height: 80px;
+    }
+    
+    /* Components */
+    .component-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .component-demo {
+        flex-direction: column;
+    }
+    
+    /* Forms */
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Icon Grid */
+    .icon-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: var(--space-2);
+    }
+    
+    .icon-item {
+        padding: var(--space-2);
+    }
+    
+    .icon-preview {
+        width: 50px;
+        height: 50px;
+    }
+    
+    /* Grid System */
+    .grid-demo {
+        gap: var(--space-2);
+    }
+    
+    .grid-item {
+        padding: var(--space-2);
+        font-size: var(--text-xs);
+    }
+    
+    /* Shadow Grid */
+    .shadow-grid,
+    .blur-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-4);
+    }
+    
+    .shadow-box,
+    .blur-box {
+        width: 100px;
+        height: 100px;
+    }
+    
+    /* Glass Demo */
+    .glass-demo {
+        grid-template-columns: 1fr;
+        padding: var(--space-4);
+    }
+    
+    /* Loading States */
+    .spinner-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-4);
+    }
+    
+    .skeleton-examples {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Animation Grid */
+    .animation-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-3);
+    }
+    
+    .animation-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    /* Footer */
+    .footer-content {
+        flex-direction: column;
+        gap: var(--space-4);
+        text-align: center;
+    }
+    
+    /* Toast */
+    .toast-container {
+        left: var(--space-4);
+        right: var(--space-4);
+    }
+    
+    .toast {
+        min-width: auto;
+    }
+    
+    /* Modal */
+    .modal-content {
+        width: 95%;
+        max-height: 95vh;
+        border-radius: var(--radius-xl);
+    }
+    
+    .modal-header,
+    .modal-body {
+        padding: var(--space-4);
+    }
+    
+    /* Typography adjustments */
+    .type-display {
+        font-size: var(--text-4xl);
+    }
+    
+    .type-h1 {
+        font-size: var(--text-3xl);
+    }
+    
+    .type-h2 {
+        font-size: var(--text-2xl);
+    }
+    
+    /* Spacing */
+    .spacing-bar {
+        height: 30px;
+    }
+}
+
+/* ===========================================
+   TABLET DEVICES (641px - 1024px)
+   =========================================== */
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    /* Navigation */
+    .nav-links {
+        gap: var(--space-4);
+    }
+    
+    /* Hero */
+    .hero-content {
+        padding: var(--space-6) var(--space-4);
+    }
+    
+    /* Sections */
+    .section {
+        margin-bottom: var(--space-16);
+    }
+    
+    /* Color Grid */
+    .color-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+    
+    /* Components */
+    .component-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Animation Grid */
+    .animation-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ===========================================
+   DESKTOP (1025px - 1440px)
+   =========================================== */
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+    /* Container adjustments */
+    .main-content {
+        padding: 0 var(--space-8);
+    }
+}
+
+/* ===========================================
+   LARGE DESKTOP (1441px+)
+   =========================================== */
+
+@media (min-width: 1441px) {
+    /* Container max-width adjustments */
+    .nav-container,
+    .main-content,
+    .footer-content {
+        max-width: 1440px;
+    }
+    
+    /* Hero enhancements */
+    .hero {
+        min-height: 70vh;
+    }
+}
+
+/* ===========================================
+   LANDSCAPE ORIENTATION
+   =========================================== */
+
+@media (orientation: landscape) and (max-height: 600px) {
+    /* Reduce vertical spacing in landscape mode on small screens */
+    .hero {
+        min-height: 40vh;
+    }
+    
+    .section {
+        margin-bottom: var(--space-10);
+    }
+    
+    .section-header {
+        margin-bottom: var(--space-6);
+    }
+}
+
+/* ===========================================
+   HIGH DPI SCREENS
+   =========================================== */
+
+@media (-webkit-min-device-pixel-ratio: 2),
+       (min-resolution: 192dpi) {
+    /* Enhance borders for retina displays */
+    .card,
+    .component-card,
+    .palette-group,
+    .form-input,
+    .form-select,
+    .form-textarea {
+        border-width: 0.5px;
+    }
+}
+
+/* ===========================================
+   PRINT STYLES
+   =========================================== */
+
+@media print {
+    /* Reset colors for print */
+    * {
+        background: white !important;
+        color: black !important;
+    }
+    
+    /* Hide non-essential elements */
+    .theme-controls,
+    .main-nav,
+    .hero-background,
+    .animation-controls,
+    .toast-container,
+    .modal {
+        display: none !important;
+    }
+    
+    /* Adjust layout for print */
+    .main-content {
+        max-width: 100%;
+        padding: 0;
+    }
+    
+    .section {
+        page-break-inside: avoid;
+        margin-bottom: 2rem;
+    }
+    
+    /* Simplify shadows and borders */
+    .card,
+    .component-card,
+    .palette-group {
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+    }
+    
+    /* Ensure links are visible */
+    a {
+        text-decoration: underline;
+    }
+    
+    a[href]::after {
+        content: " (" attr(href) ")";
+    }
+}
+
+/* ===========================================
+   REDUCED MOTION
+   =========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    /* Disable all animations */
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    /* Remove animation classes */
+    .animate-fade,
+    .animate-scale,
+    .animate-rotate,
+    .animate-slide,
+    .animate-bounce,
+    .animate-flip {
+        animation: none !important;
+    }
+}
+
+/* ===========================================
+   HIGH CONTRAST MODE
+   =========================================== */
+
+@media (prefers-contrast: high) {
+    /* Enhance borders */
+    :root {
+        --border-subtle: var(--border-strong);
+        --border-default: var(--color-neutral-900);
+    }
+    
+    /* Increase text contrast */
+    .text-secondary,
+    .text-tertiary,
+    .text-muted {
+        color: var(--text-primary);
+    }
+    
+    /* Add borders to interactive elements */
+    .btn,
+    .form-input,
+    .form-select,
+    .form-textarea {
+        border: 2px solid currentColor !important;
+    }
+    
+    /* Enhance focus states */
+    *:focus {
+        outline: 3px solid currentColor !important;
+        outline-offset: 2px !important;
+    }
+}
+
+/* ===========================================
+   DARK MODE PREFERENCE
+   =========================================== */
+
+@media (prefers-color-scheme: dark) {
+    /* Auto dark mode if no theme is set */
+    :root:not([data-theme]) {
+        /* Apply dark theme variables */
+        --bg-primary: var(--color-neutral-950);
+        --bg-secondary: var(--color-neutral-900);
+        --bg-tertiary: var(--color-neutral-800);
+        --bg-elevated: var(--color-neutral-800);
+        --text-primary: var(--color-neutral-50);
+        --text-secondary: var(--color-neutral-200);
+        --text-tertiary: var(--color-neutral-300);
+        --text-muted: var(--color-neutral-400);
+        --border-subtle: var(--color-neutral-800);
+        --border-default: var(--color-neutral-700);
+        --border-strong: var(--color-neutral-600);
+    }
+}
+
+/* ===========================================
+   CONTAINER QUERIES (Future-proofing)
+   =========================================== */
+
+@container (min-width: 30rem) {
+    .card {
+        padding: var(--space-6);
+    }
+}
+
+@container (min-width: 40rem) {
+    .card-title {
+        font-size: var(--text-xl);
+    }
+}
+
+/* ===========================================
+   HOVER CAPABILITY
+   =========================================== */
+
+@media (hover: hover) and (pointer: fine) {
+    /* Enhanced hover effects for devices with precise pointers */
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+    
+    .card:hover {
+        transform: translateY(-4px);
+    }
+    
+    .color-card:hover {
+        transform: translateY(-6px) scale(1.05);
+    }
+}
+
+@media (hover: none) {
+    /* Remove hover effects on touch devices */
+    .btn:hover,
+    .card:hover,
+    .color-card:hover {
+        transform: none;
+    }
+    
+    /* Add tap feedback */
+    .btn:active,
+    .card:active {
+        transform: scale(0.98);
+    }
+}
+
+/* ===========================================
+   FOLDABLE DEVICES
+   =========================================== */
+
+@media (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
+    /* Optimizations for foldable devices in folded state */
+    .hero {
+        min-height: 30vh;
+    }
+    
+    .section {
+        margin-bottom: var(--space-8);
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    /* Optimizations for foldable devices in unfolded state */
+    .component-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ===========================================
+   ULTRA-WIDE SCREENS
+   =========================================== */
+
+@media (min-aspect-ratio: 21/9) {
+    /* Optimize layout for ultra-wide displays */
+    .main-content {
+        max-width: 1920px;
+    }
+    
+    .component-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .color-grid {
+        grid-template-columns: repeat(8, 1fr);
+    }
+}
