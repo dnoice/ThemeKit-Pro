@@ -1,0 +1,139 @@
+{
+  "name": "css-themeing-system",
+  "version": "3.0.0",
+  "description": "A comprehensive, modern CSS variables framework for building beautiful, themeable web applications",
+  "main": "index.html",
+  "style": "variables.css",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve . -p 3000",
+    "build": "npm run minify:css && npm run minify:js",
+    "minify:css": "npx cleancss -o dist/styles.min.css variables.css css/styles.css css/queries.css",
+    "minify:js": "npx terser js/script.js -o dist/script.min.js --compress --mangle",
+    "test": "echo \"Info: No test specified\" && exit 0",
+    "lint:css": "npx stylelint \"**/*.css\"",
+    "lint:js": "npx eslint js/**/*.js",
+    "format": "npx prettier --write .",
+    "serve": "npx http-server . -p 8080",
+    "watch": "npx nodemon --watch css --watch js --exec npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dnoice/css-themeing-system.git"
+  },
+  "keywords": [
+    "css",
+    "theme",
+    "theming",
+    "design-system",
+    "css-variables",
+    "custom-properties",
+    "framework",
+    "ui",
+    "ux",
+    "responsive",
+    "dark-mode",
+    "light-mode",
+    "accessibility",
+    "wcag",
+    "component-library",
+    "design-tokens",
+    "grid-system",
+    "typography",
+    "animations",
+    "glassmorphism",
+    "icons",
+    "svg",
+    "vanilla-css",
+    "vanilla-js",
+    "no-dependencies",
+    "lightweight",
+    "modern",
+    "web-components"
+  ],
+  "author": {
+    "name": "dnoice",
+    "url": "https://github.com/dnoice"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dnoice/css-themeing-system/issues"
+  },
+  "homepage": "https://github.com/dnoice/css-themeing-system#readme",
+  "files": [
+    "variables.css",
+    "css/",
+    "js/",
+    "index.html",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "devDependencies": {
+    "clean-css-cli": "^5.6.2",
+    "eslint": "^8.50.0",
+    "http-server": "^14.1.1",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.3",
+    "serve": "^14.2.1",
+    "stylelint": "^15.10.3",
+    "stylelint-config-standard": "^34.0.0",
+    "terser": "^5.20.0"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "useTabs": false,
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "arrowParens": "avoid",
+    "printWidth": 100
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard",
+    "rules": {
+      "custom-property-pattern": "^([a-z][a-z0-9]*)(-[a-z0-9]+)*$",
+      "selector-class-pattern": "^([a-z][a-z0-9]*)(-[a-z0-9]+)*$",
+      "at-rule-no-unknown": [
+        true,
+        {
+          "ignoreAtRules": [
+            "tailwind",
+            "apply",
+            "variants",
+            "responsive",
+            "screen"
+          ]
+        }
+      ]
+    }
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es2021": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+      "ecmaVersion": 12,
+      "sourceType": "module"
+    },
+    "rules": {
+      "indent": ["error", 2],
+      "linebreak-style": ["error", "unix"],
+      "quotes": ["error", "single"],
+      "semi": ["error", "always"]
+    }
+  }
+}
