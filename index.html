@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Theme System | Design Variables Framework</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="variables.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/queries.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- SVG Icon Definitions -->
+    <svg style="display: none;">
+        <defs>
+            <!-- UI Icons -->
+            <symbol id="icon-home" viewBox="0 0 24 24">
+                <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </symbol>
+            
+            <symbol id="icon-settings" viewBox="0 0 24 24">
+                <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </symbol>
+            
+            <symbol id="icon-search" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </symbol>
+            
+            <symbol id="icon-user" viewBox="0 0 24 24">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </symbol>
+            
+            <symbol id="icon-bell" viewBox="0 0 24 24">
+                <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <path d="M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </symbol>
+            
+            <symbol id="icon-mail" viewBox="0 0 24 24">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </symbol>
+            
+            <symbol id="icon-heart" viewBox="0 0 24 24">
+                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </symbol>
+            
+            <symbol id="icon-star" viewBox="0 0 24 24">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </symbol>
+            
+            <symbol id="icon-download" viewBox="0 0 24 24">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <polyline points="7 10 12 15 17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </symbol>
+            
+            <symbol id="icon-upload" viewBox="0 0 24 24">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <polyline points="17 8 12 3 7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <line x1="12" y1="3" x2="12" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </symbol>
+            
+            <symbol id="icon-check" viewBox="0 0 24 24">
+                <polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </symbol>
+            
+            <symbol id="icon-x" viewBox="0 0 24 24">
+                <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>
+            
+            <symbol id="icon-arrow-right" viewBox="0 0 24 24">
+                <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="12 5 19 12 12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </symbol>
+            
+            <symbol id="icon-menu" viewBox="0 0 24 24">
+                <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>
+            
+            <symbol id="icon-grid" viewBox="0 0 24 24">
+                <rect x="3" y="3" width="7" height="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <rect x="14" y="3" width="7" height="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <rect x="14" y="14" width="7" height="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <rect x="3" y="14" width="7" height="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </symbol>
+            
+            <symbol id="icon-layers" viewBox="0 0 24 24">
+                <polygon points="12 2 2 7 12 12 22 7 12 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <polyline points="2 17 12 22 22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <polyline points="2 12 12 17 22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </symbol>
+        </defs>
+    </svg>
+    <!-- Theme Controls -->
+    <div class="theme-controls">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+            <svg class="theme-icon sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="theme-icon moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </button>
+        <div class="theme-menu" id="themeMenu">
+            <button class="theme-option" data-theme="light">
+                <span class="theme-option-icon">☀️</span>
+                <span>Light</span>
+            </button>
+            <button class="theme-option" data-theme="dark">
+                <span class="theme-option-icon">🌙</span>
+                <span>Dark</span>
+            </button>
+            <button class="theme-option" data-theme="cosmic">
+                <span class="theme-option-icon">✨</span>
+                <span>Cosmic</span>
+            </button>
+            <button class="theme-option" data-theme="forest">
+                <span class="theme-option-icon">🌿</span>
+                <span>Forest</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="nav-logo">
+                    <span class="logo-icon">◈</span>
+                    <span class="logo-text">ThemeSystem</span>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#colors" class="nav-link">Colors</a></li>
+                <li><a href="#typography" class="nav-link">Typography</a></li>
+                <li><a href="#icons" class="nav-link">Icons</a></li>
+                <li><a href="#components" class="nav-link">Components</a></li>
+                <li><a href="#forms" class="nav-link">Forms</a></li>
+                <li><a href="#grid" class="nav-link">Grid</a></li>
+                <li><a href="#shadows" class="nav-link">Effects</a></li>
+                <li><a href="#spacing" class="nav-link">Spacing</a></li>
+                <li><a href="#animations" class="nav-link">Animations</a></li>
+                <li><a href="#loading" class="nav-link">Loading</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-background">
+            <div class="hero-gradient"></div>
+            <div class="hero-pattern"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="hero-word">Modern</span>
+                <span class="hero-word">Theme</span>
+                <span class="hero-word accent">System</span>
+            </h1>
+            <p class="hero-subtitle">
+                A comprehensive CSS variables framework for building beautiful, consistent interfaces
+            </p>
+            <div class="hero-badges">
+                <span class="badge badge-primary">v3.0</span>
+                <span class="badge badge-secondary">Production Ready</span>
+                <span class="badge badge-tertiary">WCAG AAA</span>
+                <span class="badge badge-accent">Open Source</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Color Palette Section -->
+        <section id="colors" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Color Palette</h2>
+                <p class="section-description">A carefully crafted color system with semantic naming</p>
+            </div>
+            
+            <div class="palette-container">
+                <div class="palette-group">
+                    <h3 class="palette-title">Primary Colors</h3>
+                    <div class="color-grid">
+                        <div class="color-card" data-color="--color-primary-50">
+                            <div class="color-preview" style="background: var(--color-primary-50);"></div>
+                            <div class="color-info">
+                                <span class="color-name">Primary 50</span>
+                                <span class="color-value">--color-primary-50</span>
+                            </div>
+                        </div>
+                        <div class="color-card" data-color="--color-primary-100">
+                            <div class="color-preview" style="background: var(--color-primary-100);"></div>
+                            <div class="color-info">
+                                <span class="color-name">Primary 100</span>
+                                <span class="color-value">--color-primary-100</span>
+                            </div>
+                        </div>
+                        <div class="color-card" data-color="--color-primary-200">
+                            <div class="color-preview" style="background: var(--color-primary-200);"></div>
+                            <div class="color-info">
+                                <span class="color-name">Primary 200</span>
+                                <span class="color-value">--color-primary-200</span>
+                            </div>
+                        </div>
+                        <div class="color-card" data-color="--color-primary-300">
+                            <div class="color-preview" style="background: var(--color-primary-300);"></div>
+                            <div class="color-info">
+                                <span class="color-name">Primary 300</span>
+                                <span class="color-value">--color-primary-300</span>
+                            </div>
+                        </div>
+                        <div class="color-card" data-color="--color-primary-400">
+                            <div class="color-preview" style="background: var(--color-primary-400);"></div>
+                            <div class="color-info">
+                                <span class="color-name">Primary 400</span>
+                                <span class="color-value">--color-primary-400</span>
+                            </div>
+                        </div>
+                        <div class="color-card" data-color="--color-primary-500">
+                            <div class="color-preview" style="background: var(--color-primary-500);"></div>
+                            <div class="color-info">
+                                <span class="color-name">Primary 500</span>
+                                <span class="color-value">--color-primary-500</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="palette-group">
+                    <h3 class="palette-title">Neutral Colors</h3>
+                    <div class="color-grid">
+                        <div class="color-card" data-color="--color-neutral-50">
+                            <div class="color-preview" style="background: var(--color-neutral-50);"></div>
+                            <div class="color-info">
+                                <span class="color-name">Neutral 50</span>
+                                <span class="color-value">--color-neutral-50</span>
+                            </div>
+                        </div>
+                        <div class="color-card" data-color="--color-neutral-200">
+                            <div class="color-preview" style="background: var(--color-neutral-200);"></div>
+                            <div class="color-info">
+                                <span class="color-name">Neutral 200</span>
+                                <span class="color-value">--color-neutral-200</span>
+                            </div>
+                        </div>
+                        <div class="color-card" data-color="--color-neutral-400">
+                            <div class="color-preview" style="background: var(--color-neutral-400);"></div>
+                            <div class="color-info">
+                                <span class="color-name">Neutral 400</span>
+                                <span class="color-value">--color-neutral-400</span>
+                            </div>
+                        </div>
+                        <div class="color-card" data-color="--color-neutral-600">
+                            <div class="color-preview" style="background: var(--color-neutral-600);"></div>
+                            <div class="color-info">
+                                <span class="color-name">Neutral 600</span>
+                                <span class="color-value">--color-neutral-600</span>
+                            </div>
+                        </div>
+                        <div class="color-card" data-color="--color-neutral-800">
+                            <div class="color-preview" style="background: var(--color-neutral-800);"></div>
+                            <div class="color-info">
+                                <span class="color-name">Neutral 800</span>
+                                <span class="color-value">--color-neutral-800</span>
+                            </div>
+                        </div>
+                        <div class="color-card" data-color="--color-neutral-900">
+                            <div class="color-preview" style="background: var(--color-neutral-900);"></div>
+                            <div class="color-info">
+                                <span class="color-name">Neutral 900</span>
+                                <span class="color-value">--color-neutral-900</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typography Section -->
+        <section id="typography" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Typography Scale</h2>
+                <p class="section-description">Fluid typography system with perfect vertical rhythm</p>
+            </div>
+            
+            <div class="typography-showcase">
+                <div class="type-sample">
+                    <p class="type-display">Display</p>
+                    <code class="type-code">font-size: var(--text-display);</code>
+                </div>
+                <div class="type-sample">
+                    <p class="type-h1">Heading 1</p>
+                    <code class="type-code">font-size: var(--text-h1);</code>
+                </div>
+                <div class="type-sample">
+                    <p class="type-h2">Heading 2</p>
+                    <code class="type-code">font-size: var(--text-h2);</code>
+                </div>
+                <div class="type-sample">
+                    <p class="type-h3">Heading 3</p>
+                    <code class="type-code">font-size: var(--text-h3);</code>
+                </div>
+                <div class="type-sample">
+                    <p class="type-body">Body Text</p>
+                    <code class="type-code">font-size: var(--text-body);</code>
+                </div>
+                <div class="type-sample">
+                    <p class="type-small">Small Text</p>
+                    <code class="type-code">font-size: var(--text-small);</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Icons Section -->
+        <section id="icons" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Icon System</h2>
+                <p class="section-description">Custom SVG icons with flexible sizing and styling</p>
+            </div>
+            
+            <div class="icons-showcase">
+                <div class="icon-grid">
+                    <div class="icon-item" data-icon="home">
+                        <div class="icon-preview">
+                            <svg class="icon icon-lg">
+                                <use href="#icon-home"></use>
+                            </svg>
+                        </div>
+                        <span class="icon-label">home</span>
+                    </div>
+                    <div class="icon-item" data-icon="settings">
+                        <div class="icon-preview">
+                            <svg class="icon icon-lg">
+                                <use href="#icon-settings"></use>
+                            </svg>
+                        </div>
+                        <span class="icon-label">settings</span>
+                    </div>
+                    <div class="icon-item" data-icon="search">
+                        <div class="icon-preview">
+                            <svg class="icon icon-lg">
+                                <use href="#icon-search"></use>
+                            </svg>
+                        </div>
+                        <span class="icon-label">search</span>
+                    </div>
+                    <div class="icon-item" data-icon="user">
+                        <div class="icon-preview">
+                            <svg class="icon icon-lg">
+                                <use href="#icon-user"></use>
+                            </svg>
+                        </div>
+                        <span class="icon-label">user</span>
+                    </div>
+                    <div class="icon-item" data-icon="bell">
+                        <div class="icon-preview">
+                            <svg class="icon icon-lg">
+                                <use href="#icon-bell"></use>
+                            </svg>
+                        </div>
+                        <span class="icon-label">bell</span>
+                    </div>
+                    <div class="icon-item" data-icon="mail">
+                        <div class="icon-preview">
+                            <svg class="icon icon-lg">
+                                <use href="#icon-mail"></use>
+                            </svg>
+                        </div>
+                        <span class="icon-label">mail</span>
+                    </div>
+                    <div class="icon-item" data-icon="heart">
+                        <div class="icon-preview">
+                            <svg class="icon icon-lg">
+                                <use href="#icon-heart"></use>
+                            </svg>
+                        </div>
+                        <span class="icon-label">heart</span>
+                    </div>
+                    <div class="icon-item" data-icon="star">
+                        <div class="icon-preview">
+                            <svg class="icon icon-lg">
+                                <use href="#icon-star"></use>
+                            </svg>
+                        </div>
+                        <span class="icon-label">star</span>
+                    </div>
+                    <div class="icon-item" data-icon="download">
+                        <div class="icon-preview">
+                            <svg class="icon icon-lg">
+                                <use href="#icon-download"></use>
+                            </svg>
+                        </div>
+                        <span class="icon-label">download</span>
+                    </div>
+                    <div class="icon-item" data-icon="upload">
+                        <div class="icon-preview">
+                            <svg class="icon icon-lg">
+                                <use href="#icon-upload"></use>
+                            </svg>
+                        </div>
+                        <span class="icon-label">upload</span>
+                    </div>
+                    <div class="icon-item" data-icon="check">
+                        <div class="icon-preview">
+                            <svg class="icon icon-lg">
+                                <use href="#icon-check"></use>
+                            </svg>
+                        </div>
+                        <span class="icon-label">check</span>
+                    </div>
+                    <div class="icon-item" data-icon="x">
+                        <div class="icon-preview">
+                            <svg class="icon icon-lg">
+                                <use href="#icon-x"></use>
+                            </svg>
+                        </div>
+                        <span class="icon-label">close</span>
+                    </div>
+                </div>
+                
+                <div class="icon-sizes">
+                    <h3 class="subsection-title">Icon Sizes</h3>
+                    <div class="size-examples">
+                        <div class="size-item">
+                            <svg class="icon icon-xs"><use href="#icon-star"></use></svg>
+                            <code>icon-xs</code>
+                        </div>
+                        <div class="size-item">
+                            <svg class="icon icon-sm"><use href="#icon-star"></use></svg>
+                            <code>icon-sm</code>
+                        </div>
+                        <div class="size-item">
+                            <svg class="icon icon-md"><use href="#icon-star"></use></svg>
+                            <code>icon-md</code>
+                        </div>
+                        <div class="size-item">
+                            <svg class="icon icon-lg"><use href="#icon-star"></use></svg>
+                            <code>icon-lg</code>
+                        </div>
+                        <div class="size-item">
+                            <svg class="icon icon-xl"><use href="#icon-star"></use></svg>
+                            <code>icon-xl</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Components Section -->
+        <section id="components" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Components</h2>
+                <p class="section-description">Pre-built UI components using the theme system</p>
+            </div>
+            
+            <div class="component-grid">
+                <!-- Buttons -->
+                <div class="component-card">
+                    <h3 class="component-title">Buttons</h3>
+                    <div class="component-demo">
+                        <button class="btn btn-primary">Primary</button>
+                        <button class="btn btn-secondary">Secondary</button>
+                        <button class="btn btn-outline">Outline</button>
+                        <button class="btn btn-ghost">Ghost</button>
+                    </div>
+                </div>
+
+                <!-- Cards -->
+                <div class="component-card">
+                    <h3 class="component-title">Cards</h3>
+                    <div class="card-examples">
+                        <div class="card">
+                            <h4 class="card-title">Default Card</h4>
+                            <p class="card-text">A simple card component with subtle shadow</p>
+                        </div>
+                        <div class="card card-elevated">
+                            <h4 class="card-title">Elevated Card</h4>
+                            <p class="card-text">Higher elevation for important content</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alerts -->
+                <div class="component-card full-width">
+                    <h3 class="component-title">Alerts</h3>
+                    <div class="alert-examples">
+                        <div class="alert alert-info">
+                            <span class="alert-icon">ℹ️</span>
+                            <span>Information alert with helpful details</span>
+                        </div>
+                        <div class="alert alert-success">
+                            <span class="alert-icon">✅</span>
+                            <span>Success! Operation completed successfully</span>
+                        </div>
+                        <div class="alert alert-warning">
+                            <span class="alert-icon">⚠️</span>
+                            <span>Warning: Please review before proceeding</span>
+                        </div>
+                        <div class="alert alert-error">
+                            <span class="alert-icon">❌</span>
+                            <span>Error: Something went wrong</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Forms Section -->
+        <section id="forms" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Form Elements</h2>
+                <p class="section-description">Accessible and beautiful form components</p>
+            </div>
+            
+            <div class="form-showcase">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Text Input</label>
+                        <input type="text" class="form-input" placeholder="Enter text...">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Select</label>
+                        <select class="form-select">
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                            <option>Option 3</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" placeholder="email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-input" placeholder="••••••••">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Textarea</label>
+                    <textarea class="form-textarea" rows="4" placeholder="Enter your message..."></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" class="form-checkbox">
+                            <span>I agree to the terms</span>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="radio-label">
+                            <input type="radio" name="option" class="form-radio">
+                            <span>Option A</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="option" class="form-radio">
+                            <span>Option B</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Grid System Section -->
+        <section id="grid" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Grid System</h2>
+                <p class="section-description">Flexible grid layouts with CSS Grid and Flexbox</p>
+            </div>
+            
+            <div class="grid-showcase">
+                <h3 class="subsection-title">12 Column Grid</h3>
+                <div class="grid-demo grid-12">
+                    <div class="grid-item col-span-1">1</div>
+                    <div class="grid-item col-span-1">1</div>
+                    <div class="grid-item col-span-1">1</div>
+                    <div class="grid-item col-span-1">1</div>
+                    <div class="grid-item col-span-1">1</div>
+                    <div class="grid-item col-span-1">1</div>
+                    <div class="grid-item col-span-1">1</div>
+                    <div class="grid-item col-span-1">1</div>
+                    <div class="grid-item col-span-1">1</div>
+                    <div class="grid-item col-span-1">1</div>
+                    <div class="grid-item col-span-1">1</div>
+                    <div class="grid-item col-span-1">1</div>
+                </div>
+                
+                <div class="grid-demo grid-12">
+                    <div class="grid-item col-span-6">6 Columns</div>
+                    <div class="grid-item col-span-6">6 Columns</div>
+                </div>
+                
+                <div class="grid-demo grid-12">
+                    <div class="grid-item col-span-4">4 Cols</div>
+                    <div class="grid-item col-span-4">4 Cols</div>
+                    <div class="grid-item col-span-4">4 Cols</div>
+                </div>
+                
+                <div class="grid-demo grid-12">
+                    <div class="grid-item col-span-3">3</div>
+                    <div class="grid-item col-span-6">6 Columns</div>
+                    <div class="grid-item col-span-3">3</div>
+                </div>
+                
+                <h3 class="subsection-title">Auto-Fit Grid</h3>
+                <div class="grid-demo grid-auto">
+                    <div class="grid-item">Auto</div>
+                    <div class="grid-item">Auto</div>
+                    <div class="grid-item">Auto</div>
+                    <div class="grid-item">Auto</div>
+                    <div class="grid-item">Auto</div>
+                </div>
+                
+                <h3 class="subsection-title">Flexbox Layouts</h3>
+                <div class="flex-demo">
+                    <div class="flex-container">
+                        <div class="flex-item flex-1">Flex 1</div>
+                        <div class="flex-item flex-2">Flex 2</div>
+                        <div class="flex-item flex-1">Flex 1</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shadows & Effects Section -->
+        <section id="shadows" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Shadows & Effects</h2>
+                <p class="section-description">Elevation system and visual effects</p>
+            </div>
+            
+            <div class="effects-showcase">
+                <div class="shadow-grid">
+                    <div class="shadow-item">
+                        <div class="shadow-box shadow-xs"></div>
+                        <code>--shadow-xs</code>
+                    </div>
+                    <div class="shadow-item">
+                        <div class="shadow-box shadow-sm"></div>
+                        <code>--shadow-sm</code>
+                    </div>
+                    <div class="shadow-item">
+                        <div class="shadow-box shadow-md"></div>
+                        <code>--shadow-md</code>
+                    </div>
+                    <div class="shadow-item">
+                        <div class="shadow-box shadow-lg"></div>
+                        <code>--shadow-lg</code>
+                    </div>
+                    <div class="shadow-item">
+                        <div class="shadow-box shadow-xl"></div>
+                        <code>--shadow-xl</code>
+                    </div>
+                    <div class="shadow-item">
+                        <div class="shadow-box shadow-2xl"></div>
+                        <code>--shadow-2xl</code>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title">Colored Shadows</h3>
+                <div class="shadow-grid">
+                    <div class="shadow-item">
+                        <div class="shadow-box shadow-primary"></div>
+                        <code>--shadow-primary</code>
+                    </div>
+                    <div class="shadow-item">
+                        <div class="shadow-box shadow-secondary"></div>
+                        <code>--shadow-secondary</code>
+                    </div>
+                    <div class="shadow-item">
+                        <div class="shadow-box shadow-accent"></div>
+                        <code>--shadow-accent</code>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title">Blur Effects</h3>
+                <div class="blur-grid">
+                    <div class="blur-item">
+                        <div class="blur-box blur-sm">Blur SM</div>
+                        <code>--blur-sm</code>
+                    </div>
+                    <div class="blur-item">
+                        <div class="blur-box blur-md">Blur MD</div>
+                        <code>--blur-md</code>
+                    </div>
+                    <div class="blur-item">
+                        <div class="blur-box blur-lg">Blur LG</div>
+                        <code>--blur-lg</code>
+                    </div>
+                    <div class="blur-item">
+                        <div class="blur-box blur-xl">Blur XL</div>
+                        <code>--blur-xl</code>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title">Glassmorphism</h3>
+                <div class="glass-demo">
+                    <div class="glass-card">
+                        <h4>Glass Card</h4>
+                        <p>Frosted glass effect with backdrop blur</p>
+                    </div>
+                    <div class="glass-card glass-dark">
+                        <h4>Dark Glass</h4>
+                        <p>Dark variant with subtle transparency</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spacing Section -->
+        <section id="spacing" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Spacing System</h2>
+                <p class="section-description">Consistent spacing scale based on 8px grid</p>
+            </div>
+            
+            <div class="spacing-showcase">
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="width: var(--space-1);"></div>
+                    <span class="spacing-label">--space-1 (4px)</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="width: var(--space-2);"></div>
+                    <span class="spacing-label">--space-2 (8px)</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="width: var(--space-3);"></div>
+                    <span class="spacing-label">--space-3 (12px)</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="width: var(--space-4);"></div>
+                    <span class="spacing-label">--space-4 (16px)</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="width: var(--space-6);"></div>
+                    <span class="spacing-label">--space-6 (24px)</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="width: var(--space-8);"></div>
+                    <span class="spacing-label">--space-8 (32px)</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="width: var(--space-12);"></div>
+                    <span class="spacing-label">--space-12 (48px)</span>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="width: var(--space-16);"></div>
+                    <span class="spacing-label">--space-16 (64px)</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animations Section -->
+        <section id="animations" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Animations</h2>
+                <p class="section-description">Smooth transitions and engaging animations</p>
+            </div>
+            
+            <div class="animation-controls">
+                <button class="btn btn-primary" id="playAnimations">Play All Animations</button>
+                <select class="form-select" id="animationSpeed">
+                    <option value="fast">Fast (150ms)</option>
+                    <option value="normal" selected>Normal (300ms)</option>
+                    <option value="slow">Slow (500ms)</option>
+                    <option value="slower">Slower (1000ms)</option>
+                </select>
+            </div>
+            
+            <div class="animation-grid">
+                <div class="animation-card" data-animation="fade">
+                    <div class="animation-box">Fade</div>
+                </div>
+                <div class="animation-card" data-animation="scale">
+                    <div class="animation-box">Scale</div>
+                </div>
+                <div class="animation-card" data-animation="rotate">
+                    <div class="animation-box">Rotate</div>
+                </div>
+                <div class="animation-card" data-animation="slide">
+                    <div class="animation-box">Slide</div>
+                </div>
+                <div class="animation-card" data-animation="bounce">
+                    <div class="animation-box">Bounce</div>
+                </div>
+                <div class="animation-card" data-animation="flip">
+                    <div class="animation-box">Flip</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading States Section -->
+        <section id="loading" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Loading States</h2>
+                <p class="section-description">Smooth loading animations and skeleton screens</p>
+            </div>
+            
+            <div class="loading-showcase">
+                <h3 class="subsection-title">Spinners</h3>
+                <div class="spinner-grid">
+                    <div class="spinner-item">
+                        <div class="spinner spinner-circle"></div>
+                        <code>Circle</code>
+                    </div>
+                    <div class="spinner-item">
+                        <div class="spinner spinner-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <code>Dots</code>
+                    </div>
+                    <div class="spinner-item">
+                        <div class="spinner spinner-pulse"></div>
+                        <code>Pulse</code>
+                    </div>
+                    <div class="spinner-item">
+                        <div class="spinner spinner-bars">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <code>Bars</code>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title">Progress Bars</h3>
+                <div class="progress-examples">
+                    <div class="progress-item">
+                        <label>Default Progress</label>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <label>Striped Progress</label>
+                        <div class="progress progress-striped">
+                            <div class="progress-bar" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <label>Animated Progress</label>
+                        <div class="progress progress-animated">
+                            <div class="progress-bar" style="width: 45%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title">Skeleton Screens</h3>
+                <div class="skeleton-examples">
+                    <div class="skeleton-card">
+                        <div class="skeleton skeleton-header"></div>
+                        <div class="skeleton skeleton-text"></div>
+                        <div class="skeleton skeleton-text" style="width: 80%"></div>
+                        <div class="skeleton skeleton-text" style="width: 60%"></div>
+                        <div class="skeleton-footer">
+                            <div class="skeleton skeleton-button"></div>
+                            <div class="skeleton skeleton-button"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skeleton-list">
+                        <div class="skeleton-item">
+                            <div class="skeleton skeleton-avatar"></div>
+                            <div class="skeleton-content">
+                                <div class="skeleton skeleton-title"></div>
+                                <div class="skeleton skeleton-subtitle"></div>
+                            </div>
+                        </div>
+                        <div class="skeleton-item">
+                            <div class="skeleton skeleton-avatar"></div>
+                            <div class="skeleton-content">
+                                <div class="skeleton skeleton-title"></div>
+                                <div class="skeleton skeleton-subtitle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Modern Theme System. Built with CSS Variables.</p>
+            <div class="footer-links">
+                <a href="#" class="footer-link">Documentation</a>
+                <a href="#" class="footer-link">GitHub</a>
+                <a href="#" class="footer-link">License</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Modal Title</h3>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                Modal content goes here
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+</body>
+</html>
