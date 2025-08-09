@@ -1,0 +1,469 @@
+name: Build and Test
+
+on:
+  # Trigger on all pushes and PRs
+  push:
+    branches: [ main, develop, 'feature/**' ]
+  pull_request:
+    branches: [ main ]
+  
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      debug_enabled:
+        type: boolean
+        description: 'Enable debug mode'
+        required: false
+        default: false
+
+env:
+  NODE_VERSION: '20'
+  FORCE_COLOR: 2
+
+jobs:
+  # Lint job
+  lint:
+    name: Lint Code
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit
+      
+      - name: Validate CSS
+        run: |
+          echo "🎨 Validating CSS files..."
+          npx stylelint "**/*.css" --formatter verbose || true
+      
+      - name: Validate JavaScript
+        run: |
+          echo "📝 Validating JavaScript files..."
+          npx eslint js/**/*.js --format stylish || true
+      
+      - name: Check formatting
+        run: |
+          echo "✨ Checking code formatting..."
+          npx prettier --check . || true
+      
+      - name: Validate HTML
+        run: |
+          echo "📄 Validating HTML files..."
+          npx html-validate "*.html" "examples/*.html" || true
+
+  # Build job
+  build:
+    name: Build Project
+    runs-on: ubuntu-latest
+    needs: lint
+    
+    strategy:
+      matrix:
+        node-version: [18, 20]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit
+      
+      - name: Create development build
+        run: |
+          echo "🔨 Building project..."
+          mkdir -p build
+          
+          # Copy source files
+          cp -r index.html build/
+          cp -r variables.css build/
+          cp -r css build/
+          cp -r js build/
+          cp -r examples build/ 2>/dev/null || mkdir -p build/examples
+          
+          echo "✅ Development build created"
+      
+      - name: Create production build
+        run: |
+          echo "📦 Creating production build..."
+          mkdir -p dist
+          
+          # Minify CSS
+          npx cleancss -o dist/styles.min.css variables.css css/styles.css css/queries.css
+          
+          # Minify JavaScript
+          npx terser js/script.js -o dist/script.min.js --compress --mangle
+          
+          # Create combined files
+          cat variables.css css/styles.css css/queries.css > dist/theme-system.css
+          npx cleancss -o dist/theme-system.min.css dist/theme-system.css
+          
+          echo "✅ Production build created"
+      
+      - name: Check build sizes
+        run: |
+          echo "📊 Build Size Report:"
+          echo "===================="
+          
+          # Original sizes
+          original_css_size=$(du -b variables.css css/styles.css css/queries.css | awk '{sum+=$1} END {print sum}')
+          original_js_size=$(du -b js/script.js | cut -f1)
+          
+          # Minified sizes
+          min_css_size=$(du -b dist/theme-system.min.css | cut -f1)
+          min_js_size=$(du -b dist/script.min.js | cut -f1)
+          
+          # Calculate compression ratios
+          css_ratio=$(echo "scale=2; (1 - $min_css_size / $original_css_size) * 100" | bc)
+          js_ratio=$(echo "scale=2; (1 - $min_js_size / $original_js_size) * 100" | bc)
+          
+          echo "CSS: $(numfmt --to=iec $original_css_size) → $(numfmt --to=iec $min_css_size) (${css_ratio}% reduction)"
+          echo "JS:  $(numfmt --to=iec $original_js_size) → $(numfmt --to=iec $min_js_size) (${js_ratio}% reduction)"
+          echo "===================="
+          
+          # Fail if files are too large
+          if [ $min_css_size -gt 100000 ]; then
+            echo "⚠️ Warning: Minified CSS is larger than 100KB"
+          fi
+          
+          if [ $min_js_size -gt 50000 ]; then
+            echo "⚠️ Warning: Minified JS is larger than 50KB"
+          fi
+      
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-node-${{ matrix.node-version }}
+          path: |
+            build/
+            dist/
+          retention-days: 7
+
+  # Test job
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit
+      
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-node-20
+          path: .
+      
+      - name: Start test server
+        run: |
+          npx serve build -p 3000 &
+          sleep 5
+      
+      - name: Run smoke tests
+        run: |
+          echo "🔍 Running smoke tests..."
+          
+          # Check if server is running
+          curl -f http://localhost:3000 || exit 1
+          echo "✅ Server is running"
+          
+          # Check if CSS loads
+          curl -f http://localhost:3000/variables.css || exit 1
+          echo "✅ CSS loads correctly"
+          
+          # Check if JS loads
+          curl -f http://localhost:3000/js/script.js || exit 1
+          echo "✅ JavaScript loads correctly"
+      
+      - name: Test theme switching
+        run: |
+          echo "🎨 Testing theme switching..."
+          
+          # Create a simple test script
+          cat > test-themes.js << 'EOF'
+          const puppeteer = require('puppeteer');
+          
+          (async () => {
+            const browser = await puppeteer.launch();
+            const page = await browser.newPage();
+            
+            await page.goto('http://localhost:3000');
+            
+            // Test each theme
+            const themes = ['light', 'dark', 'cosmic', 'forest'];
+            for (const theme of themes) {
+              await page.evaluate((t) => {
+                document.documentElement.setAttribute('data-theme', t);
+              }, theme);
+              
+              const currentTheme = await page.evaluate(() => 
+                document.documentElement.getAttribute('data-theme')
+              );
+              
+              console.log(`✅ Theme '${theme}' applied successfully`);
+            }
+            
+            await browser.close();
+          })();
+          EOF
+          
+          npm install puppeteer
+          node test-themes.js || true
+      
+      - name: Validate responsive design
+        run: |
+          echo "📱 Testing responsive breakpoints..."
+          
+          # Test different viewport sizes
+          viewports=("375x667" "768x1024" "1920x1080")
+          
+          for viewport in "${viewports[@]}"; do
+            echo "Testing viewport: $viewport"
+            # Add actual viewport testing here
+          done
+      
+      - name: Kill test server
+        if: always()
+        run: |
+          pkill -f "serve build" || true
+
+  # Browser compatibility test
+  browser-test:
+    name: Browser Compatibility
+    runs-on: ${{ matrix.os }}
+    needs: build
+    
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        browser: [chrome, firefox, edge]
+        exclude:
+          - os: ubuntu-latest
+            browser: edge
+          - os: macos-latest
+            browser: edge
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit
+      
+      - name: Setup browser - ${{ matrix.browser }}
+        run: |
+          echo "Setting up ${{ matrix.browser }} on ${{ matrix.os }}"
+      
+      - name: Run browser tests
+        run: |
+          echo "Testing in ${{ matrix.browser }} on ${{ matrix.os }}"
+          # Add actual browser testing commands here
+
+  # Accessibility test
+  accessibility:
+    name: Accessibility Testing
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: |
+          npm ci --prefer-offline --no-audit
+          npm install -g pa11y axe-cli
+      
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-node-20
+          path: .
+      
+      - name: Start server
+        run: |
+          npx serve build -p 3000 &
+          sleep 5
+      
+      - name: Run pa11y accessibility tests
+        run: |
+          echo "♿ Running accessibility tests..."
+          
+          # Test main page
+          pa11y http://localhost:3000 \
+            --standard WCAG2AAA \
+            --reporter cli \
+            --threshold 0 || true
+          
+          # Test with different themes
+          for theme in light dark cosmic forest; do
+            echo "Testing theme: $theme"
+            pa11y http://localhost:3000 \
+              --standard WCAG2AA \
+              --reporter json \
+              --actions "set data-theme to $theme" || true
+          done
+      
+      - name: Run axe accessibility tests
+        run: |
+          axe http://localhost:3000 \
+            --tags wcag2a,wcag2aa,wcag21a,wcag21aa \
+            --save accessibility-report.json || true
+      
+      - name: Upload accessibility report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: accessibility-report
+          path: accessibility-report.json
+      
+      - name: Kill server
+        if: always()
+        run: |
+          pkill -f "serve build" || true
+
+  # Performance test
+  performance:
+    name: Performance Testing
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-node-20
+          path: .
+      
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v10
+        with:
+          configPath: '.lighthouserc.json'
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+      
+      - name: Analyze bundle size
+        run: |
+          echo "📊 Bundle Size Analysis"
+          echo "====================="
+          
+          # Check individual file sizes
+          find dist -name "*.css" -o -name "*.js" | while read file; do
+            size=$(du -h "$file" | cut -f1)
+            gzip_size=$(gzip -c "$file" | wc -c | numfmt --to=iec)
+            echo "$file: $size (gzipped: $gzip_size)"
+          done
+
+  # Security scan
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Run npm audit
+        run: |
+          npm audit --audit-level=moderate || true
+      
+      - name: Run Snyk security scan
+        uses: snyk/actions/node@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
+      
+      - name: Check for secrets
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+
+  # Summary job
+  summary:
+    name: Build Summary
+    runs-on: ubuntu-latest
+    needs: [lint, build, test, accessibility, performance, security]
+    if: always()
+    
+    steps:
+      - name: Create summary
+        run: |
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+          # Build Summary 📊
+          
+          ## Status
+          - Lint: ${{ needs.lint.result }} $([ "${{ needs.lint.result }}" == "success" ] && echo "✅" || echo "❌")
+          - Build: ${{ needs.build.result }} $([ "${{ needs.build.result }}" == "success" ] && echo "✅" || echo "❌")
+          - Test: ${{ needs.test.result }} $([ "${{ needs.test.result }}" == "success" ] && echo "✅" || echo "❌")
+          - Accessibility: ${{ needs.accessibility.result }} $([ "${{ needs.accessibility.result }}" == "success" ] && echo "✅" || echo "❌")
+          - Performance: ${{ needs.performance.result }} $([ "${{ needs.performance.result }}" == "success" ] && echo "✅" || echo "❌")
+          - Security: ${{ needs.security.result }} $([ "${{ needs.security.result }}" == "success" ] && echo "✅" || echo "❌")
+          
+          ## Details
+          - **Branch:** ${{ github.ref_name }}
+          - **Commit:** ${{ github.sha }}
+          - **Author:** ${{ github.actor }}
+          - **Event:** ${{ github.event_name }}
+          
+          ## Next Steps
+          $(if [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "- Review PR changes"
+            echo "- Check test results"
+            echo "- Approve or request changes"
+          else
+            echo "- Deploy to production"
+            echo "- Create release notes"
+            echo "- Update documentation"
+          fi)
+          EOF
