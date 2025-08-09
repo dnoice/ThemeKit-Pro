@@ -1,0 +1,424 @@
+name: Release and Publish
+
+on:
+  # Trigger on version tags
+  push:
+    tags:
+      - 'v*.*.*'
+  
+  # Manual release
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g., 3.1.0)'
+        required: true
+        type: string
+      prerelease:
+        description: 'Is this a pre-release?'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  packages: write
+  id-token: write
+
+jobs:
+  # Validate version
+  validate:
+    name: Validate Version
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Determine version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            VERSION="${{ github.event.inputs.version }}"
+          else
+            VERSION=${GITHUB_REF#refs/tags/v}
+          fi
+          
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "📦 Version: $VERSION"
+      
+      - name: Validate semver
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          
+          if ! echo "$VERSION" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9]+)?$'; then
+            echo "❌ Invalid version format: $VERSION"
+            exit 1
+          fi
+          
+          echo "✅ Valid semver: $VERSION"
+
+  # Build release
+  build:
+    name: Build Release
+    runs-on: ubuntu-latest
+    needs: validate
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit
+      
+      - name: Update version in package.json
+        run: |
+          npm version ${{ needs.validate.outputs.version }} --no-git-tag-version
+          
+          # Update version in other files if needed
+          sed -i "s/Version:.*/Version: ${{ needs.validate.outputs.version }}/" README.md || true
+      
+      - name: Build production assets
+        run: |
+          echo "🔨 Building release assets..."
+          
+          # Create dist directory
+          mkdir -p dist
+          
+          # Build minified CSS
+          npx cleancss -o dist/variables.min.css variables.css --source-map
+          npx cleancss -o dist/styles.min.css css/styles.css --source-map
+          npx cleancss -o dist/queries.min.css css/queries.css --source-map
+          
+          # Build combined CSS
+          cat variables.css css/styles.css css/queries.css > dist/theme-system.css
+          npx cleancss -o dist/theme-system.min.css dist/theme-system.css --source-map
+          
+          # Build minified JavaScript
+          npx terser js/script.js \
+            -o dist/script.min.js \
+            --compress \
+            --mangle \
+            --source-map "url='script.min.js.map'"
+          
+          # Create ESM version
+          cat > dist/script.esm.js << 'EOF'
+          // ESM wrapper for CSS Theming System
+          export { ThemeSystem as default } from './script.min.js';
+          EOF
+          
+          echo "✅ Production assets built"
+      
+      - name: Create release bundles
+        run: |
+          VERSION=${{ needs.validate.outputs.version }}
+          
+          # Create release directory
+          mkdir -p release
+          
+          # Bundle 1: Full package
+          mkdir -p css-themeing-system-${VERSION}
+          cp -r index.html variables.css css js examples *.md LICENSE css-themeing-system-${VERSION}/
+          cp -r dist css-themeing-system-${VERSION}/
+          tar -czf release/css-themeing-system-${VERSION}.tar.gz css-themeing-system-${VERSION}
+          zip -r release/css-themeing-system-${VERSION}.zip css-themeing-system-${VERSION}
+          
+          # Bundle 2: Minified only
+          mkdir -p css-themeing-system-${VERSION}-min
+          cp dist/*.min.* css-themeing-system-${VERSION}-min/
+          cp LICENSE README.md css-themeing-system-${VERSION}-min/
+          tar -czf release/css-themeing-system-${VERSION}-min.tar.gz css-themeing-system-${VERSION}-min
+          zip -r release/css-themeing-system-${VERSION}-min.zip css-themeing-system-${VERSION}-min
+          
+          # Bundle 3: CDN package
+          mkdir -p cdn
+          cp dist/theme-system.min.* cdn/
+          cp dist/script.min.* cdn/
+          tar -czf release/css-themeing-system-${VERSION}-cdn.tar.gz cdn
+          
+          echo "📦 Release bundles created"
+      
+      - name: Generate checksums
+        run: |
+          cd release
+          sha256sum *.tar.gz *.zip > checksums.txt
+          echo "🔐 Checksums generated:"
+          cat checksums.txt
+      
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-artifacts
+          path: release/
+          retention-days: 30
+
+  # Create GitHub release
+  github-release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    needs: [validate, build]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Download release artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: release-artifacts
+          path: release/
+      
+      - name: Generate release notes
+        id: notes
+        run: |
+          VERSION=${{ needs.validate.outputs.version }}
+          
+          # Get previous tag
+          PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+          
+          # Generate changelog
+          cat > release-notes.md << EOF
+          # CSS Theming System v${VERSION}
+          
+          ## 📦 Installation
+          
+          ### CDN
+          \`\`\`html
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dnoice/css-themeing-system@v${VERSION}/dist/theme-system.min.css">
+          <script src="https://cdn.jsdelivr.net/gh/dnoice/css-themeing-system@v${VERSION}/dist/script.min.js"></script>
+          \`\`\`
+          
+          ### NPM
+          \`\`\`bash
+          npm install css-themeing-system@${VERSION}
+          \`\`\`
+          
+          ### Download
+          - [Full Package](https://github.com/dnoice/css-themeing-system/releases/download/v${VERSION}/css-themeing-system-${VERSION}.tar.gz)
+          - [Minified Package](https://github.com/dnoice/css-themeing-system/releases/download/v${VERSION}/css-themeing-system-${VERSION}-min.tar.gz)
+          - [CDN Package](https://github.com/dnoice/css-themeing-system/releases/download/v${VERSION}/css-themeing-system-${VERSION}-cdn.tar.gz)
+          
+          ## 🎉 What's New
+          
+          EOF
+          
+          # Add commit messages since last tag
+          if [ -n "$PREV_TAG" ]; then
+            echo "### Changes since $PREV_TAG" >> release-notes.md
+            echo "" >> release-notes.md
+            git log ${PREV_TAG}..HEAD --pretty=format:"- %s (%h)" >> release-notes.md
+          else
+            echo "Initial release" >> release-notes.md
+          fi
+          
+          # Add checksums
+          echo "" >> release-notes.md
+          echo "## 🔐 Checksums" >> release-notes.md
+          echo "\`\`\`" >> release-notes.md
+          cat release/checksums.txt >> release-notes.md
+          echo "\`\`\`" >> release-notes.md
+          
+          # Add footer
+          echo "" >> release-notes.md
+          echo "---" >> release-notes.md
+          echo "**Full Changelog**: https://github.com/dnoice/css-themeing-system/compare/${PREV_TAG}...v${VERSION}" >> release-notes.md
+      
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ needs.validate.outputs.version }}
+          name: Release v${{ needs.validate.outputs.version }}
+          body_path: release-notes.md
+          draft: false
+          prerelease: ${{ github.event.inputs.prerelease == 'true' }}
+          files: |
+            release/*.tar.gz
+            release/*.zip
+            release/checksums.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Publish to NPM
+  npm-publish:
+    name: Publish to NPM
+    runs-on: ubuntu-latest
+    needs: [validate, build]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+      
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit
+      
+      - name: Download release artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: release-artifacts
+          path: release/
+      
+      - name: Prepare package
+        run: |
+          # Update version
+          npm version ${{ needs.validate.outputs.version }} --no-git-tag-version
+          
+          # Copy built files to root for npm
+          cp -r dist/* .
+          
+          # Update package.json files field
+          node -e "
+          const pkg = require('./package.json');
+          pkg.files = [
+            'variables.css',
+            'css/',
+            'js/',
+            'dist/',
+            'README.md',
+            'LICENSE',
+            'CHANGELOG.md'
+          ];
+          require('fs').writeFileSync('./package.json', JSON.stringify(pkg, null, 2));
+          "
+      
+      - name: Publish to NPM
+        run: |
+          if [ "${{ github.event.inputs.prerelease }}" == "true" ]; then
+            npm publish --tag beta
+          else
+            npm publish
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      
+      - name: Verify NPM publication
+        run: |
+          sleep 10
+          npm view css-themeing-system@${{ needs.validate.outputs.version }}
+          echo "✅ Package published to NPM"
+
+  # Deploy documentation
+  deploy-docs:
+    name: Deploy Documentation
+    runs-on: ubuntu-latest
+    needs: [validate, github-release]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Build documentation
+        run: |
+          # Create docs directory
+          mkdir -p docs
+          
+          # Copy documentation files
+          cp README.md docs/
+          cp CHANGELOG.md docs/
+          cp CONTRIBUTING.md docs/
+          
+          # Create version-specific documentation
+          VERSION=${{ needs.validate.outputs.version }}
+          mkdir -p docs/v${VERSION}
+          cp -r index.html variables.css css js examples docs/v${VERSION}/
+          
+          # Create latest symlink
+          ln -s v${VERSION} docs/latest
+          
+          echo "📚 Documentation prepared"
+      
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          destination_dir: docs
+
+  # Notify
+  notify:
+    name: Send Release Notifications
+    runs-on: ubuntu-latest
+    needs: [validate, github-release, npm-publish]
+    if: always()
+    
+    steps:
+      - name: Send Discord notification
+        if: env.DISCORD_WEBHOOK != ''
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: |
+          VERSION=${{ needs.validate.outputs.version }}
+          
+          curl -H "Content-Type: application/json" \
+            -d "{
+              \"embeds\": [{
+                \"title\": \"🚀 New Release: v${VERSION}\",
+                \"description\": \"CSS Theming System v${VERSION} has been released!\",
+                \"color\": 5763719,
+                \"fields\": [
+                  {
+                    \"name\": \"📦 NPM\",
+                    \"value\": \"[View Package](https://www.npmjs.com/package/css-themeing-system)\",
+                    \"inline\": true
+                  },
+                  {
+                    \"name\": \"🐙 GitHub\",
+                    \"value\": \"[View Release](https://github.com/dnoice/css-themeing-system/releases/tag/v${VERSION})\",
+                    \"inline\": true
+                  },
+                  {
+                    \"name\": \"📚 Documentation\",
+                    \"value\": \"[View Docs](https://dnoice.github.io/css-themeing-system/)\",
+                    \"inline\": true
+                  }
+                ],
+                \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%S.000Z)\"
+              }]
+            }" \
+            $DISCORD_WEBHOOK || true
+      
+      - name: Create summary
+        run: |
+          VERSION=${{ needs.validate.outputs.version }}
+          
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+          # 🎉 Release v${VERSION} Published!
+          
+          ## 📦 Distribution
+          - ✅ GitHub Release created
+          - ✅ NPM package published
+          - ✅ Documentation deployed
+          - ✅ CDN files available
+          
+          ## 🔗 Links
+          - [NPM Package](https://www.npmjs.com/package/css-themeing-system)
+          - [GitHub Release](https://github.com/dnoice/css-themeing-system/releases/tag/v${VERSION})
+          - [Documentation](https://dnoice.github.io/css-themeing-system/)
+          
+          ## 📋 Next Steps
+          1. Announce on social media
+          2. Update project website
+          3. Notify users via newsletter
+          4. Create migration guide if needed
+          EOF
