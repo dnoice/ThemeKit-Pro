@@ -1,0 +1,446 @@
+name: Pull Request Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches: [main, develop]
+
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+  issues: write
+
+jobs:
+  # Label PR
+  label:
+    name: Label Pull Request
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Label PR based on files changed
+        uses: actions/labeler@v4
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          configuration-path: .github/labeler.yml
+      
+      - name: Label PR size
+        uses: codelytv/pr-size-labeler@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          xs_label: 'size/xs'
+          xs_max_size: '10'
+          s_label: 'size/s'
+          s_max_size: '100'
+          m_label: 'size/m'
+          m_max_size: '500'
+          l_label: 'size/l'
+          l_max_size: '1000'
+          xl_label: 'size/xl'
+
+  # Check PR description
+  pr-check:
+    name: PR Validation
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check PR description
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const body = pr.body || '';
+            
+            // Check for required sections
+            const requiredSections = [
+              '## Description',
+              '## Type of Change',
+              '## Testing',
+              '## Checklist'
+            ];
+            
+            const missingSections = requiredSections.filter(section => 
+              !body.includes(section)
+            );
+            
+            if (missingSections.length > 0) {
+              core.setFailed(`PR description is missing required sections: ${missingSections.join(', ')}`);
+              
+              // Add comment
+              await github.rest.issues.createComment({
+                ...context.repo,
+                issue_number: pr.number,
+                body: `## ⚠️ PR Description Incomplete
+                
+                Please update your PR description to include:
+                ${missingSections.map(s => `- ${s}`).join('\n')}
+                
+                Use the PR template for guidance.`
+              });
+            }
+      
+      - name: Check for linked issues
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const body = pr.body || '';
+            
+            // Check for issue references
+            const issuePattern = /(closes|fixes|resolves)\s+#\d+/i;
+            
+            if (!issuePattern.test(body)) {
+              core.warning('No linked issues found in PR description');
+            }
+
+  # File validation
+  validate-files:
+    name: Validate Files
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v41
+        with:
+          files: |
+            **/*.css
+            **/*.js
+            **/*.html
+      
+      - name: Check file sizes
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          echo "📊 Checking file sizes..."
+          
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            if [ -f "$file" ]; then
+              size=$(du -b "$file" | cut -f1)
+              
+              # Check if file is too large
+              if [ "$size" -gt 500000 ]; then
+                echo "⚠️ Warning: $file is larger than 500KB ($(numfmt --to=iec $size))"
+              fi
+            fi
+          done
+      
+      - name: Check for console.log
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          echo "🔍 Checking for console.log statements..."
+          
+          found=false
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            if [[ "$file" == *.js ]]; then
+              if grep -n "console.log" "$file"; then
+                echo "⚠️ Found console.log in $file"
+                found=true
+              fi
+            fi
+          done
+          
+          if [ "$found" = true ]; then
+            echo "::warning::Remove console.log statements before merging"
+          fi
+
+  # Code quality
+  code-quality:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit
+      
+      - name: Run linters
+        run: |
+          echo "🎨 Running linters..."
+          
+          # CSS linting
+          npx stylelint "**/*.css" --formatter compact || true
+          
+          # JavaScript linting
+          npx eslint js/**/*.js --format compact || true
+          
+          # HTML validation
+          npx html-validate "*.html" "examples/*.html" || true
+      
+      - name: Check formatting
+        run: |
+          npx prettier --check . || true
+
+  # Build test
+  build-test:
+    name: Build Test
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit
+      
+      - name: Build project
+        run: |
+          mkdir -p dist
+          npx cleancss -o dist/theme-system.min.css variables.css css/styles.css css/queries.css
+          npx terser js/script.js -o dist/script.min.js --compress --mangle
+      
+      - name: Compare build sizes
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            // Get sizes
+            const cssSize = fs.statSync('dist/theme-system.min.css').size;
+            const jsSize = fs.statSync('dist/script.min.js').size;
+            
+            // Format sizes
+            const formatSize = (bytes) => {
+              const kb = bytes / 1024;
+              return `${kb.toFixed(2)} KB`;
+            };
+            
+            // Create comment
+            const comment = `## 📦 Build Size Report
+            
+            | File | Size |
+            |------|------|
+            | CSS (minified) | ${formatSize(cssSize)} |
+            | JS (minified) | ${formatSize(jsSize)} |
+            | **Total** | **${formatSize(cssSize + jsSize)}** |
+            
+            <details>
+            <summary>Size Analysis</summary>
+            
+            - CSS: ${cssSize} bytes
+            - JavaScript: ${jsSize} bytes
+            - Combined: ${cssSize + jsSize} bytes
+            
+            </details>`;
+            
+            // Post comment
+            await github.rest.issues.createComment({
+              ...context.repo,
+              issue_number: context.issue.number,
+              body: comment
+            });
+
+  # Visual regression test
+  visual-test:
+    name: Visual Regression Test
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout base branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.base_ref }}
+          path: base
+      
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          path: pr
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          npm install -g serve playwright
+          npx playwright install chromium
+      
+      - name: Take screenshots
+        run: |
+          # Start servers
+          serve base -p 3000 &
+          serve pr -p 3001 &
+          sleep 5
+          
+          # Take screenshots
+          cat > screenshot.js << 'EOF'
+          const { chromium } = require('playwright');
+          
+          (async () => {
+            const browser = await chromium.launch();
+            
+            // Screenshot base branch
+            const basePage = await browser.newPage();
+            await basePage.goto('http://localhost:3000');
+            await basePage.screenshot({ path: 'base.png', fullPage: true });
+            
+            // Screenshot PR branch
+            const prPage = await browser.newPage();
+            await prPage.goto('http://localhost:3001');
+            await prPage.screenshot({ path: 'pr.png', fullPage: true });
+            
+            await browser.close();
+          })();
+          EOF
+          
+          node screenshot.js
+      
+      - name: Compare screenshots
+        run: |
+          # Install image comparison tool
+          npm install -g pixelmatch pngjs
+          
+          # Compare images
+          node -e "
+          const pixelmatch = require('pixelmatch');
+          const fs = require('fs');
+          const PNG = require('pngjs').PNG;
+          
+          const img1 = PNG.sync.read(fs.readFileSync('base.png'));
+          const img2 = PNG.sync.read(fs.readFileSync('pr.png'));
+          const {width, height} = img1;
+          const diff = new PNG({width, height});
+          
+          const numDiffPixels = pixelmatch(
+            img1.data, img2.data, diff.data, width, height,
+            {threshold: 0.1}
+          );
+          
+          fs.writeFileSync('diff.png', PNG.sync.write(diff));
+          
+          const diffPercent = (numDiffPixels / (width * height) * 100).toFixed(2);
+          console.log(\`Visual difference: \${diffPercent}%\`);
+          " || true
+      
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-regression
+          path: |
+            base.png
+            pr.png
+            diff.png
+
+  # Security check
+  security-check:
+    name: Security Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+      
+      - name: Run security audit
+        run: |
+          npm audit --audit-level=high || true
+      
+      - name: Check for secrets
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.pull_request.base.sha }}
+          head: ${{ github.event.pull_request.head.sha }}
+
+  # PR comment summary
+  summary:
+    name: PR Summary
+    runs-on: ubuntu-latest
+    needs: [pr-check, validate-files, code-quality, build-test, security-check]
+    if: always()
+    
+    steps:
+      - name: Create PR comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const statuses = {
+              'PR Validation': '${{ needs.pr-check.result }}',
+              'File Validation': '${{ needs.validate-files.result }}',
+              'Code Quality': '${{ needs.code-quality.result }}',
+              'Build Test': '${{ needs.build-test.result }}',
+              'Security': '${{ needs.security-check.result }}'
+            };
+            
+            const getEmoji = (status) => {
+              switch(status) {
+                case 'success': return '✅';
+                case 'failure': return '❌';
+                case 'skipped': return '⏭️';
+                default: return '⏳';
+              }
+            };
+            
+            const checksTable = Object.entries(statuses)
+              .map(([check, status]) => `| ${check} | ${getEmoji(status)} ${status} |`)
+              .join('\n');
+            
+            const comment = `## 🔍 PR Check Summary
+            
+            | Check | Status |
+            |-------|--------|
+            ${checksTable}
+            
+            <details>
+            <summary>📋 Checklist</summary>
+            
+            - [ ] All checks passing
+            - [ ] Code reviewed
+            - [ ] Tests updated
+            - [ ] Documentation updated
+            - [ ] No console.log statements
+            - [ ] Build size acceptable
+            
+            </details>
+            
+            ---
+            
+            **Workflow Run:** [#${{ github.run_number }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            `;
+            
+            // Find existing comment
+            const { data: comments } = await github.rest.issues.listComments({
+              ...context.repo,
+              issue_number: context.issue.number
+            });
+            
+            const botComment = comments.find(comment => 
+              comment.user.type === 'Bot' && 
+              comment.body.includes('PR Check Summary')
+            );
+            
+            if (botComment) {
+              // Update existing comment
+              await github.rest.issues.updateComment({
+                ...context.repo,
+                comment_id: botComment.id,
+                body: comment
+              });
+            } else {
+              // Create new comment
+              await github.rest.issues.createComment({
+                ...context.repo,
+                issue_number: context.issue.number,
+                body: comment
+              });
+            }
