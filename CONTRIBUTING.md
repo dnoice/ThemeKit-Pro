@@ -1,21 +1,23 @@
-# Contributing to CSS Theming System
+# Contributing to ThemeKit Pro
 
-First off, thank you for considering contributing to CSS Theming System! It's people like you that make this project such a great tool. 🎉
+🎉 Thank you for considering contributing to ThemeKit Pro! We're excited to have you as part of our community.
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Code of Conduct](#code-of-conduct)
-- [Getting Started](#getting-started)
 - [How Can I Contribute?](#how-can-i-contribute)
 - [Development Setup](#development-setup)
-- [Style Guidelines](#style-guidelines)
-- [Commit Messages](#commit-messages)
+- [Coding Standards](#coding-standards)
 - [Pull Request Process](#pull-request-process)
-- [Community](#community)
+- [Issue Guidelines](#issue-guidelines)
+- [Component Guidelines](#component-guidelines)
+- [Testing](#testing)
 
-## 📜 Code of Conduct
+## Code of Conduct
 
-This project and everyone participating in it is governed by our Code of Conduct. By participating, you are expected to uphold this code:
+This project and everyone participating in it is governed by our Code of Conduct. By participating, you are expected to uphold this code. Please report unacceptable behavior to [team@themekit-pro.com](mailto:team@themekit-pro.com).
+
+### Our Pledge
 
 - Use welcoming and inclusive language
 - Be respectful of differing viewpoints and experiences
@@ -23,407 +25,434 @@ This project and everyone participating in it is governed by our Code of Conduct
 - Focus on what is best for the community
 - Show empathy towards other community members
 
-## 🚀 Getting Started
+## How Can I Contribute?
 
-1. Fork the repository on GitHub
-2. Clone your fork locally
-3. Create a new branch for your contribution
-4. Make your changes
-5. Push to your fork and submit a pull request
+### 🐛 Reporting Bugs
 
-## 💡 How Can I Contribute?
+Before creating bug reports, please check the [existing issues](https://github.com/dnoice/ThemeKit-Pro/issues) to avoid duplicates.
 
-### Reporting Bugs
+When creating a bug report, include:
 
-Before creating bug reports, please check existing issues to avoid duplicates. When you create a bug report, include:
+- **Clear title** and description
+- **Steps to reproduce** the issue
+- **Expected behavior** vs actual behavior
+- **Screenshots** if applicable
+- **Environment details** (browser, OS, version)
+- **Code samples** demonstrating the issue
 
-- **Clear and descriptive title**
-- **Steps to reproduce the issue**
-- **Expected behavior**
-- **Actual behavior**
-- **Screenshots** (if applicable)
-- **Browser and OS information**
-- **Additional context**
+Use this template:
 
-**Bug Report Template:**
 ```markdown
-## Bug Description
-A clear and concise description of the bug.
+**Bug Description:**
+A clear description of what the bug is.
 
-## Steps to Reproduce
+**To Reproduce:**
 1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
+2. Click on '...'
+3. Scroll down to '...'
 4. See error
 
-## Expected Behavior
+**Expected Behavior:**
 What you expected to happen.
 
-## Actual Behavior
-What actually happened.
-
-## Screenshots
+**Screenshots:**
 If applicable, add screenshots.
 
-## Environment
-- Browser: [e.g., Chrome 95]
-- OS: [e.g., Windows 10]
-- Version: [e.g., 3.0.0]
-
-## Additional Context
-Any other context about the problem.
+**Environment:**
+- OS: [e.g. macOS]
+- Browser: [e.g. Chrome 91]
+- ThemeKit Pro Version: [e.g. 2.0.0]
 ```
 
-### Suggesting Enhancements
+### 💡 Suggesting Features
 
-Enhancement suggestions are tracked as GitHub issues. When creating an enhancement suggestion, include:
+Feature requests are welcome! Please:
 
-- **Clear and descriptive title**
-- **Detailed description** of the proposed enhancement
-- **Rationale** - Why would this be useful?
-- **Possible implementation** details
-- **Examples** from other projects (if applicable)
+1. **Check existing requests** first
+2. **Explain the use case** clearly
+3. **Provide examples** or mockups
+4. **Consider the scope** - does it fit ThemeKit Pro's goals?
 
-**Enhancement Template:**
-```markdown
-## Enhancement Description
-A clear description of the enhancement.
+### 🔧 Contributing Code
 
-## Rationale
-Why is this enhancement needed?
+#### Types of Contributions
 
-## Proposed Solution
-How could this be implemented?
+- **Bug fixes** - Fix existing issues
+- **New components** - Add missing UI components
+- **Enhancements** - Improve existing components
+- **Documentation** - Improve docs and examples
+- **Accessibility** - Enhance a11y features
+- **Performance** - Optimize code and assets
 
-## Alternatives Considered
-What other solutions have you considered?
-
-## Additional Context
-Any other context or screenshots.
-```
-
-### Contributing Code
-
-#### New Features
-1. Open an issue to discuss the feature first
-2. Get approval from maintainers
-3. Fork and create a feature branch
-4. Implement the feature
-5. Add/update documentation
-6. Submit a pull request
-
-#### Bug Fixes
-1. Find or create an issue for the bug
-2. Fork and create a bugfix branch
-3. Fix the bug
-4. Add tests if applicable
-5. Submit a pull request
-
-## 🛠️ Development Setup
+## Development Setup
 
 ### Prerequisites
-- Node.js (v14 or higher)
-- npm or yarn
+
+- Node.js 16+ and npm 8+
+- Modern browser (Chrome 90+, Firefox 88+, Safari 14+)
 - Git
-- A modern web browser
-- Code editor (VS Code recommended)
 
-### Local Development
+### Setup Steps
 
-```bash
-# Clone your fork
-git clone https://github.com/YOUR-USERNAME/css-themeing-system.git
-cd css-themeing-system
+1. **Fork the repository**
+   ```bash
+   # Click "Fork" on GitHub, then clone your fork
+   git clone https://github.com/YOUR_USERNAME/ThemeKit-Pro.git
+   cd ThemeKit-Pro
+   ```
 
-# Add upstream remote
-git remote add upstream https://github.com/dnoice/css-themeing-system.git
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-# Install dependencies (if any)
-npm install
+3. **Start development server**
+   ```bash
+   npm run dev
+   ```
 
-# Start local development server
-npm start
-# or use any local server like:
-# python -m http.server 8000
-# php -S localhost:8000
-# npx serve
-```
+4. **Open browser**
+   - Navigate to `http://localhost:3000`
+   - You should see the ThemeKit Pro demo
 
 ### Project Structure
+
 ```
-css-themeing-system/
-├── index.html          # Demo page
-├── variables.css       # CSS custom properties
+ThemeKit-Pro/
 ├── css/
-│   ├── styles.css     # Core styles
-│   └── queries.css    # Media queries
+│   ├── variables.css    # Design tokens and CSS custom properties
+│   ├── styles.css       # Main component styles
+│   └── queries.css      # Responsive design and media queries
 ├── js/
-│   └── script.js      # JavaScript functionality
-├── docs/              # Documentation
-├── examples/          # Usage examples
-└── tests/             # Test files
+│   └── script.js        # JavaScript functionality and APIs
+├── docs/                # Documentation files
+├── examples/            # Usage examples
+├── tests/               # Test files
+├── index.html           # Main demo page
+├── package.json         # Package configuration
+└── README.md           # Project documentation
 ```
 
-## 📝 Style Guidelines
+### Development Workflow
+
+1. **Create a branch**
+   ```bash
+   git checkout -b feature/your-feature-name
+   # or
+   git checkout -b fix/bug-description
+   ```
+
+2. **Make changes**
+   - Edit CSS in `css/` directory
+   - Edit JavaScript in `js/` directory
+   - Test changes in browser
+
+3. **Test your changes**
+   ```bash
+   npm run lint          # Check code style
+   npm run build         # Build for production
+   ```
+
+4. **Commit changes**
+   ```bash
+   git add .
+   git commit -m "feat: add new button variant"
+   # or
+   git commit -m "fix: resolve navigation bug"
+   ```
+
+## Coding Standards
 
 ### CSS Guidelines
 
-1. **Use CSS Custom Properties**
-   ```css
-   /* Good */
-   .component {
-       color: var(--text-primary);
-       padding: var(--space-4);
-   }
-   
-   /* Avoid */
-   .component {
-       color: #333;
-       padding: 16px;
-   }
-   ```
+#### File Organization
+- **variables.css**: Design tokens only
+- **styles.css**: Component styles
+- **queries.css**: Responsive design
 
-2. **Follow BEM Naming Convention**
-   ```css
-   .block {}
-   .block__element {}
-   .block--modifier {}
-   ```
+#### CSS Naming Conventions
+We use BEM (Block Element Modifier) methodology:
 
-3. **Order Properties Logically**
-   ```css
-   .element {
-       /* Positioning */
-       position: relative;
-       top: 0;
-       
-       /* Box Model */
-       display: flex;
-       width: 100%;
-       padding: var(--space-4);
-       
-       /* Visual */
-       background: var(--bg-primary);
-       color: var(--text-primary);
-       
-       /* Typography */
-       font-size: var(--text-base);
-       line-height: var(--leading-normal);
-       
-       /* Misc */
-       transition: var(--transition-all);
-       cursor: pointer;
-   }
-   ```
+```css
+/* Block */
+.card { }
 
-4. **Mobile-First Responsive Design**
-   ```css
-   /* Mobile styles (default) */
-   .element { }
-   
-   /* Tablet and up */
-   @media (min-width: 768px) { }
-   
-   /* Desktop and up */
-   @media (min-width: 1024px) { }
-   ```
+/* Element */
+.card__header { }
+.card__content { }
+.card__footer { }
+
+/* Modifier */
+.card--elevated { }
+.card--bordered { }
+```
+
+#### CSS Custom Properties
+Always use CSS custom properties for values that might change:
+
+```css
+/* Good */
+.button {
+  background-color: var(--interactive-primary);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-lg);
+}
+
+/* Avoid */
+.button {
+  background-color: #0ea5e9;
+  padding: 12px 24px;
+  border-radius: 8px;
+}
+```
+
+#### Responsive Design
+Mobile-first approach:
+
+```css
+/* Mobile styles (base) */
+.component {
+  display: block;
+}
+
+/* Tablet and up */
+@media (min-width: 768px) {
+  .component {
+    display: flex;
+  }
+}
+```
 
 ### JavaScript Guidelines
 
-1. **Use ES6+ Features**
-   ```javascript
-   // Good
-   const component = {
-       init() {
-           this.bindEvents();
-       },
-       bindEvents() {
-           // Use arrow functions for callbacks
-           element.addEventListener('click', () => {
-               this.handleClick();
-           });
-       }
-   };
-   
-   // Avoid
-   var component = {
-       init: function() { }
-   };
-   ```
+#### Code Style
+- Use modern ES6+ syntax
+- Prefer `const` and `let` over `var`
+- Use arrow functions where appropriate
+- Add JSDoc comments for functions
 
-2. **Follow Module Pattern**
-   ```javascript
-   const ModuleName = {
-       init() {
-           // Initialization
-       },
-       methodName() {
-           // Method implementation
-       }
-   };
-   ```
-
-3. **Use Meaningful Names**
-   ```javascript
-   // Good
-   const isModalOpen = true;
-   const toggleTheme = () => {};
-   
-   // Avoid
-   const flag = true;
-   const fn = () => {};
-   ```
-
-### Documentation Guidelines
-
-1. **Comment Complex Logic**
-   ```javascript
-   // Calculate viewport-relative font size with min/max bounds
-   // This ensures readable text across all screen sizes
-   const fontSize = clamp(minSize, preferredSize, maxSize);
-   ```
-
-2. **Use JSDoc for Functions**
-   ```javascript
-   /**
-    * Shows a toast notification
-    * @param {string} message - The message to display
-    * @param {string} type - Type of toast (success|error|info|warning)
-    * @param {number} duration - Duration in milliseconds
-    */
-   function showToast(message, type = 'info', duration = 3000) {
-       // Implementation
-   }
-   ```
-
-## 💬 Commit Messages
-
-Follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
-
-### Format
-```
-<type>(<scope>): <subject>
-
-<body>
-
-<footer>
+```javascript
+/**
+ * Sets progress for a progress bar element
+ * @param {Element|string} element - Progress bar element or selector
+ * @param {number} percentage - Progress percentage (0-100)
+ * @param {boolean} animate - Whether to animate the change
+ */
+setProgress(element, percentage, animate = true) {
+  // Implementation
+}
 ```
 
-### Types
-- `feat`: New feature
-- `fix`: Bug fix
-- `docs`: Documentation changes
-- `style`: Code style changes (formatting, semicolons, etc.)
-- `refactor`: Code refactoring
-- `perf`: Performance improvements
-- `test`: Adding or updating tests
-- `build`: Build system changes
-- `ci`: CI/CD changes
-- `chore`: Other changes (dependencies, etc.)
+#### Error Handling
+Always include proper error handling:
 
-### Examples
-```bash
-# Feature
-git commit -m "feat(icons): add new social media icons"
-
-# Bug fix
-git commit -m "fix(theme): correct dark mode text contrast"
-
-# Documentation
-git commit -m "docs(readme): update installation instructions"
-
-# Performance
-git commit -m "perf(animations): optimize CSS transitions"
+```javascript
+try {
+  // Risky operation
+  const result = someFunctionThatMightFail();
+  return result;
+} catch (error) {
+  console.error('Operation failed:', error);
+  // Handle gracefully
+}
 ```
 
-## 🔄 Pull Request Process
+### Accessibility Requirements
 
-1. **Before Submitting**
-   - Update documentation if needed
-   - Ensure your code follows style guidelines
-   - Test in multiple browsers
-   - Update the README.md if needed
-   - Add yourself to CONTRIBUTORS.md
+All components must meet **WCAG 2.1 AA** standards:
 
-2. **PR Title Format**
-   ```
-   type(scope): brief description
-   ```
+- **Semantic HTML** - Use proper HTML elements
+- **ARIA labels** - Add appropriate ARIA attributes
+- **Keyboard navigation** - All interactive elements must be keyboard accessible
+- **Color contrast** - Minimum 4.5:1 ratio for normal text
+- **Focus indicators** - Visible focus states for all interactive elements
 
-3. **PR Description Template**
-   ```markdown
-   ## Description
-   Brief description of changes
-   
-   ## Type of Change
-   - [ ] Bug fix
-   - [ ] New feature
-   - [ ] Breaking change
-   - [ ] Documentation update
-   
-   ## Testing
-   - [ ] Chrome
-   - [ ] Firefox
-   - [ ] Safari
-   - [ ] Edge
-   
-   ## Checklist
-   - [ ] My code follows the style guidelines
-   - [ ] I have performed a self-review
-   - [ ] I have commented my code where necessary
-   - [ ] I have updated the documentation
-   - [ ] My changes generate no new warnings
-   - [ ] I have tested on multiple browsers
-   
-   ## Screenshots (if applicable)
-   
-   ## Related Issues
-   Closes #(issue number)
-   ```
+Example:
+```html
+<button 
+  class="btn btn--primary"
+  aria-label="Save document"
+  tabindex="0"
+>
+  Save
+</button>
+```
 
-4. **Review Process**
-   - A maintainer will review your PR
-   - Address any feedback
-   - Once approved, your PR will be merged
+## Pull Request Process
 
-## 🧪 Testing
+### Before Submitting
 
-### Manual Testing Checklist
-- [ ] All themes work correctly
-- [ ] Responsive design works on all breakpoints
+- [ ] Code follows our style guidelines
+- [ ] Self-review of code completed
+- [ ] Comments added for complex logic
+- [ ] Documentation updated if needed
+- [ ] Tests added/updated if applicable
+- [ ] Accessibility requirements met
+
+### PR Template
+
+```markdown
+## Description
+Brief description of changes
+
+## Type of Change
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Breaking change
+- [ ] Documentation update
+
+## Testing
+- [ ] Tested in Chrome
+- [ ] Tested in Firefox
+- [ ] Tested in Safari
+- [ ] Mobile testing completed
+- [ ] Accessibility testing completed
+
+## Screenshots
+Include screenshots for UI changes
+
+## Checklist
+- [ ] Code follows style guidelines
+- [ ] Self-review completed
+- [ ] Documentation updated
 - [ ] No console errors
-- [ ] Accessibility features work (keyboard navigation, screen readers)
-- [ ] Performance is acceptable (no lag, smooth animations)
+```
 
-### Browser Testing
-Test in the latest versions of:
-- Chrome/Chromium
-- Firefox
-- Safari
-- Edge
-- Mobile browsers (iOS Safari, Chrome Mobile)
+### Review Process
 
-## 🌟 Recognition
+1. **Automated checks** - Must pass all CI checks
+2. **Code review** - At least one maintainer review required
+3. **Testing** - Manual testing in multiple browsers
+4. **Approval** - Maintainer approval required
+5. **Merge** - Squash and merge preferred
 
-Contributors will be:
-- Listed in CONTRIBUTORS.md
-- Mentioned in release notes
-- Given credit in the documentation
+## Issue Guidelines
 
-## 💭 Questions?
+### Good Issue Titles
 
-Feel free to:
-- Open an issue for questions
-- Join our [Discord community](https://discord.gg/example)
-- Email the maintainers
+- ✅ "Button component: Focus state not visible in dark mode"
+- ✅ "Feature request: Add toast notification duration option"
+- ✅ "Bug: Progress bar animation stutters on Safari"
 
-## 📚 Additional Resources
+- ❌ "Button broken"
+- ❌ "Feature request"
+- ❌ "Please help"
 
-- [CSS Best Practices](https://developer.mozilla.org/en-US/docs/MDN/Guidelines/Code_guidelines/CSS)
-- [JavaScript Best Practices](https://developer.mozilla.org/en-US/docs/MDN/Guidelines/Code_guidelines/JavaScript)
-- [Web Accessibility Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
-- [Git Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows)
+### Labels
 
----
+We use these labels to organize issues:
 
-Thank you for contributing to CSS Theming System! 🎨✨
+- `bug` - Something isn't working
+- `enhancement` - New feature or request
+- `documentation` - Improvements to docs
+- `good first issue` - Good for newcomers
+- `help wanted` - Extra attention needed
+- `accessibility` - Related to a11y
+- `performance` - Performance improvements
+
+## Component Guidelines
+
+### Creating New Components
+
+1. **Research existing patterns** - Check if similar component exists
+2. **Design API** - Plan the component interface
+3. **Write CSS** - Follow our naming conventions
+4. **Add JavaScript** - If interactive behavior needed
+5. **Document usage** - Add examples and API docs
+6. **Test accessibility** - Ensure WCAG compliance
+
+### Component Checklist
+
+- [ ] **Responsive** - Works on all screen sizes
+- [ ] **Accessible** - Keyboard navigation and screen readers
+- [ ] **Themeable** - Uses CSS custom properties
+- [ ] **Documented** - Clear usage examples
+- [ ] **Tested** - Works in all supported browsers
+- [ ] **Consistent** - Follows existing patterns
+
+### Component Example
+
+```css
+/* Component: Alert */
+.alert {
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-primary);
+  background: var(--bg-surface);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.alert__icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.alert__content {
+  flex: 1;
+}
+
+.alert__title {
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-1);
+}
+
+.alert--success {
+  border-color: var(--border-success);
+  background: var(--color-success-25);
+}
+
+.alert--error {
+  border-color: var(--border-error);
+  background: var(--color-error-25);
+}
+```
+
+## Testing
+
+### Manual Testing
+
+Test all changes in:
+
+- **Chrome** (latest 2 versions)
+- **Firefox** (latest 2 versions)
+- **Safari** (latest 2 versions)
+- **Mobile browsers** (iOS Safari, Chrome Mobile)
+
+### Accessibility Testing
+
+- **Keyboard navigation** - Tab through all interactive elements
+- **Screen reader** - Test with VoiceOver (macOS) or NVDA (Windows)
+- **Color contrast** - Use tools like WebAIM's contrast checker
+- **Focus indicators** - Ensure visible focus states
+
+### Automated Testing
+
+```bash
+# Run linting
+npm run lint
+
+# Check for accessibility issues
+npm run a11y
+
+# Build test
+npm run build
+```
+
+## Getting Help
+
+- 💬 [GitHub Discussions](https://github.com/dnoice/ThemeKit-Pro/discussions)
+- 📧 [Email us](mailto:team@themekit-pro.com)
+- 🐛 [Report issues](https://github.com/dnoice/ThemeKit-Pro/issues)
+
+## Recognition
+
+Contributors are recognized in:
+
+- README.md contributors section
+- Release notes
+- Project documentation
+
+Thank you for contributing to ThemeKit Pro! 🎉
