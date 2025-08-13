@@ -12,14 +12,31 @@
     <link rel="stylesheet" href="css/queries.css">
 </head>
 <body>
-    <!-- Header with Advanced Navigation -->
+    <!-- Header with Official Logo -->
     <header class="header">
         <nav class="nav">
             <div class="nav__brand">
-                <div class="nav__logo">
-                    <div class="logo-icon"></div>
-                    <h1 class="nav__title">ThemeKit Pro</h1>
-                </div>
+                <a href="#hero" class="nav__logo" aria-label="ThemeKit Pro - Home">
+                    <!-- Official ThemeKit-Pro Logo -->
+                    <svg class="logo-icon" viewBox="0 0 1024 1024" role="img" aria-hidden="true">
+                        <defs>
+                            <style>
+                                .logo-navy { fill: var(--tkp-navy); }
+                                .logo-bg { fill: var(--logo-bg-color); }
+                                .logo-violet { fill: var(--tkp-violet); opacity: 0.92; }
+                                .logo-teal { fill: var(--tkp-teal); opacity: 0.88; }
+                                .logo-amber { fill: var(--tkp-amber); opacity: 0.84; }
+                            </style>
+                        </defs>
+                        <g transform="translate(192,32)">
+                            <rect class="logo-bg" width="640" height="640" rx="96" ry="96"/>
+                            <rect class="logo-violet" x="80" y="80" width="320" height="320" rx="48" ry="48"/>
+                            <rect class="logo-teal" x="160" y="160" width="320" height="320" rx="48" ry="48"/>
+                            <rect class="logo-amber" x="240" y="240" width="320" height="320" rx="48" ry="48"/>
+                        </g>
+                    </svg>
+                    <div class="nav__title">ThemeKit Pro</div>
+                </a>
             </div>
             <div class="nav__menu" id="navMenu">
                 <a href="#hero" class="nav__link">Home</a>
@@ -40,7 +57,7 @@
         </nav>
     </header>
 
-    <!-- Hero Section with Animated Background -->
+    <!-- Hero Section with Logo Showcase -->
     <section class="hero" id="hero">
         <div class="hero__background">
             <div class="hero__shapes">
@@ -52,6 +69,27 @@
         </div>
         <div class="container">
             <div class="hero__content">
+                <!-- Hero Logo Display -->
+                <div class="hero__logo">
+                    <svg class="logo-icon logo-icon--hero" viewBox="0 0 1024 1024" role="img" aria-label="ThemeKit Pro - Advanced CSS Design System">
+                        <defs>
+                            <style>
+                                .hero-logo-navy { fill: var(--tkp-navy); }
+                                .hero-logo-bg { fill: var(--logo-bg-color); }
+                                .hero-logo-violet { fill: var(--tkp-violet); opacity: 0.92; }
+                                .hero-logo-teal { fill: var(--tkp-teal); opacity: 0.88; }
+                                .hero-logo-amber { fill: var(--tkp-amber); opacity: 0.84; }
+                            </style>
+                        </defs>
+                        <g transform="translate(192,32)">
+                            <rect class="hero-logo-bg" width="640" height="640" rx="96" ry="96"/>
+                            <rect class="hero-logo-violet" x="80" y="80" width="320" height="320" rx="48" ry="48"/>
+                            <rect class="hero-logo-teal" x="160" y="160" width="320" height="320" rx="48" ry="48"/>
+                            <rect class="hero-logo-amber" x="240" y="240" width="320" height="320" rx="48" ry="48"/>
+                        </g>
+                    </svg>
+                </div>
+                
                 <div class="hero__badge">
                     <span class="badge badge--accent">New Release</span>
                     <span class="hero__version">v2.0 is here with 50+ components</span>
@@ -90,6 +128,119 @@
                     <div class="stat">
                         <div class="stat__number" data-count="1000">0</div>
                         <div class="stat__label">Design Tokens</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logo Showcase Section -->
+    <section class="section section--alt" id="logo-showcase">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Official Brand Assets</h2>
+                <p class="section__description">
+                    The ThemeKit Pro logo family with consistent brand colors and sizing
+                </p>
+            </div>
+            
+            <div class="logo-showcase">
+                <div class="logo-showcase__grid">
+                    <!-- Logo Sizes Demo -->
+                    <div class="logo-demo-card">
+                        <h3 class="logo-demo-card__title">Logo Sizes</h3>
+                        <div class="logo-sizes-demo">
+                            <div class="logo-size-item">
+                                <svg class="logo-icon logo-icon--xs" viewBox="0 0 1024 1024">
+                                    <g transform="translate(192,32)">
+                                        <rect class="logo-bg" width="640" height="640" rx="96" ry="96" fill="white"/>
+                                        <rect class="logo-violet" x="80" y="80" width="320" height="320" rx="48" ry="48" fill="var(--tkp-violet)" opacity="0.92"/>
+                                        <rect class="logo-teal" x="160" y="160" width="320" height="320" rx="48" ry="48" fill="var(--tkp-teal)" opacity="0.88"/>
+                                        <rect class="logo-amber" x="240" y="240" width="320" height="320" rx="48" ry="48" fill="var(--tkp-amber)" opacity="0.84"/>
+                                    </g>
+                                </svg>
+                                <span class="logo-size-label">XS - 24px</span>
+                            </div>
+                            <div class="logo-size-item">
+                                <svg class="logo-icon logo-icon--sm" viewBox="0 0 1024 1024">
+                                    <g transform="translate(192,32)">
+                                        <rect class="logo-bg" width="640" height="640" rx="96" ry="96" fill="white"/>
+                                        <rect class="logo-violet" x="80" y="80" width="320" height="320" rx="48" ry="48" fill="var(--tkp-violet)" opacity="0.92"/>
+                                        <rect class="logo-teal" x="160" y="160" width="320" height="320" rx="48" ry="48" fill="var(--tkp-teal)" opacity="0.88"/>
+                                        <rect class="logo-amber" x="240" y="240" width="320" height="320" rx="48" ry="48" fill="var(--tkp-amber)" opacity="0.84"/>
+                                    </g>
+                                </svg>
+                                <span class="logo-size-label">SM - 32px</span>
+                            </div>
+                            <div class="logo-size-item">
+                                <svg class="logo-icon logo-icon--base" viewBox="0 0 1024 1024">
+                                    <g transform="translate(192,32)">
+                                        <rect class="logo-bg" width="640" height="640" rx="96" ry="96" fill="white"/>
+                                        <rect class="logo-violet" x="80" y="80" width="320" height="320" rx="48" ry="48" fill="var(--tkp-violet)" opacity="0.92"/>
+                                        <rect class="logo-teal" x="160" y="160" width="320" height="320" rx="48" ry="48" fill="var(--tkp-teal)" opacity="0.88"/>
+                                        <rect class="logo-amber" x="240" y="240" width="320" height="320" rx="48" ry="48" fill="var(--tkp-amber)" opacity="0.84"/>
+                                    </g>
+                                </svg>
+                                <span class="logo-size-label">Base - 40px</span>
+                            </div>
+                            <div class="logo-size-item">
+                                <svg class="logo-icon logo-icon--lg" viewBox="0 0 1024 1024">
+                                    <g transform="translate(192,32)">
+                                        <rect class="logo-bg" width="640" height="640" rx="96" ry="96" fill="white"/>
+                                        <rect class="logo-violet" x="80" y="80" width="320" height="320" rx="48" ry="48" fill="var(--tkp-violet)" opacity="0.92"/>
+                                        <rect class="logo-teal" x="160" y="160" width="320" height="320" rx="48" ry="48" fill="var(--tkp-teal)" opacity="0.88"/>
+                                        <rect class="logo-amber" x="240" y="240" width="320" height="320" rx="48" ry="48" fill="var(--tkp-amber)" opacity="0.84"/>
+                                    </g>
+                                </svg>
+                                <span class="logo-size-label">LG - 48px</span>
+                            </div>
+                            <div class="logo-size-item">
+                                <svg class="logo-icon logo-icon--xl" viewBox="0 0 1024 1024">
+                                    <g transform="translate(192,32)">
+                                        <rect class="logo-bg" width="640" height="640" rx="96" ry="96" fill="white"/>
+                                        <rect class="logo-violet" x="80" y="80" width="320" height="320" rx="48" ry="48" fill="var(--tkp-violet)" opacity="0.92"/>
+                                        <rect class="logo-teal" x="160" y="160" width="320" height="320" rx="48" ry="48" fill="var(--tkp-teal)" opacity="0.88"/>
+                                        <rect class="logo-amber" x="240" y="240" width="320" height="320" rx="48" ry="48" fill="var(--tkp-amber)" opacity="0.84"/>
+                                    </g>
+                                </svg>
+                                <span class="logo-size-label">XL - 64px</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Brand Colors Demo -->
+                    <div class="logo-demo-card">
+                        <h3 class="logo-demo-card__title">Brand Colors</h3>
+                        <div class="brand-colors-demo">
+                            <div class="color-swatch">
+                                <div class="color-swatch__preview" style="background-color: var(--tkp-navy);"></div>
+                                <div class="color-swatch__info">
+                                    <div class="color-swatch__name">Navy</div>
+                                    <div class="color-swatch__value">#0F172A</div>
+                                </div>
+                            </div>
+                            <div class="color-swatch">
+                                <div class="color-swatch__preview" style="background-color: var(--tkp-violet);"></div>
+                                <div class="color-swatch__info">
+                                    <div class="color-swatch__name">Violet</div>
+                                    <div class="color-swatch__value">#7C3AED</div>
+                                </div>
+                            </div>
+                            <div class="color-swatch">
+                                <div class="color-swatch__preview" style="background-color: var(--tkp-teal);"></div>
+                                <div class="color-swatch__info">
+                                    <div class="color-swatch__name">Teal</div>
+                                    <div class="color-swatch__value">#14B8A6</div>
+                                </div>
+                            </div>
+                            <div class="color-swatch">
+                                <div class="color-swatch__preview" style="background-color: var(--tkp-amber);"></div>
+                                <div class="color-swatch__info">
+                                    <div class="color-swatch__name">Amber</div>
+                                    <div class="color-swatch__value">#F59E0B</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1013,14 +1164,21 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer with Updated Logo -->
     <footer class="footer">
         <div class="container">
             <div class="footer__content">
                 <div class="footer__section footer__section--main">
                     <div class="footer__brand">
                         <div class="footer__logo">
-                            <div class="logo-icon"></div>
+                            <svg class="logo-icon logo-icon--lg" viewBox="0 0 1024 1024" role="img" aria-hidden="true">
+                                <g transform="translate(192,32)">
+                                    <rect class="logo-bg" width="640" height="640" rx="96" ry="96"/>
+                                    <rect class="logo-violet" x="80" y="80" width="320" height="320" rx="48" ry="48"/>
+                                    <rect class="logo-teal" x="160" y="160" width="320" height="320" rx="48" ry="48"/>
+                                    <rect class="logo-amber" x="240" y="240" width="320" height="320" rx="48" ry="48"/>
+                                </g>
+                            </svg>
                             <h3 class="footer__title">ThemeKit Pro</h3>
                         </div>
                         <p class="footer__description">
