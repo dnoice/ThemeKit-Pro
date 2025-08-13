@@ -4,7 +4,30 @@
 
 :root {
   /* ==========================================================================
-     COLOR SYSTEM - Enhanced Palette
+     OFFICIAL THEMEKIT-PRO BRAND COLORS
+     ========================================================================== */
+  
+  /* Official ThemeKit-Pro Brand Palette */
+  --tkp-navy: #0F172A;
+  --tkp-violet: #7C3AED;
+  --tkp-teal: #14B8A6;
+  --tkp-amber: #F59E0B;
+  
+  /* Logo specific variables */
+  --logo-bg-color: #ffffff;
+  --logo-bg-color-dark: var(--tkp-navy);
+  
+  /* Logo sizing system */
+  --logo-size-xs: 24px;
+  --logo-size-sm: 32px;
+  --logo-size-base: 40px;
+  --logo-size-lg: 48px;
+  --logo-size-xl: 64px;
+  --logo-size-2xl: 80px;
+  --logo-size-hero: 120px;
+  
+  /* ==========================================================================
+     ENHANCED COLOR SYSTEM - Updated with Brand Integration
      ========================================================================== */
   
   /* Primary Colors - Blue tones from image */
@@ -20,6 +43,62 @@
   --color-primary-800: #075985;  /* Darker blue from image */
   --color-primary-900: #0c4a6e;
   --color-primary-950: #082f49;  /* Navy/black from image */
+
+  /* Brand Violet Colors - Based on --tkp-violet */
+  --color-brand-violet-25: #faf8ff;
+  --color-brand-violet-50: #f5f3ff;
+  --color-brand-violet-100: #ede9fe;
+  --color-brand-violet-200: #ddd6fe;
+  --color-brand-violet-300: #c4b5fd;
+  --color-brand-violet-400: #a78bfa;
+  --color-brand-violet-500: var(--tkp-violet);  /* #7C3AED */
+  --color-brand-violet-600: #7c2d92;
+  --color-brand-violet-700: #6d28d9;
+  --color-brand-violet-800: #5b21b6;
+  --color-brand-violet-900: #4c1d95;
+  --color-brand-violet-950: #2e1065;
+
+  /* Brand Teal Colors - Based on --tkp-teal */
+  --color-brand-teal-25: #f0fdfa;
+  --color-brand-teal-50: #ecfdf5;
+  --color-brand-teal-100: #d1fae5;
+  --color-brand-teal-200: #a7f3d0;
+  --color-brand-teal-300: #6ee7b7;
+  --color-brand-teal-400: #34d399;
+  --color-brand-teal-500: var(--tkp-teal);  /* #14B8A6 */
+  --color-brand-teal-600: #059669;
+  --color-brand-teal-700: #047857;
+  --color-brand-teal-800: #065f46;
+  --color-brand-teal-900: #064e3b;
+  --color-brand-teal-950: #022c22;
+
+  /* Brand Amber Colors - Based on --tkp-amber */
+  --color-brand-amber-25: #fffcf5;
+  --color-brand-amber-50: #fffbeb;
+  --color-brand-amber-100: #fef3c7;
+  --color-brand-amber-200: #fde68a;
+  --color-brand-amber-300: #fcd34d;
+  --color-brand-amber-400: #fbbf24;
+  --color-brand-amber-500: var(--tkp-amber);  /* #F59E0B */
+  --color-brand-amber-600: #d97706;
+  --color-brand-amber-700: #b45309;
+  --color-brand-amber-800: #92400e;
+  --color-brand-amber-900: #78350f;
+  --color-brand-amber-950: #451a03;
+
+  /* Brand Navy Colors - Based on --tkp-navy */
+  --color-brand-navy-25: #f8fafc;
+  --color-brand-navy-50: #f1f5f9;
+  --color-brand-navy-100: #e2e8f0;
+  --color-brand-navy-200: #cbd5e1;
+  --color-brand-navy-300: #94a3b8;
+  --color-brand-navy-400: #64748b;
+  --color-brand-navy-500: #475569;
+  --color-brand-navy-600: #334155;
+  --color-brand-navy-700: #1e293b;
+  --color-brand-navy-800: var(--tkp-navy);  /* #0F172A */
+  --color-brand-navy-900: #0c1220;
+  --color-brand-navy-950: #020617;
 
   /* Secondary Colors - Gray tones from image */
   --color-secondary-25: #fcfcfd;
@@ -134,7 +213,7 @@
   --color-error-950: #450a0a;
 
   /* ==========================================================================
-     SEMANTIC COLOR TOKENS - Light Theme (Default)
+     SEMANTIC COLOR TOKENS - Enhanced with Brand Colors
      ========================================================================== */
   
   /* Background Colors */
@@ -151,13 +230,13 @@
   --bg-backdrop: rgba(0, 0, 0, 0.5);
 
   /* Text Colors */
-  --text-primary: var(--color-secondary-900);
+  --text-primary: var(--tkp-navy);
   --text-secondary: var(--color-secondary-700);
   --text-tertiary: var(--color-secondary-500);
   --text-quaternary: var(--color-secondary-400);
   --text-inverse: #ffffff;
-  --text-accent: var(--color-primary-600);
-  --text-accent-hover: var(--color-primary-700);
+  --text-accent: var(--tkp-violet);
+  --text-accent-hover: var(--color-brand-violet-700);
   --text-success: var(--color-success-600);
   --text-warning: var(--color-warning-600);
   --text-error: var(--color-error-600);
@@ -168,26 +247,30 @@
   --border-primary: var(--color-secondary-200);
   --border-secondary: var(--color-secondary-300);
   --border-tertiary: var(--color-secondary-400);
-  --border-accent: var(--color-primary-200);
-  --border-focus: var(--color-primary-500);
+  --border-accent: var(--color-brand-violet-200);
+  --border-focus: var(--tkp-violet);
   --border-success: var(--color-success-300);
   --border-warning: var(--color-warning-300);
   --border-error: var(--color-error-300);
   --border-disabled: var(--color-secondary-200);
 
-  /* Interactive Colors */
-  --interactive-primary: var(--color-primary-500);
-  --interactive-primary-hover: var(--color-primary-600);
-  --interactive-primary-active: var(--color-primary-700);
+  /* Interactive Colors - Enhanced with Brand Colors */
+  --interactive-primary: var(--tkp-violet);
+  --interactive-primary-hover: var(--color-brand-violet-700);
+  --interactive-primary-active: var(--color-brand-violet-800);
   --interactive-primary-disabled: var(--color-secondary-300);
   
   --interactive-secondary: var(--color-secondary-500);
   --interactive-secondary-hover: var(--color-secondary-600);
   --interactive-secondary-active: var(--color-secondary-700);
   
-  --interactive-accent: var(--color-accent-500);
-  --interactive-accent-hover: var(--color-accent-600);
-  --interactive-accent-active: var(--color-accent-700);
+  --interactive-accent: var(--tkp-amber);
+  --interactive-accent-hover: var(--color-brand-amber-600);
+  --interactive-accent-active: var(--color-brand-amber-700);
+  
+  --interactive-teal: var(--tkp-teal);
+  --interactive-teal-hover: var(--color-brand-teal-600);
+  --interactive-teal-active: var(--color-brand-teal-700);
   
   --interactive-success: var(--color-success-500);
   --interactive-success-hover: var(--color-success-600);
@@ -312,7 +395,7 @@
   --radius-full: 9999px;
 
   /* ==========================================================================
-     SHADOW SYSTEM - Advanced
+     SHADOW SYSTEM - Enhanced with Brand Colors
      ========================================================================== */
   
   --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -323,8 +406,11 @@
   --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
-  --shadow-colored-primary: 0 10px 15px -3px rgba(14, 165, 233, 0.3), 0 4px 6px -2px rgba(14, 165, 233, 0.05);
+  
+  /* Brand colored shadows */
+  --shadow-colored-primary: 0 10px 15px -3px rgba(124, 58, 237, 0.3), 0 4px 6px -2px rgba(124, 58, 237, 0.05);
   --shadow-colored-accent: 0 10px 15px -3px rgba(245, 158, 11, 0.3), 0 4px 6px -2px rgba(245, 158, 11, 0.05);
+  --shadow-colored-teal: 0 10px 15px -3px rgba(20, 184, 166, 0.3), 0 4px 6px -2px rgba(20, 184, 166, 0.05);
   --shadow-colored-success: 0 10px 15px -3px rgba(34, 197, 94, 0.3), 0 4px 6px -2px rgba(34, 197, 94, 0.05);
   --shadow-colored-error: 0 10px 15px -3px rgba(239, 68, 68, 0.3), 0 4px 6px -2px rgba(239, 68, 68, 0.05);
 
@@ -506,18 +592,27 @@
   --step-size-sm: 2rem;      /* 32px */
   --step-size-lg: 3rem;      /* 48px */
   
-  /* Gradient Variables */
-  --gradient-primary: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-600) 100%);
+  /* Gradient Variables - Enhanced with Brand Colors */
+  --gradient-primary: linear-gradient(135deg, var(--tkp-violet) 0%, var(--color-brand-violet-600) 100%);
   --gradient-secondary: linear-gradient(135deg, var(--color-secondary-500) 0%, var(--color-secondary-600) 100%);
-  --gradient-accent: linear-gradient(135deg, var(--color-accent-500) 0%, var(--color-accent-600) 100%);
+  --gradient-accent: linear-gradient(135deg, var(--tkp-amber) 0%, var(--color-brand-amber-600) 100%);
+  --gradient-teal: linear-gradient(135deg, var(--tkp-teal) 0%, var(--color-brand-teal-600) 100%);
   --gradient-warm: linear-gradient(135deg, var(--color-warm-500) 0%, var(--color-warm-600) 100%);
   --gradient-cool: linear-gradient(135deg, var(--color-cool-400) 0%, var(--color-cool-500) 100%);
-  --gradient-rainbow: linear-gradient(135deg, 
-    var(--color-primary-500) 0%, 
-    var(--color-accent-500) 25%, 
-    var(--color-warm-500) 50%, 
-    var(--color-success-500) 75%, 
-    var(--color-cool-500) 100%);
+  
+  /* Brand specific gradients */
+  --gradient-brand-primary: linear-gradient(135deg, var(--tkp-violet) 0%, var(--tkp-teal) 100%);
+  --gradient-brand-secondary: linear-gradient(135deg, var(--tkp-teal) 0%, var(--tkp-amber) 100%);
+  --gradient-brand-rainbow: linear-gradient(135deg, 
+    var(--tkp-violet) 0%, 
+    var(--tkp-teal) 50%, 
+    var(--tkp-amber) 100%);
+  
+  /* Hero gradient */
+  --gradient-hero: linear-gradient(135deg, 
+    var(--tkp-navy) 0%, 
+    var(--tkp-violet) 50%, 
+    var(--tkp-teal) 100%);
   
   /* Loading Shimmer Gradients */
   --gradient-shimmer: linear-gradient(
@@ -528,23 +623,26 @@
   );
   
   /* Progress Gradients */
-  --gradient-progress: linear-gradient(90deg, var(--interactive-primary), var(--interactive-accent));
+  --gradient-progress: linear-gradient(90deg, var(--tkp-violet), var(--tkp-teal));
   --gradient-progress-success: linear-gradient(90deg, var(--interactive-success), #10b981);
   --gradient-progress-warning: linear-gradient(90deg, var(--interactive-warning), #f59e0b);
   --gradient-progress-error: linear-gradient(90deg, var(--interactive-error), #f87171);
 }
 
 /* ==========================================================================
-   DARK THEME OVERRIDES - Enhanced
+   DARK THEME OVERRIDES - Enhanced with Brand Colors
    ========================================================================== */
 
 [data-theme="dark"] {
+  /* Logo background for dark theme */
+  --logo-bg-color: var(--logo-bg-color-dark);
+  
   /* Background Colors */
   --bg-primary: var(--color-secondary-950);
   --bg-secondary: var(--color-secondary-900);
   --bg-tertiary: var(--color-secondary-800);
   --bg-quaternary: var(--color-secondary-700);
-  --bg-accent: var(--color-primary-950);
+  --bg-accent: var(--color-brand-violet-950);
   --bg-surface: var(--color-secondary-900);
   --bg-surface-raised: var(--color-secondary-800);
   --bg-surface-overlay: rgba(30, 41, 59, 0.8);
@@ -557,9 +655,9 @@
   --text-secondary: var(--color-secondary-200);
   --text-tertiary: var(--color-secondary-400);
   --text-quaternary: var(--color-secondary-500);
-  --text-inverse: var(--color-secondary-900);
-  --text-accent: var(--color-primary-400);
-  --text-accent-hover: var(--color-primary-300);
+  --text-inverse: var(--tkp-navy);
+  --text-accent: var(--color-brand-violet-400);
+  --text-accent-hover: var(--color-brand-violet-300);
   --text-success: var(--color-success-400);
   --text-warning: var(--color-warning-400);
   --text-error: var(--color-error-400);
@@ -570,26 +668,30 @@
   --border-primary: var(--color-secondary-800);
   --border-secondary: var(--color-secondary-700);
   --border-tertiary: var(--color-secondary-600);
-  --border-accent: var(--color-primary-800);
-  --border-focus: var(--color-primary-400);
+  --border-accent: var(--color-brand-violet-800);
+  --border-focus: var(--color-brand-violet-400);
   --border-success: var(--color-success-700);
   --border-warning: var(--color-warning-700);
   --border-error: var(--color-error-700);
   --border-disabled: var(--color-secondary-700);
 
-  /* Interactive Colors */
-  --interactive-primary: var(--color-primary-500);
-  --interactive-primary-hover: var(--color-primary-400);
-  --interactive-primary-active: var(--color-primary-300);
+  /* Interactive Colors - Adjusted for dark theme */
+  --interactive-primary: var(--tkp-violet);
+  --interactive-primary-hover: var(--color-brand-violet-400);
+  --interactive-primary-active: var(--color-brand-violet-300);
   --interactive-primary-disabled: var(--color-secondary-700);
   
   --interactive-secondary: var(--color-secondary-600);
   --interactive-secondary-hover: var(--color-secondary-500);
   --interactive-secondary-active: var(--color-secondary-400);
   
-  --interactive-accent: var(--color-accent-500);
-  --interactive-accent-hover: var(--color-accent-400);
-  --interactive-accent-active: var(--color-accent-300);
+  --interactive-accent: var(--tkp-amber);
+  --interactive-accent-hover: var(--color-brand-amber-400);
+  --interactive-accent-active: var(--color-brand-amber-300);
+  
+  --interactive-teal: var(--tkp-teal);
+  --interactive-teal-hover: var(--color-brand-teal-400);
+  --interactive-teal-active: var(--color-brand-teal-300);
   
   --interactive-success: var(--color-success-500);
   --interactive-success-hover: var(--color-success-400);
@@ -611,10 +713,17 @@
   --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
   --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
   --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
-  --shadow-colored-primary: 0 10px 15px -3px rgba(14, 165, 233, 0.4), 0 4px 6px -2px rgba(14, 165, 233, 0.1);
+  --shadow-colored-primary: 0 10px 15px -3px rgba(124, 58, 237, 0.4), 0 4px 6px -2px rgba(124, 58, 237, 0.1);
   --shadow-colored-accent: 0 10px 15px -3px rgba(245, 158, 11, 0.4), 0 4px 6px -2px rgba(245, 158, 11, 0.1);
+  --shadow-colored-teal: 0 10px 15px -3px rgba(20, 184, 166, 0.4), 0 4px 6px -2px rgba(20, 184, 166, 0.1);
   --shadow-colored-success: 0 10px 15px -3px rgba(34, 197, 94, 0.4), 0 4px 6px -2px rgba(34, 197, 94, 0.1);
   --shadow-colored-error: 0 10px 15px -3px rgba(239, 68, 68, 0.4), 0 4px 6px -2px rgba(239, 68, 68, 0.1);
+  
+  /* Dark theme gradients */
+  --gradient-hero: linear-gradient(135deg, 
+    #ffffff 0%, 
+    var(--tkp-violet) 50%, 
+    var(--tkp-teal) 100%);
 }
 
 /* ==========================================================================
@@ -623,7 +732,7 @@
 
 @media (prefers-contrast: high) {
   :root {
-    --border-primary: var(--color-secondary-900);
+    --border-primary: var(--tkp-navy);
     --border-secondary: var(--color-secondary-800);
     --text-secondary: var(--color-secondary-800);
     --text-tertiary: var(--color-secondary-700);
