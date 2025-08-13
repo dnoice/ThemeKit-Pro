@@ -1,3 +1,1104 @@
-css/queries.css
+/* ==========================================================================
+   THEMEKIT PRO - RESPONSIVE MEDIA QUERIES
+   Mobile-first responsive system from tiny to huge to foldable and everything in between
+   ========================================================================== */
 
-robust and comprehensive responsive system from the tiny to the huge to the foldable and everything in between.
+/* ==========================================================================
+   BASE MOBILE STYLES (320px and up)
+   These styles apply to all devices and are overridden by larger breakpoints
+   ========================================================================== */
+
+/* Mobile-first container */
+.container {
+  padding: 0 var(--space-4);
+}
+
+/* Mobile navigation */
+.nav__menu {
+  position: fixed;
+  top: var(--nav-height);
+  left: 0;
+  right: 0;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-primary);
+  flex-direction: column;
+  gap: 0;
+  padding: var(--space-4) 0;
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition-all);
+  z-index: var(--z-dropdown);
+  box-shadow: var(--shadow-lg);
+}
+
+.nav__menu.active {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.nav__link {
+  padding: var(--space-4) var(--space-6);
+  border-radius: 0;
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.nav__link:last-child {
+  border-bottom: none;
+}
+
+.nav__toggle {
+  display: flex;
+}
+
+/* Mobile hero adjustments */
+.hero {
+  min-height: 80vh;
+  padding: var(--space-16) 0 var(--space-12) 0;
+}
+
+.hero__title {
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-tight);
+}
+
+.hero__subtitle {
+  font-size: var(--font-size-lg);
+}
+
+.hero__actions {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-3);
+}
+
+.hero__stats {
+  flex-direction: column;
+  gap: var(--space-6);
+  text-align: center;
+}
+
+/* Mobile sections */
+.section {
+  padding: var(--space-12) 0;
+}
+
+.section__title {
+  font-size: var(--font-size-2xl);
+}
+
+.section__description {
+  font-size: var(--font-size-base);
+}
+
+/* Mobile logo showcase */
+.logo-showcase__grid {
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+.logo-sizes-demo {
+  grid-template-columns: 1fr;
+}
+
+.brand-colors-demo {
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+/* Mobile feature showcase */
+.feature-showcase {
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  text-align: center;
+}
+
+.feature-showcase__visual {
+  order: -1;
+  min-height: 200px;
+}
+
+/* Mobile tabs */
+.tabs__nav {
+  flex-wrap: wrap;
+}
+
+.tabs__button {
+  flex: 1;
+  min-width: 120px;
+  font-size: var(--font-size-sm);
+  padding: var(--space-3) var(--space-4);
+}
+
+/* Mobile component filter */
+.component-filter {
+  gap: var(--space-2);
+}
+
+.filter-btn {
+  font-size: var(--font-size-xs);
+  padding: var(--space-1-5) var(--space-3);
+}
+
+/* Mobile component grid */
+.component-grid {
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+.component-card__demo {
+  min-height: 150px;
+  padding: var(--space-4);
+}
+
+/* Mobile demo sections */
+.demo-row {
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.playground__controls {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Mobile icon showcase */
+.icon-grid {
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+
+.icon-sizes {
+  gap: var(--space-2);
+}
+
+/* Mobile progress showcase */
+.progress-steps {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.progress-steps::before {
+  display: none;
+}
+
+.progress-step {
+  flex-direction: row;
+  width: 100%;
+  text-align: left;
+}
+
+.progress-step__circle {
+  margin-bottom: 0;
+  margin-right: var(--space-3);
+}
+
+/* Mobile pricing */
+.pricing-grid {
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+.pricing-card--featured {
+  transform: none;
+  order: -1;
+}
+
+.pricing-card--featured:hover {
+  transform: translateY(-4px);
+}
+
+/* Mobile testimonials */
+.testimonial__author {
+  flex-direction: column;
+  text-align: center;
+}
+
+.testimonial__info {
+  text-align: center;
+}
+
+.testimonial__quote {
+  font-size: var(--font-size-lg);
+}
+
+/* Mobile newsletter */
+.newsletter {
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  text-align: center;
+}
+
+.newsletter__title {
+  font-size: var(--font-size-2xl);
+}
+
+.newsletter__description {
+  font-size: var(--font-size-base);
+}
+
+/* Mobile footer */
+.footer__content {
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  text-align: center;
+}
+
+.footer__bottom {
+  flex-direction: column;
+  gap: var(--space-4);
+  text-align: center;
+}
+
+.footer__legal {
+  justify-content: center;
+}
+
+/* Mobile toast positioning */
+.toast-container {
+  left: var(--space-4);
+  right: var(--space-4);
+  top: var(--space-4);
+}
+
+.toast {
+  min-width: auto;
+  max-width: none;
+}
+
+/* ==========================================================================
+   EXTRA SMALL DEVICES (480px and up)
+   Small phones in landscape, larger phones in portrait
+   ========================================================================== */
+
+@media (min-width: 480px) {
+  .container {
+    padding: 0 var(--space-6);
+  }
+
+  .hero__title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .hero__actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .hero__stats {
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--space-8);
+  }
+
+  .component-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .brand-colors-demo {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .icon-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .demo-row {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .pricing-card--featured {
+    order: 0;
+  }
+
+  .testimonial__author {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .testimonial__info {
+    text-align: left;
+  }
+}
+
+/* ==========================================================================
+   SMALL DEVICES (640px and up)
+   Large phones in landscape, small tablets in portrait
+   ========================================================================== */
+
+@media (min-width: 640px) {
+  .nav {
+    padding: var(--space-4) var(--space-8);
+  }
+
+  .hero {
+    min-height: 90vh;
+    padding: var(--space-20) 0 var(--space-16) 0;
+  }
+
+  .hero__title {
+    font-size: var(--font-size-4xl);
+  }
+
+  .hero__subtitle {
+    font-size: var(--font-size-xl);
+  }
+
+  .section {
+    padding: var(--space-16) 0;
+  }
+
+  .section__title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .section__description {
+    font-size: var(--font-size-lg);
+  }
+
+  .logo-showcase__grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .component-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+
+  .component-card__demo {
+    min-height: 180px;
+    padding: var(--space-6);
+  }
+
+  .tabs__button {
+    flex: none;
+    min-width: auto;
+    font-size: var(--font-size-base);
+    padding: var(--space-4) var(--space-6);
+  }
+
+  .filter-btn {
+    font-size: var(--font-size-sm);
+    padding: var(--space-2) var(--space-4);
+  }
+
+  .playground__controls {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .pricing-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-8);
+  }
+
+  .pricing-card--featured {
+    transform: scale(1.02);
+  }
+
+  .testimonials {
+    padding: var(--space-12);
+  }
+
+  .testimonial__quote {
+    font-size: var(--font-size-xl);
+  }
+
+  .toast-container {
+    left: auto;
+    right: var(--space-4);
+    width: auto;
+  }
+
+  .toast {
+    min-width: var(--toast-width);
+    max-width: var(--toast-width);
+  }
+}
+
+/* ==========================================================================
+   MEDIUM DEVICES (768px and up)
+   Large tablets in portrait, small laptops
+   ========================================================================== */
+
+@media (min-width: 768px) {
+  /* Show desktop navigation */
+  .nav__menu {
+    position: static;
+    flex-direction: row;
+    gap: var(--space-8);
+    padding: 0;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+
+  .nav__link {
+    padding: var(--space-2) var(--space-3);
+    border: none;
+    width: auto;
+    text-align: left;
+  }
+
+  .nav__toggle {
+    display: none;
+  }
+
+  .nav__controls {
+    gap: var(--space-4);
+  }
+
+  .hero {
+    min-height: 100vh;
+    padding: var(--space-24) 0 var(--space-20) 0;
+  }
+
+  .section {
+    padding: var(--space-20) 0;
+  }
+
+  .feature-showcase {
+    grid-template-columns: 1fr 1fr;
+    text-align: left;
+  }
+
+  .feature-showcase__visual {
+    order: 0;
+    min-height: 300px;
+  }
+
+  .component-grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+
+  .component-card__demo {
+    min-height: 200px;
+  }
+
+  .progress-steps {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .progress-steps::before {
+    display: block;
+  }
+
+  .progress-step {
+    flex-direction: column;
+    text-align: center;
+    width: auto;
+  }
+
+  .progress-step__circle {
+    margin-bottom: var(--space-2);
+    margin-right: 0;
+  }
+
+  .newsletter {
+    grid-template-columns: 1fr 1fr;
+    text-align: left;
+  }
+
+  .footer__content {
+    grid-template-columns: 2fr repeat(2, 1fr);
+    text-align: left;
+  }
+
+  .footer__bottom {
+    flex-direction: row;
+    text-align: left;
+  }
+}
+
+/* ==========================================================================
+   LARGE DEVICES (1024px and up)
+   Large tablets in landscape, standard laptops
+   ========================================================================== */
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 var(--space-8);
+  }
+
+  .nav {
+    padding: var(--space-4) var(--space-12);
+  }
+
+  .section__header {
+    margin-bottom: var(--space-20);
+  }
+
+  .component-grid {
+    gap: var(--space-8);
+  }
+
+  .pricing-grid {
+    gap: var(--space-10);
+  }
+
+  .pricing-card--featured {
+    transform: scale(1.05);
+  }
+
+  .footer__content {
+    grid-template-columns: 2fr repeat(4, 1fr);
+    gap: var(--space-12);
+  }
+
+  /* Enhanced hover effects for larger screens */
+  .component-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .pricing-card:hover {
+    transform: translateY(-6px);
+  }
+
+  .pricing-card--featured:hover {
+    transform: scale(1.05) translateY(-6px);
+  }
+}
+
+/* ==========================================================================
+   EXTRA LARGE DEVICES (1280px and up)
+   Large laptops, desktop monitors
+   ========================================================================== */
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: var(--container-xl);
+  }
+
+  .hero__content {
+    max-width: var(--content-5xl);
+  }
+
+  .hero__title {
+    font-size: var(--font-size-5xl);
+  }
+
+  .hero__stats {
+    gap: var(--space-16);
+  }
+
+  .section__header {
+    max-width: var(--content-3xl);
+  }
+
+  .component-grid {
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  }
+
+  .feature-showcase {
+    gap: var(--space-16);
+  }
+
+  .feature-showcase__visual {
+    min-height: 400px;
+  }
+
+  .testimonials {
+    padding: var(--space-16);
+  }
+
+  .newsletter {
+    gap: var(--space-16);
+  }
+}
+
+/* ==========================================================================
+   2X LARGE DEVICES (1536px and up)
+   Large desktop monitors, ultrawide displays
+   ========================================================================== */
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: var(--container-2xl);
+    padding: 0 var(--space-12);
+  }
+
+  .hero__title {
+    font-size: var(--font-size-6xl);
+  }
+
+  .hero__subtitle {
+    font-size: var(--font-size-2xl);
+  }
+
+  .section {
+    padding: var(--space-28) 0;
+  }
+
+  .section__title {
+    font-size: var(--font-size-4xl);
+  }
+
+  .section__header {
+    margin-bottom: var(--space-24);
+  }
+
+  .component-grid {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: var(--space-12);
+  }
+
+  .pricing-grid {
+    gap: var(--space-12);
+  }
+
+  .footer {
+    padding: var(--space-28) 0 var(--space-12) 0;
+  }
+}
+
+/* ==========================================================================
+   ULTRA-WIDE DISPLAYS (1920px and up)
+   4K monitors, ultra-wide displays
+   ========================================================================== */
+
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1800px;
+  }
+
+  .hero__content {
+    max-width: var(--content-6xl);
+  }
+
+  .component-grid {
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: var(--space-16);
+  }
+
+  .section__header {
+    max-width: var(--content-4xl);
+  }
+}
+
+/* ==========================================================================
+   LANDSCAPE ORIENTATION ADJUSTMENTS
+   ========================================================================== */
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    min-height: auto;
+    padding: var(--space-8) 0;
+  }
+
+  .hero__logo {
+    margin-bottom: var(--space-4);
+  }
+
+  .hero__badge {
+    margin-bottom: var(--space-3);
+  }
+
+  .hero__title {
+    margin-bottom: var(--space-3);
+    font-size: var(--font-size-2xl);
+  }
+
+  .hero__subtitle {
+    margin-bottom: var(--space-6);
+    font-size: var(--font-size-base);
+  }
+
+  .hero__actions {
+    margin-bottom: var(--space-8);
+  }
+
+  .hero__stats {
+    gap: var(--space-6);
+  }
+
+  .stat__number {
+    font-size: var(--font-size-2xl);
+  }
+}
+
+/* ==========================================================================
+   FOLDABLE DEVICES & FLEXIBLE DISPLAYS
+   ========================================================================== */
+
+@media (min-width: 600px) and (max-width: 900px) and (orientation: portrait) {
+  /* Foldable devices in portrait mode */
+  .component-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .newsletter {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1200px) and (orientation: landscape) {
+  /* Foldable devices in landscape mode */
+  .hero__content {
+    max-width: var(--content-3xl);
+  }
+
+  .feature-showcase {
+    gap: var(--space-10);
+  }
+
+  .component-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ==========================================================================
+   HIGH-DPI DISPLAYS
+   ========================================================================== */
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Enhanced visual quality for high-DPI displays */
+  .logo-icon,
+  .icon {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+
+  .hero__shapes .shape {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+}
+
+/* ==========================================================================
+   REDUCED MOTION PREFERENCES
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__shapes .shape {
+    animation: none;
+  }
+
+  .device {
+    animation: none;
+  }
+
+  .spinner,
+  .progress-ring__circle,
+  .progress-bar__fill {
+    animation: none;
+    transition: none;
+  }
+
+  .testimonial {
+    transition: opacity 0.3s ease;
+  }
+
+  .component-card:hover,
+  .pricing-card:hover,
+  .btn:hover {
+    transform: none;
+  }
+
+  .icon--spinning,
+  .icon--pulse {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   HIGH CONTRAST MODE
+   ========================================================================== */
+
+@media (prefers-contrast: high) {
+  .btn--outline {
+    border-width: 2px;
+  }
+
+  .component-card,
+  .pricing-card {
+    border-width: 2px;
+  }
+
+  .nav__link::after {
+    height: 3px;
+  }
+
+  .progress-bar {
+    border: 1px solid var(--text-primary);
+  }
+
+  .progress-ring__circle-bg {
+    stroke-width: 6;
+  }
+
+  .progress-ring__circle {
+    stroke-width: 6;
+  }
+}
+
+/* ==========================================================================
+   DARK MODE SPECIFIC RESPONSIVE ADJUSTMENTS
+   ========================================================================== */
+
+@media (min-width: 768px) {
+  [data-theme="dark"] .nav__menu {
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(12px);
+  }
+}
+
+/* ==========================================================================
+   PRINT MEDIA QUERIES
+   ========================================================================== */
+
+@media print {
+  .hero {
+    min-height: auto;
+    padding: var(--space-8) 0;
+  }
+
+  .hero__shapes,
+  .hero__background {
+    display: none;
+  }
+
+  .section {
+    padding: var(--space-8) 0;
+    page-break-inside: avoid;
+  }
+
+  .component-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .newsletter {
+    grid-template-columns: 1fr;
+    background: none;
+    color: var(--text-primary);
+  }
+
+  .footer__content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+
+  .feature-showcase {
+    grid-template-columns: 1fr;
+  }
+
+  .component-card,
+  .pricing-card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid var(--text-primary);
+  }
+}
+
+/* ==========================================================================
+   CONTAINER QUERIES (Progressive Enhancement)
+   ========================================================================== */
+
+@supports (container-type: inline-size) {
+  .component-card {
+    container-type: inline-size;
+  }
+
+  @container (max-width: 300px) {
+    .component-card__demo {
+      padding: var(--space-3);
+      min-height: 120px;
+    }
+
+    .component-card__title {
+      font-size: var(--font-size-base);
+    }
+  }
+
+  @container (min-width: 400px) {
+    .component-card__demo {
+      padding: var(--space-8);
+      min-height: 250px;
+    }
+  }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY RESPONSIVE ENHANCEMENTS
+   ========================================================================== */
+
+/* Larger touch targets on smaller screens */
+@media (max-width: 768px) {
+  .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .nav__link {
+    min-height: 44px;
+  }
+
+  .tabs__button {
+    min-height: 44px;
+  }
+
+  .filter-btn {
+    min-height: 44px;
+  }
+
+  .pagination__btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .testimonials__btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .testimonials__dot {
+    width: 16px;
+    height: 16px;
+  }
+
+  .faq__question {
+    min-height: 60px;
+  }
+}
+
+/* Enhanced focus indicators for keyboard navigation */
+@media (min-width: 768px) {
+  .keyboard-navigation .nav__link:focus {
+    outline-offset: 4px;
+  }
+
+  .keyboard-navigation .btn:focus {
+    outline-offset: 3px;
+  }
+
+  .keyboard-navigation .tabs__button:focus {
+    outline-offset: 2px;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE UTILITIES
+   ========================================================================== */
+
+/* Show/hide utilities for different breakpoints */
+.mobile-only {
+  display: block;
+}
+
+.tablet-up {
+  display: none;
+}
+
+.desktop-up {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .mobile-only {
+    display: none;
+  }
+
+  .tablet-up {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .tablet-up {
+    display: none;
+  }
+
+  .desktop-up {
+    display: block;
+  }
+}
+
+/* Responsive text sizes */
+.text-responsive {
+  font-size: var(--font-size-sm);
+}
+
+@media (min-width: 640px) {
+  .text-responsive {
+    font-size: var(--font-size-base);
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-responsive {
+    font-size: var(--font-size-lg);
+  }
+}
+
+/* Responsive spacing */
+.spacing-responsive {
+  padding: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .spacing-responsive {
+    padding: var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .spacing-responsive {
+    padding: var(--space-8);
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE PERFORMANCE OPTIMIZATIONS
+   ========================================================================== */
+
+/* Reduce animations on smaller devices for performance */
+@media (max-width: 640px) {
+  .hero__shapes .shape {
+    animation-duration: 8s;
+  }
+
+  .device {
+    animation-duration: 4s;
+  }
+
+  .progress-ring__circle {
+    transition-duration: 0.8s;
+  }
+}
+
+/* Enhanced animations for larger, more powerful devices */
+@media (min-width: 1280px) {
+  .component-card:hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .pricing-card:hover {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn:hover {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
