@@ -3,938 +3,1231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Theme System | Design Variables Framework</title>
-    
-    <!-- CSS Files -->
+    <title>ThemeKit Pro - Advanced CSS Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/queries.css">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- SVG Icon Definitions -->
-    <svg style="display: none;">
-        <defs>
-            <!-- UI Icons -->
-            <symbol id="icon-home" viewBox="0 0 24 24">
-                <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            </symbol>
-            
-            <symbol id="icon-settings" viewBox="0 0 24 24">
-                <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            </symbol>
-            
-            <symbol id="icon-search" viewBox="0 0 24 24">
-                <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            </symbol>
-            
-            <symbol id="icon-user" viewBox="0 0 24 24">
-                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            </symbol>
-            
-            <symbol id="icon-bell" viewBox="0 0 24 24">
-                <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <path d="M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            </symbol>
-            
-            <symbol id="icon-mail" viewBox="0 0 24 24">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            </symbol>
-            
-            <symbol id="icon-heart" viewBox="0 0 24 24">
-                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            </symbol>
-            
-            <symbol id="icon-star" viewBox="0 0 24 24">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            </symbol>
-            
-            <symbol id="icon-download" viewBox="0 0 24 24">
-                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <polyline points="7 10 12 15 17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            </symbol>
-            
-            <symbol id="icon-upload" viewBox="0 0 24 24">
-                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <polyline points="17 8 12 3 7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <line x1="12" y1="3" x2="12" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            </symbol>
-            
-            <symbol id="icon-check" viewBox="0 0 24 24">
-                <polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            </symbol>
-            
-            <symbol id="icon-x" viewBox="0 0 24 24">
-                <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </symbol>
-            
-            <symbol id="icon-arrow-right" viewBox="0 0 24 24">
-                <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <polyline points="12 5 19 12 12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            </symbol>
-            
-            <symbol id="icon-menu" viewBox="0 0 24 24">
-                <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </symbol>
-            
-            <symbol id="icon-grid" viewBox="0 0 24 24">
-                <rect x="3" y="3" width="7" height="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <rect x="14" y="3" width="7" height="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <rect x="14" y="14" width="7" height="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <rect x="3" y="14" width="7" height="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            </symbol>
-            
-            <symbol id="icon-layers" viewBox="0 0 24 24">
-                <polygon points="12 2 2 7 12 12 22 7 12 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <polyline points="2 17 12 22 22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                <polyline points="2 12 12 17 22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            </symbol>
-        </defs>
-    </svg>
-    <!-- Theme Controls -->
-    <div class="theme-controls">
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-            <svg class="theme-icon sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="5"></circle>
-                <line x1="12" y1="1" x2="12" y2="3"></line>
-                <line x1="12" y1="21" x2="12" y2="23"></line>
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                <line x1="1" y1="12" x2="3" y2="12"></line>
-                <line x1="21" y1="12" x2="23" y2="12"></line>
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-            </svg>
-            <svg class="theme-icon moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-            </svg>
-        </button>
-        <div class="theme-menu" id="themeMenu">
-            <button class="theme-option" data-theme="light">
-                <span class="theme-option-icon">☀️</span>
-                <span>Light</span>
-            </button>
-            <button class="theme-option" data-theme="dark">
-                <span class="theme-option-icon">🌙</span>
-                <span>Dark</span>
-            </button>
-            <button class="theme-option" data-theme="cosmic">
-                <span class="theme-option-icon">✨</span>
-                <span>Cosmic</span>
-            </button>
-            <button class="theme-option" data-theme="forest">
-                <span class="theme-option-icon">🌿</span>
-                <span>Forest</span>
-            </button>
-        </div>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="main-nav">
-        <div class="nav-container">
-            <div class="nav-brand">
-                <div class="nav-logo">
-                    <span class="logo-icon">◈</span>
-                    <span class="logo-text">ThemeSystem</span>
+    <!-- Header with Advanced Navigation -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav__brand">
+                <div class="nav__logo">
+                    <div class="logo-icon"></div>
+                    <h1 class="nav__title">ThemeKit Pro</h1>
                 </div>
             </div>
-            <ul class="nav-links">
-                <li><a href="#colors" class="nav-link">Colors</a></li>
-                <li><a href="#typography" class="nav-link">Typography</a></li>
-                <li><a href="#icons" class="nav-link">Icons</a></li>
-                <li><a href="#components" class="nav-link">Components</a></li>
-                <li><a href="#forms" class="nav-link">Forms</a></li>
-                <li><a href="#grid" class="nav-link">Grid</a></li>
-                <li><a href="#shadows" class="nav-link">Effects</a></li>
-                <li><a href="#spacing" class="nav-link">Spacing</a></li>
-                <li><a href="#animations" class="nav-link">Animations</a></li>
-                <li><a href="#loading" class="nav-link">Loading</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="hero">
-        <div class="hero-background">
-            <div class="hero-gradient"></div>
-            <div class="hero-pattern"></div>
-        </div>
-        <div class="hero-content">
-            <h1 class="hero-title">
-                <span class="hero-word">Modern</span>
-                <span class="hero-word">Theme</span>
-                <span class="hero-word accent">System</span>
-            </h1>
-            <p class="hero-subtitle">
-                A comprehensive CSS variables framework for building beautiful, consistent interfaces
-            </p>
-            <div class="hero-badges">
-                <span class="badge badge-primary">v3.0</span>
-                <span class="badge badge-secondary">Production Ready</span>
-                <span class="badge badge-tertiary">WCAG AAA</span>
-                <span class="badge badge-accent">Open Source</span>
+            <div class="nav__menu" id="navMenu">
+                <a href="#hero" class="nav__link">Home</a>
+                <a href="#components" class="nav__link">Components</a>
+                <a href="#sections" class="nav__link">Sections</a>
+                <a href="#features" class="nav__link">Features</a>
+                <a href="#pricing" class="nav__link">Pricing</a>
             </div>
-        </div>
+            <div class="nav__controls">
+                <button class="btn btn--ghost nav__toggle" id="navToggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <button class="btn btn--secondary" id="themeToggle">
+                    <span class="theme-icon">🌙</span>
+                    <span class="theme-text">Dark</span>
+                </button>
+            </div>
+        </nav>
     </header>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Color Palette Section -->
-        <section id="colors" class="section">
-            <div class="section-header">
-                <h2 class="section-title">Color Palette</h2>
-                <p class="section-description">A carefully crafted color system with semantic naming</p>
+    <!-- Hero Section with Animated Background -->
+    <section class="hero" id="hero">
+        <div class="hero__background">
+            <div class="hero__shapes">
+                <div class="shape shape--1"></div>
+                <div class="shape shape--2"></div>
+                <div class="shape shape--3"></div>
+                <div class="shape shape--4"></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="hero__content">
+                <div class="hero__badge">
+                    <span class="badge badge--accent">New Release</span>
+                    <span class="hero__version">v2.0 is here with 50+ components</span>
+                </div>
+                <h1 class="hero__title">
+                    Build <span class="gradient-text">Beautiful</span> Interfaces
+                    <br>with Advanced Theming
+                </h1>
+                <p class="hero__subtitle">
+                    A comprehensive design system with 100+ ready-made components, 
+                    dual themes, advanced animations, and enterprise-grade accessibility.
+                </p>
+                <div class="hero__actions">
+                    <button class="btn btn--primary btn--large" id="getStartedBtn">
+                        <span>Get Started Free</span>
+                        <svg class="btn__icon" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <button class="btn btn--outline btn--large" id="viewDocsBtn">
+                        <svg class="btn__icon" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>View Documentation</span>
+                    </button>
+                </div>
+                <div class="hero__stats">
+                    <div class="stat">
+                        <div class="stat__number" data-count="100">0</div>
+                        <div class="stat__label">Components</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat__number" data-count="50">0</div>
+                        <div class="stat__label">Sections</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat__number" data-count="1000">0</div>
+                        <div class="stat__label">Design Tokens</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Showcase with Tabs -->
+    <section class="section section--features" id="features">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Powerful Features</h2>
+                <p class="section__description">
+                    Everything you need to build modern, accessible, and beautiful web applications
+                </p>
             </div>
             
-            <div class="palette-container">
-                <div class="palette-group">
-                    <h3 class="palette-title">Primary Colors</h3>
-                    <div class="color-grid">
-                        <div class="color-card" data-color="--color-primary-50">
-                            <div class="color-preview" style="background: var(--color-primary-50);"></div>
-                            <div class="color-info">
-                                <span class="color-name">Primary 50</span>
-                                <span class="color-value">--color-primary-50</span>
+            <div class="tabs" id="featureTabs">
+                <div class="tabs__nav">
+                    <button class="tabs__button tabs__button--active" data-tab="design">
+                        <svg class="tabs__icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        Design System
+                    </button>
+                    <button class="tabs__button" data-tab="themes">
+                        <svg class="tabs__icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        Smart Theming
+                    </button>
+                    <button class="tabs__button" data-tab="responsive">
+                        <svg class="tabs__icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M4 6h18V4H4c-1.1 0-2 .9-2 2v11H0v3h14v-3H4V6zm19 2h-6c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1zm-1 9h-4v-7h4v7z"/>
+                        </svg>
+                        Responsive
+                    </button>
+                    <button class="tabs__button" data-tab="accessibility">
+                        <svg class="tabs__icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/>
+                        </svg>
+                        Accessibility
+                    </button>
+                </div>
+                
+                <div class="tabs__content">
+                    <div class="tabs__panel tabs__panel--active" data-panel="design">
+                        <div class="feature-showcase">
+                            <div class="feature-showcase__content">
+                                <h3 class="feature-showcase__title">Comprehensive Design System</h3>
+                                <p class="feature-showcase__description">
+                                    Over 1000 design tokens covering colors, typography, spacing, shadows, and more. 
+                                    Built with CSS custom properties for maximum flexibility and maintainability.
+                                </p>
+                                <ul class="feature-list">
+                                    <li class="feature-list__item">
+                                        <svg class="feature-list__icon" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                        </svg>
+                                        1000+ Design Tokens
+                                    </li>
+                                    <li class="feature-list__item">
+                                        <svg class="feature-list__icon" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                        </svg>
+                                        Semantic Color System
+                                    </li>
+                                    <li class="feature-list__item">
+                                        <svg class="feature-list__icon" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                        </svg>
+                                        Typography Scale
+                                    </li>
+                                    <li class="feature-list__item">
+                                        <svg class="feature-list__icon" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                        </svg>
+                                        Animation System
+                                    </li>
+                                </ul>
                             </div>
-                        </div>
-                        <div class="color-card" data-color="--color-primary-100">
-                            <div class="color-preview" style="background: var(--color-primary-100);"></div>
-                            <div class="color-info">
-                                <span class="color-name">Primary 100</span>
-                                <span class="color-value">--color-primary-100</span>
+                            <div class="feature-showcase__visual">
+                                <div class="design-tokens-demo">
+                                    <div class="token-group">
+                                        <div class="token token--color"></div>
+                                        <div class="token token--spacing"></div>
+                                        <div class="token token--typography"></div>
+                                        <div class="token token--shadow"></div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="color-card" data-color="--color-primary-200">
-                            <div class="color-preview" style="background: var(--color-primary-200);"></div>
-                            <div class="color-info">
-                                <span class="color-name">Primary 200</span>
-                                <span class="color-value">--color-primary-200</span>
-                            </div>
-                        </div>
-                        <div class="color-card" data-color="--color-primary-300">
-                            <div class="color-preview" style="background: var(--color-primary-300);"></div>
-                            <div class="color-info">
-                                <span class="color-name">Primary 300</span>
-                                <span class="color-value">--color-primary-300</span>
-                            </div>
-                        </div>
-                        <div class="color-card" data-color="--color-primary-400">
-                            <div class="color-preview" style="background: var(--color-primary-400);"></div>
-                            <div class="color-info">
-                                <span class="color-name">Primary 400</span>
-                                <span class="color-value">--color-primary-400</span>
-                            </div>
-                        </div>
-                        <div class="color-card" data-color="--color-primary-500">
-                            <div class="color-preview" style="background: var(--color-primary-500);"></div>
-                            <div class="color-info">
-                                <span class="color-name">Primary 500</span>
-                                <span class="color-value">--color-primary-500</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="palette-group">
-                    <h3 class="palette-title">Neutral Colors</h3>
-                    <div class="color-grid">
-                        <div class="color-card" data-color="--color-neutral-50">
-                            <div class="color-preview" style="background: var(--color-neutral-50);"></div>
-                            <div class="color-info">
-                                <span class="color-name">Neutral 50</span>
-                                <span class="color-value">--color-neutral-50</span>
-                            </div>
-                        </div>
-                        <div class="color-card" data-color="--color-neutral-200">
-                            <div class="color-preview" style="background: var(--color-neutral-200);"></div>
-                            <div class="color-info">
-                                <span class="color-name">Neutral 200</span>
-                                <span class="color-value">--color-neutral-200</span>
-                            </div>
-                        </div>
-                        <div class="color-card" data-color="--color-neutral-400">
-                            <div class="color-preview" style="background: var(--color-neutral-400);"></div>
-                            <div class="color-info">
-                                <span class="color-name">Neutral 400</span>
-                                <span class="color-value">--color-neutral-400</span>
-                            </div>
-                        </div>
-                        <div class="color-card" data-color="--color-neutral-600">
-                            <div class="color-preview" style="background: var(--color-neutral-600);"></div>
-                            <div class="color-info">
-                                <span class="color-name">Neutral 600</span>
-                                <span class="color-value">--color-neutral-600</span>
-                            </div>
-                        </div>
-                        <div class="color-card" data-color="--color-neutral-800">
-                            <div class="color-preview" style="background: var(--color-neutral-800);"></div>
-                            <div class="color-info">
-                                <span class="color-name">Neutral 800</span>
-                                <span class="color-value">--color-neutral-800</span>
-                            </div>
-                        </div>
-                        <div class="color-card" data-color="--color-neutral-900">
-                            <div class="color-preview" style="background: var(--color-neutral-900);"></div>
-                            <div class="color-info">
-                                <span class="color-name">Neutral 900</span>
-                                <span class="color-value">--color-neutral-900</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Typography Section -->
-        <section id="typography" class="section">
-            <div class="section-header">
-                <h2 class="section-title">Typography Scale</h2>
-                <p class="section-description">Fluid typography system with perfect vertical rhythm</p>
-            </div>
-            
-            <div class="typography-showcase">
-                <div class="type-sample">
-                    <p class="type-display">Display</p>
-                    <code class="type-code">font-size: var(--text-display);</code>
-                </div>
-                <div class="type-sample">
-                    <p class="type-h1">Heading 1</p>
-                    <code class="type-code">font-size: var(--text-h1);</code>
-                </div>
-                <div class="type-sample">
-                    <p class="type-h2">Heading 2</p>
-                    <code class="type-code">font-size: var(--text-h2);</code>
-                </div>
-                <div class="type-sample">
-                    <p class="type-h3">Heading 3</p>
-                    <code class="type-code">font-size: var(--text-h3);</code>
-                </div>
-                <div class="type-sample">
-                    <p class="type-body">Body Text</p>
-                    <code class="type-code">font-size: var(--text-body);</code>
-                </div>
-                <div class="type-sample">
-                    <p class="type-small">Small Text</p>
-                    <code class="type-code">font-size: var(--text-small);</code>
-                </div>
-            </div>
-        </section>
-
-        <!-- Icons Section -->
-        <section id="icons" class="section">
-            <div class="section-header">
-                <h2 class="section-title">Icon System</h2>
-                <p class="section-description">Custom SVG icons with flexible sizing and styling</p>
-            </div>
-            
-            <div class="icons-showcase">
-                <div class="icon-grid">
-                    <div class="icon-item" data-icon="home">
-                        <div class="icon-preview">
-                            <svg class="icon icon-lg">
-                                <use href="#icon-home"></use>
-                            </svg>
-                        </div>
-                        <span class="icon-label">home</span>
-                    </div>
-                    <div class="icon-item" data-icon="settings">
-                        <div class="icon-preview">
-                            <svg class="icon icon-lg">
-                                <use href="#icon-settings"></use>
-                            </svg>
-                        </div>
-                        <span class="icon-label">settings</span>
-                    </div>
-                    <div class="icon-item" data-icon="search">
-                        <div class="icon-preview">
-                            <svg class="icon icon-lg">
-                                <use href="#icon-search"></use>
-                            </svg>
-                        </div>
-                        <span class="icon-label">search</span>
-                    </div>
-                    <div class="icon-item" data-icon="user">
-                        <div class="icon-preview">
-                            <svg class="icon icon-lg">
-                                <use href="#icon-user"></use>
-                            </svg>
-                        </div>
-                        <span class="icon-label">user</span>
-                    </div>
-                    <div class="icon-item" data-icon="bell">
-                        <div class="icon-preview">
-                            <svg class="icon icon-lg">
-                                <use href="#icon-bell"></use>
-                            </svg>
-                        </div>
-                        <span class="icon-label">bell</span>
-                    </div>
-                    <div class="icon-item" data-icon="mail">
-                        <div class="icon-preview">
-                            <svg class="icon icon-lg">
-                                <use href="#icon-mail"></use>
-                            </svg>
-                        </div>
-                        <span class="icon-label">mail</span>
-                    </div>
-                    <div class="icon-item" data-icon="heart">
-                        <div class="icon-preview">
-                            <svg class="icon icon-lg">
-                                <use href="#icon-heart"></use>
-                            </svg>
-                        </div>
-                        <span class="icon-label">heart</span>
-                    </div>
-                    <div class="icon-item" data-icon="star">
-                        <div class="icon-preview">
-                            <svg class="icon icon-lg">
-                                <use href="#icon-star"></use>
-                            </svg>
-                        </div>
-                        <span class="icon-label">star</span>
-                    </div>
-                    <div class="icon-item" data-icon="download">
-                        <div class="icon-preview">
-                            <svg class="icon icon-lg">
-                                <use href="#icon-download"></use>
-                            </svg>
-                        </div>
-                        <span class="icon-label">download</span>
-                    </div>
-                    <div class="icon-item" data-icon="upload">
-                        <div class="icon-preview">
-                            <svg class="icon icon-lg">
-                                <use href="#icon-upload"></use>
-                            </svg>
-                        </div>
-                        <span class="icon-label">upload</span>
-                    </div>
-                    <div class="icon-item" data-icon="check">
-                        <div class="icon-preview">
-                            <svg class="icon icon-lg">
-                                <use href="#icon-check"></use>
-                            </svg>
-                        </div>
-                        <span class="icon-label">check</span>
-                    </div>
-                    <div class="icon-item" data-icon="x">
-                        <div class="icon-preview">
-                            <svg class="icon icon-lg">
-                                <use href="#icon-x"></use>
-                            </svg>
-                        </div>
-                        <span class="icon-label">close</span>
-                    </div>
-                </div>
-                
-                <div class="icon-sizes">
-                    <h3 class="subsection-title">Icon Sizes</h3>
-                    <div class="size-examples">
-                        <div class="size-item">
-                            <svg class="icon icon-xs"><use href="#icon-star"></use></svg>
-                            <code>icon-xs</code>
-                        </div>
-                        <div class="size-item">
-                            <svg class="icon icon-sm"><use href="#icon-star"></use></svg>
-                            <code>icon-sm</code>
-                        </div>
-                        <div class="size-item">
-                            <svg class="icon icon-md"><use href="#icon-star"></use></svg>
-                            <code>icon-md</code>
-                        </div>
-                        <div class="size-item">
-                            <svg class="icon icon-lg"><use href="#icon-star"></use></svg>
-                            <code>icon-lg</code>
-                        </div>
-                        <div class="size-item">
-                            <svg class="icon icon-xl"><use href="#icon-star"></use></svg>
-                            <code>icon-xl</code>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Components Section -->
-        <section id="components" class="section">
-            <div class="section-header">
-                <h2 class="section-title">Components</h2>
-                <p class="section-description">Pre-built UI components using the theme system</p>
-            </div>
-            
-            <div class="component-grid">
-                <!-- Buttons -->
-                <div class="component-card">
-                    <h3 class="component-title">Buttons</h3>
-                    <div class="component-demo">
-                        <button class="btn btn-primary">Primary</button>
-                        <button class="btn btn-secondary">Secondary</button>
-                        <button class="btn btn-outline">Outline</button>
-                        <button class="btn btn-ghost">Ghost</button>
-                    </div>
-                </div>
-
-                <!-- Cards -->
-                <div class="component-card">
-                    <h3 class="component-title">Cards</h3>
-                    <div class="card-examples">
-                        <div class="card">
-                            <h4 class="card-title">Default Card</h4>
-                            <p class="card-text">A simple card component with subtle shadow</p>
-                        </div>
-                        <div class="card card-elevated">
-                            <h4 class="card-title">Elevated Card</h4>
-                            <p class="card-text">Higher elevation for important content</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Alerts -->
-                <div class="component-card full-width">
-                    <h3 class="component-title">Alerts</h3>
-                    <div class="alert-examples">
-                        <div class="alert alert-info">
-                            <span class="alert-icon">ℹ️</span>
-                            <span>Information alert with helpful details</span>
-                        </div>
-                        <div class="alert alert-success">
-                            <span class="alert-icon">✅</span>
-                            <span>Success! Operation completed successfully</span>
-                        </div>
-                        <div class="alert alert-warning">
-                            <span class="alert-icon">⚠️</span>
-                            <span>Warning: Please review before proceeding</span>
-                        </div>
-                        <div class="alert alert-error">
-                            <span class="alert-icon">❌</span>
-                            <span>Error: Something went wrong</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Forms Section -->
-        <section id="forms" class="section">
-            <div class="section-header">
-                <h2 class="section-title">Form Elements</h2>
-                <p class="section-description">Accessible and beautiful form components</p>
-            </div>
-            
-            <div class="form-showcase">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label">Text Input</label>
-                        <input type="text" class="form-input" placeholder="Enter text...">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Select</label>
-                        <select class="form-select">
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label">Email</label>
-                        <input type="email" class="form-input" placeholder="email@example.com">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Password</label>
-                        <input type="password" class="form-input" placeholder="••••••••">
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Textarea</label>
-                    <textarea class="form-textarea" rows="4" placeholder="Enter your message..."></textarea>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" class="form-checkbox">
-                            <span>I agree to the terms</span>
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <label class="radio-label">
-                            <input type="radio" name="option" class="form-radio">
-                            <span>Option A</span>
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="option" class="form-radio">
-                            <span>Option B</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Grid System Section -->
-        <section id="grid" class="section">
-            <div class="section-header">
-                <h2 class="section-title">Grid System</h2>
-                <p class="section-description">Flexible grid layouts with CSS Grid and Flexbox</p>
-            </div>
-            
-            <div class="grid-showcase">
-                <h3 class="subsection-title">12 Column Grid</h3>
-                <div class="grid-demo grid-12">
-                    <div class="grid-item col-span-1">1</div>
-                    <div class="grid-item col-span-1">1</div>
-                    <div class="grid-item col-span-1">1</div>
-                    <div class="grid-item col-span-1">1</div>
-                    <div class="grid-item col-span-1">1</div>
-                    <div class="grid-item col-span-1">1</div>
-                    <div class="grid-item col-span-1">1</div>
-                    <div class="grid-item col-span-1">1</div>
-                    <div class="grid-item col-span-1">1</div>
-                    <div class="grid-item col-span-1">1</div>
-                    <div class="grid-item col-span-1">1</div>
-                    <div class="grid-item col-span-1">1</div>
-                </div>
-                
-                <div class="grid-demo grid-12">
-                    <div class="grid-item col-span-6">6 Columns</div>
-                    <div class="grid-item col-span-6">6 Columns</div>
-                </div>
-                
-                <div class="grid-demo grid-12">
-                    <div class="grid-item col-span-4">4 Cols</div>
-                    <div class="grid-item col-span-4">4 Cols</div>
-                    <div class="grid-item col-span-4">4 Cols</div>
-                </div>
-                
-                <div class="grid-demo grid-12">
-                    <div class="grid-item col-span-3">3</div>
-                    <div class="grid-item col-span-6">6 Columns</div>
-                    <div class="grid-item col-span-3">3</div>
-                </div>
-                
-                <h3 class="subsection-title">Auto-Fit Grid</h3>
-                <div class="grid-demo grid-auto">
-                    <div class="grid-item">Auto</div>
-                    <div class="grid-item">Auto</div>
-                    <div class="grid-item">Auto</div>
-                    <div class="grid-item">Auto</div>
-                    <div class="grid-item">Auto</div>
-                </div>
-                
-                <h3 class="subsection-title">Flexbox Layouts</h3>
-                <div class="flex-demo">
-                    <div class="flex-container">
-                        <div class="flex-item flex-1">Flex 1</div>
-                        <div class="flex-item flex-2">Flex 2</div>
-                        <div class="flex-item flex-1">Flex 1</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Shadows & Effects Section -->
-        <section id="shadows" class="section">
-            <div class="section-header">
-                <h2 class="section-title">Shadows & Effects</h2>
-                <p class="section-description">Elevation system and visual effects</p>
-            </div>
-            
-            <div class="effects-showcase">
-                <div class="shadow-grid">
-                    <div class="shadow-item">
-                        <div class="shadow-box shadow-xs"></div>
-                        <code>--shadow-xs</code>
-                    </div>
-                    <div class="shadow-item">
-                        <div class="shadow-box shadow-sm"></div>
-                        <code>--shadow-sm</code>
-                    </div>
-                    <div class="shadow-item">
-                        <div class="shadow-box shadow-md"></div>
-                        <code>--shadow-md</code>
-                    </div>
-                    <div class="shadow-item">
-                        <div class="shadow-box shadow-lg"></div>
-                        <code>--shadow-lg</code>
-                    </div>
-                    <div class="shadow-item">
-                        <div class="shadow-box shadow-xl"></div>
-                        <code>--shadow-xl</code>
-                    </div>
-                    <div class="shadow-item">
-                        <div class="shadow-box shadow-2xl"></div>
-                        <code>--shadow-2xl</code>
-                    </div>
-                </div>
-                
-                <h3 class="subsection-title">Colored Shadows</h3>
-                <div class="shadow-grid">
-                    <div class="shadow-item">
-                        <div class="shadow-box shadow-primary"></div>
-                        <code>--shadow-primary</code>
-                    </div>
-                    <div class="shadow-item">
-                        <div class="shadow-box shadow-secondary"></div>
-                        <code>--shadow-secondary</code>
-                    </div>
-                    <div class="shadow-item">
-                        <div class="shadow-box shadow-accent"></div>
-                        <code>--shadow-accent</code>
-                    </div>
-                </div>
-                
-                <h3 class="subsection-title">Blur Effects</h3>
-                <div class="blur-grid">
-                    <div class="blur-item">
-                        <div class="blur-box blur-sm">Blur SM</div>
-                        <code>--blur-sm</code>
-                    </div>
-                    <div class="blur-item">
-                        <div class="blur-box blur-md">Blur MD</div>
-                        <code>--blur-md</code>
-                    </div>
-                    <div class="blur-item">
-                        <div class="blur-box blur-lg">Blur LG</div>
-                        <code>--blur-lg</code>
-                    </div>
-                    <div class="blur-item">
-                        <div class="blur-box blur-xl">Blur XL</div>
-                        <code>--blur-xl</code>
-                    </div>
-                </div>
-                
-                <h3 class="subsection-title">Glassmorphism</h3>
-                <div class="glass-demo">
-                    <div class="glass-card">
-                        <h4>Glass Card</h4>
-                        <p>Frosted glass effect with backdrop blur</p>
-                    </div>
-                    <div class="glass-card glass-dark">
-                        <h4>Dark Glass</h4>
-                        <p>Dark variant with subtle transparency</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Spacing Section -->
-        <section id="spacing" class="section">
-            <div class="section-header">
-                <h2 class="section-title">Spacing System</h2>
-                <p class="section-description">Consistent spacing scale based on 8px grid</p>
-            </div>
-            
-            <div class="spacing-showcase">
-                <div class="spacing-item">
-                    <div class="spacing-bar" style="width: var(--space-1);"></div>
-                    <span class="spacing-label">--space-1 (4px)</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-bar" style="width: var(--space-2);"></div>
-                    <span class="spacing-label">--space-2 (8px)</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-bar" style="width: var(--space-3);"></div>
-                    <span class="spacing-label">--space-3 (12px)</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-bar" style="width: var(--space-4);"></div>
-                    <span class="spacing-label">--space-4 (16px)</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-bar" style="width: var(--space-6);"></div>
-                    <span class="spacing-label">--space-6 (24px)</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-bar" style="width: var(--space-8);"></div>
-                    <span class="spacing-label">--space-8 (32px)</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-bar" style="width: var(--space-12);"></div>
-                    <span class="spacing-label">--space-12 (48px)</span>
-                </div>
-                <div class="spacing-item">
-                    <div class="spacing-bar" style="width: var(--space-16);"></div>
-                    <span class="spacing-label">--space-16 (64px)</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Animations Section -->
-        <section id="animations" class="section">
-            <div class="section-header">
-                <h2 class="section-title">Animations</h2>
-                <p class="section-description">Smooth transitions and engaging animations</p>
-            </div>
-            
-            <div class="animation-controls">
-                <button class="btn btn-primary" id="playAnimations">Play All Animations</button>
-                <select class="form-select" id="animationSpeed">
-                    <option value="fast">Fast (150ms)</option>
-                    <option value="normal" selected>Normal (300ms)</option>
-                    <option value="slow">Slow (500ms)</option>
-                    <option value="slower">Slower (1000ms)</option>
-                </select>
-            </div>
-            
-            <div class="animation-grid">
-                <div class="animation-card" data-animation="fade">
-                    <div class="animation-box">Fade</div>
-                </div>
-                <div class="animation-card" data-animation="scale">
-                    <div class="animation-box">Scale</div>
-                </div>
-                <div class="animation-card" data-animation="rotate">
-                    <div class="animation-box">Rotate</div>
-                </div>
-                <div class="animation-card" data-animation="slide">
-                    <div class="animation-box">Slide</div>
-                </div>
-                <div class="animation-card" data-animation="bounce">
-                    <div class="animation-box">Bounce</div>
-                </div>
-                <div class="animation-card" data-animation="flip">
-                    <div class="animation-box">Flip</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Loading States Section -->
-        <section id="loading" class="section">
-            <div class="section-header">
-                <h2 class="section-title">Loading States</h2>
-                <p class="section-description">Smooth loading animations and skeleton screens</p>
-            </div>
-            
-            <div class="loading-showcase">
-                <h3 class="subsection-title">Spinners</h3>
-                <div class="spinner-grid">
-                    <div class="spinner-item">
-                        <div class="spinner spinner-circle"></div>
-                        <code>Circle</code>
-                    </div>
-                    <div class="spinner-item">
-                        <div class="spinner spinner-dots">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                        <code>Dots</code>
-                    </div>
-                    <div class="spinner-item">
-                        <div class="spinner spinner-pulse"></div>
-                        <code>Pulse</code>
-                    </div>
-                    <div class="spinner-item">
-                        <div class="spinner spinner-bars">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                        <code>Bars</code>
-                    </div>
-                </div>
-                
-                <h3 class="subsection-title">Progress Bars</h3>
-                <div class="progress-examples">
-                    <div class="progress-item">
-                        <label>Default Progress</label>
-                        <div class="progress">
-                            <div class="progress-bar" style="width: 60%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <label>Striped Progress</label>
-                        <div class="progress progress-striped">
-                            <div class="progress-bar" style="width: 75%"></div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <label>Animated Progress</label>
-                        <div class="progress progress-animated">
-                            <div class="progress-bar" style="width: 45%"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <h3 class="subsection-title">Skeleton Screens</h3>
-                <div class="skeleton-examples">
-                    <div class="skeleton-card">
-                        <div class="skeleton skeleton-header"></div>
-                        <div class="skeleton skeleton-text"></div>
-                        <div class="skeleton skeleton-text" style="width: 80%"></div>
-                        <div class="skeleton skeleton-text" style="width: 60%"></div>
-                        <div class="skeleton-footer">
-                            <div class="skeleton skeleton-button"></div>
-                            <div class="skeleton skeleton-button"></div>
                         </div>
                     </div>
                     
-                    <div class="skeleton-list">
-                        <div class="skeleton-item">
-                            <div class="skeleton skeleton-avatar"></div>
-                            <div class="skeleton-content">
-                                <div class="skeleton skeleton-title"></div>
-                                <div class="skeleton skeleton-subtitle"></div>
+                    <div class="tabs__panel" data-panel="themes">
+                        <div class="feature-showcase">
+                            <div class="feature-showcase__content">
+                                <h3 class="feature-showcase__title">Intelligent Theme System</h3>
+                                <p class="feature-showcase__description">
+                                    Automatic theme switching, system preference detection, and smooth transitions. 
+                                    Built-in support for custom themes and brand colors.
+                                </p>
+                                <div class="theme-preview">
+                                    <button class="theme-preview__option theme-preview__option--light" data-preview="light">
+                                        Light Theme
+                                    </button>
+                                    <button class="theme-preview__option theme-preview__option--dark" data-preview="dark">
+                                        Dark Theme
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="feature-showcase__visual">
+                                <div class="theme-demo" id="themeDemo">
+                                    <div class="mini-card">
+                                        <div class="mini-card__header">Card Component</div>
+                                        <div class="mini-card__content">Dynamic theming in action</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="skeleton-item">
-                            <div class="skeleton skeleton-avatar"></div>
-                            <div class="skeleton-content">
-                                <div class="skeleton skeleton-title"></div>
-                                <div class="skeleton skeleton-subtitle"></div>
+                    </div>
+                    
+                    <div class="tabs__panel" data-panel="responsive">
+                        <div class="feature-showcase">
+                            <div class="feature-showcase__content">
+                                <h3 class="feature-showcase__title">Mobile-First Responsive Design</h3>
+                                <p class="feature-showcase__description">
+                                    Built with a mobile-first approach, supporting all device sizes from 320px to 4K displays. 
+                                    Container queries and modern CSS features included.
+                                </p>
+                            </div>
+                            <div class="feature-showcase__visual">
+                                <div class="responsive-demo">
+                                    <div class="device device--mobile">📱</div>
+                                    <div class="device device--tablet">📱</div>
+                                    <div class="device device--desktop">💻</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tabs__panel" data-panel="accessibility">
+                        <div class="feature-showcase">
+                            <div class="feature-showcase__content">
+                                <h3 class="feature-showcase__title">WCAG 2.1 AA Compliant</h3>
+                                <p class="feature-showcase__description">
+                                    Built with accessibility in mind. Proper ARIA labels, keyboard navigation, 
+                                    screen reader support, and high contrast support.
+                                </p>
+                            </div>
+                            <div class="feature-showcase__visual">
+                                <div class="accessibility-demo">
+                                    <div class="a11y-feature">
+                                        <span class="a11y-icon">⌨️</span>
+                                        <span>Keyboard Navigation</span>
+                                    </div>
+                                    <div class="a11y-feature">
+                                        <span class="a11y-icon">👁️</span>
+                                        <span>Screen Reader Support</span>
+                                    </div>
+                                    <div class="a11y-feature">
+                                        <span class="a11y-icon">🎨</span>
+                                        <span>High Contrast</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+
+    <!-- Interactive Component Showcase -->
+    <section class="section section--alt" id="components">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Component Gallery</h2>
+                <p class="section__description">
+                    Explore our extensive library of production-ready components
+                </p>
+            </div>
+            
+            <!-- Component Filter -->
+            <div class="component-filter">
+                <button class="filter-btn filter-btn--active" data-filter="all">All Components</button>
+                <button class="filter-btn" data-filter="form">Forms</button>
+                <button class="filter-btn" data-filter="navigation">Navigation</button>
+                <button class="filter-btn" data-filter="data">Data Display</button>
+                <button class="filter-btn" data-filter="feedback">Feedback</button>
+                <button class="filter-btn" data-filter="loading">Loading States</button>
+                <button class="filter-btn" data-filter="icons">Icons</button>
+            </div>
+            
+            <!-- Component Grid -->
+            <div class="component-grid" id="componentGrid">
+                <!-- Form Components -->
+                <div class="component-item" data-category="form">
+                    <div class="component-card">
+                        <div class="component-card__header">
+                            <h3 class="component-card__title">Advanced Forms</h3>
+                            <span class="component-card__badge">Interactive</span>
+                        </div>
+                        <div class="component-card__demo">
+                            <div class="demo-form">
+                                <div class="form-group form-group--floating">
+                                    <input type="text" class="input input--floating" id="demoInput" placeholder=" ">
+                                    <label for="demoInput" class="label label--floating">Full Name</label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="email" class="input" placeholder="Enter email">
+                                        <button class="btn btn--primary">Subscribe</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Navigation Components -->
+                <div class="component-item" data-category="navigation">
+                    <div class="component-card">
+                        <div class="component-card__header">
+                            <h3 class="component-card__title">Navigation Systems</h3>
+                            <span class="component-card__badge">Responsive</span>
+                        </div>
+                        <div class="component-card__demo">
+                            <div class="demo-nav">
+                                <div class="breadcrumb">
+                                    <a href="#" class="breadcrumb__link">Home</a>
+                                    <span class="breadcrumb__separator">/</span>
+                                    <a href="#" class="breadcrumb__link">Components</a>
+                                    <span class="breadcrumb__separator">/</span>
+                                    <span class="breadcrumb__current">Navigation</span>
+                                </div>
+                                <div class="pagination">
+                                    <button class="pagination__btn">‹</button>
+                                    <button class="pagination__btn pagination__btn--active">1</button>
+                                    <button class="pagination__btn">2</button>
+                                    <button class="pagination__btn">3</button>
+                                    <button class="pagination__btn">›</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Data Display Components -->
+                <div class="component-item" data-category="data">
+                    <div class="component-card">
+                        <div class="component-card__header">
+                            <h3 class="component-card__title">Data Visualization</h3>
+                            <span class="component-card__badge">Animated</span>
+                        </div>
+                        <div class="component-card__demo">
+                            <div class="demo-chart">
+                                <div class="progress-ring" data-progress="75">
+                                    <svg class="progress-ring__svg">
+                                        <circle class="progress-ring__circle-bg" cx="30" cy="30" r="28"></circle>
+                                        <circle class="progress-ring__circle" cx="30" cy="30" r="28"></circle>
+                                    </svg>
+                                    <div class="progress-ring__text">75%</div>
+                                </div>
+                                <div class="mini-stats">
+                                    <div class="mini-stat">
+                                        <div class="mini-stat__value">2.4K</div>
+                                        <div class="mini-stat__label">Users</div>
+                                        <div class="mini-stat__trend mini-stat__trend--up">+12%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feedback Components -->
+                <div class="component-item" data-category="feedback">
+                    <div class="component-card">
+                        <div class="component-card__header">
+                            <h3 class="component-card__title">Notifications</h3>
+                            <span class="component-card__badge">Interactive</span>
+                        </div>
+                        <div class="component-card__demo">
+                            <div class="demo-notifications">
+                                <div class="notification notification--success">
+                                    <div class="notification__icon">✓</div>
+                                    <div class="notification__content">
+                                        <div class="notification__title">Success!</div>
+                                        <div class="notification__message">Your changes have been saved.</div>
+                                    </div>
+                                </div>
+                                <button class="btn btn--small btn--outline" id="showNotification">
+                                    Show Toast
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Button Showcase -->
+                <div class="component-item" data-category="form">
+                    <div class="component-card">
+                        <div class="component-card__header">
+                            <h3 class="component-card__title">Button System</h3>
+                            <span class="component-card__badge">Complete</span>
+                        </div>
+                        <div class="component-card__demo">
+                            <div class="button-showcase-mini">
+                                <button class="btn btn--primary btn--small">Primary</button>
+                                <button class="btn btn--secondary btn--small">Secondary</button>
+                                <button class="btn btn--accent btn--small">Accent</button>
+                                <button class="btn btn--outline btn--small">Outline</button>
+                                <button class="btn btn--ghost btn--small">Ghost</button>
+                                <button class="btn btn--primary btn--small" disabled>Disabled</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card Showcase -->
+                <div class="component-item" data-category="data">
+                    <div class="component-card">
+                        <div class="component-card__header">
+                            <h3 class="component-card__title">Card Variations</h3>
+                            <span class="component-card__badge">Flexible</span>
+                        </div>
+                        <div class="component-card__demo">
+                            <div class="mini-cards">
+                                <div class="mini-card mini-card--elevated">
+                                    <div class="mini-card__header">Elevated</div>
+                                    <div class="mini-card__content">Shadow depth</div>
+                                </div>
+                                <div class="mini-card mini-card--bordered">
+                                    <div class="mini-card__header">Bordered</div>
+                                    <div class="mini-card__content">Clean lines</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loading Spinners -->
+                <div class="component-item" data-category="loading">
+                    <div class="component-card">
+                        <div class="component-card__header">
+                            <h3 class="component-card__title">Loading Spinners</h3>
+                            <span class="component-card__badge">Animated</span>
+                        </div>
+                        <div class="component-card__demo">
+                            <div class="spinner-showcase">
+                                <div class="spinner-group">
+                                    <div class="spinner spinner--primary"></div>
+                                    <span class="spinner-label">Primary</span>
+                                </div>
+                                <div class="spinner-group">
+                                    <div class="spinner spinner--dots">
+                                        <div></div><div></div><div></div>
+                                    </div>
+                                    <span class="spinner-label">Dots</span>
+                                </div>
+                                <div class="spinner-group">
+                                    <div class="spinner spinner--pulse"></div>
+                                    <span class="spinner-label">Pulse</span>
+                                </div>
+                                <div class="spinner-group">
+                                    <div class="spinner spinner--bars">
+                                        <div></div><div></div><div></div><div></div>
+                                    </div>
+                                    <span class="spinner-label">Bars</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Bars -->
+                <div class="component-item" data-category="loading">
+                    <div class="component-card">
+                        <div class="component-card__header">
+                            <h3 class="component-card__title">Progress Indicators</h3>
+                            <span class="component-card__badge">Interactive</span>
+                        </div>
+                        <div class="component-card__demo">
+                            <div class="progress-showcase">
+                                <div class="progress-group">
+                                    <label class="progress-label">Linear Progress</label>
+                                    <div class="progress-bar" data-progress="65">
+                                        <div class="progress-bar__fill"></div>
+                                        <span class="progress-bar__text">65%</span>
+                                    </div>
+                                </div>
+                                <div class="progress-group">
+                                    <label class="progress-label">Stepped Progress</label>
+                                    <div class="progress-steps">
+                                        <div class="progress-step progress-step--completed">
+                                            <div class="progress-step__circle">1</div>
+                                            <span class="progress-step__label">Setup</span>
+                                        </div>
+                                        <div class="progress-step progress-step--active">
+                                            <div class="progress-step__circle">2</div>
+                                            <span class="progress-step__label">Configure</span>
+                                        </div>
+                                        <div class="progress-step">
+                                            <div class="progress-step__circle">3</div>
+                                            <span class="progress-step__label">Complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn--primary btn--small" id="progressDemo">
+                                    Start Progress Demo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SVG Icon Kit -->
+                <div class="component-item" data-category="icons">
+                    <div class="component-card">
+                        <div class="component-card__header">
+                            <h3 class="component-card__title">SVG Icon Kit</h3>
+                            <span class="component-card__badge">Complete</span>
+                        </div>
+                        <div class="component-card__demo">
+                            <div class="icon-showcase">
+                                <div class="icon-grid">
+                                    <div class="icon-item">
+                                        <svg class="icon icon--lg" data-icon="home">
+                                            <use href="#icon-home"></use>
+                                        </svg>
+                                        <span class="icon-name">home</span>
+                                    </div>
+                                    <div class="icon-item">
+                                        <svg class="icon icon--lg" data-icon="user">
+                                            <use href="#icon-user"></use>
+                                        </svg>
+                                        <span class="icon-name">user</span>
+                                    </div>
+                                    <div class="icon-item">
+                                        <svg class="icon icon--lg" data-icon="settings">
+                                            <use href="#icon-settings"></use>
+                                        </svg>
+                                        <span class="icon-name">settings</span>
+                                    </div>
+                                    <div class="icon-item">
+                                        <svg class="icon icon--lg" data-icon="heart">
+                                            <use href="#icon-heart"></use>
+                                        </svg>
+                                        <span class="icon-name">heart</span>
+                                    </div>
+                                    <div class="icon-item">
+                                        <svg class="icon icon--lg" data-icon="star">
+                                            <use href="#icon-star"></use>
+                                        </svg>
+                                        <span class="icon-name">star</span>
+                                    </div>
+                                    <div class="icon-item">
+                                        <svg class="icon icon--lg" data-icon="download">
+                                            <use href="#icon-download"></use>
+                                        </svg>
+                                        <span class="icon-name">download</span>
+                                    </div>
+                                    <div class="icon-item">
+                                        <svg class="icon icon--lg" data-icon="mail">
+                                            <use href="#icon-mail"></use>
+                                        </svg>
+                                        <span class="icon-name">mail</span>
+                                    </div>
+                                    <div class="icon-item">
+                                        <svg class="icon icon--lg" data-icon="search">
+                                            <use href="#icon-search"></use>
+                                        </svg>
+                                        <span class="icon-name">search</span>
+                                    </div>
+                                </div>
+                                <div class="icon-sizes">
+                                    <svg class="icon icon--sm" data-icon="star"><use href="#icon-star"></use></svg>
+                                    <svg class="icon icon--base" data-icon="star"><use href="#icon-star"></use></svg>
+                                    <svg class="icon icon--lg" data-icon="star"><use href="#icon-star"></use></svg>
+                                    <svg class="icon icon--xl" data-icon="star"><use href="#icon-star"></use></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loading States -->
+                <div class="component-item" data-category="loading">
+                    <div class="component-card">
+                        <div class="component-card__header">
+                            <h3 class="component-card__title">Loading States</h3>
+                            <span class="component-card__badge">Contextual</span>
+                        </div>
+                        <div class="component-card__demo">
+                            <div class="loading-states">
+                                <div class="loading-card">
+                                    <div class="loading-card__header">
+                                        <div class="skeleton skeleton--title"></div>
+                                        <div class="skeleton skeleton--badge"></div>
+                                    </div>
+                                    <div class="loading-card__content">
+                                        <div class="skeleton skeleton--text"></div>
+                                        <div class="skeleton skeleton--text"></div>
+                                        <div class="skeleton skeleton--text skeleton--short"></div>
+                                    </div>
+                                    <div class="loading-card__footer">
+                                        <div class="skeleton skeleton--button"></div>
+                                    </div>
+                                </div>
+                                <button class="btn btn--outline btn--small" id="toggleLoading">
+                                    Toggle Loading
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="section section--pricing" id="pricing">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Choose Your Plan</h2>
+                <p class="section__description">
+                    Flexible pricing for teams of all sizes
+                </p>
+                <div class="pricing-toggle">
+                    <span class="pricing-toggle__label">Monthly</span>
+                    <button class="pricing-toggle__switch" id="pricingToggle">
+                        <span class="pricing-toggle__slider"></span>
+                    </button>
+                    <span class="pricing-toggle__label">Annual <span class="pricing-toggle__badge">Save 20%</span></span>
+                </div>
+            </div>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-card__header">
+                        <h3 class="pricing-card__title">Starter</h3>
+                        <div class="pricing-card__price">
+                            <span class="pricing-card__currency">$</span>
+                            <span class="pricing-card__amount" data-monthly="19" data-annual="15">19</span>
+                            <span class="pricing-card__period">/month</span>
+                        </div>
+                        <p class="pricing-card__description">Perfect for small projects and personal use</p>
+                    </div>
+                    <div class="pricing-card__content">
+                        <ul class="pricing-card__features">
+                            <li class="pricing-card__feature">
+                                <svg class="pricing-card__icon" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                50+ Components
+                            </li>
+                            <li class="pricing-card__feature">
+                                <svg class="pricing-card__icon" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                2 Themes
+                            </li>
+                            <li class="pricing-card__feature">
+                                <svg class="pricing-card__icon" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                Email Support
+                            </li>
+                            <li class="pricing-card__feature">
+                                <svg class="pricing-card__icon" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                Basic Documentation
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pricing-card__footer">
+                        <button class="btn btn--outline btn--full">Get Started</button>
+                    </div>
+                </div>
+                
+                <div class="pricing-card pricing-card--featured">
+                    <div class="pricing-card__badge">Most Popular</div>
+                    <div class="pricing-card__header">
+                        <h3 class="pricing-card__title">Professional</h3>
+                        <div class="pricing-card__price">
+                            <span class="pricing-card__currency">$</span>
+                            <span class="pricing-card__amount" data-monthly="49" data-annual="39">49</span>
+                            <span class="pricing-card__period">/month</span>
+                        </div>
+                        <p class="pricing-card__description">Ideal for growing teams and businesses</p>
+                    </div>
+                    <div class="pricing-card__content">
+                        <ul class="pricing-card__features">
+                            <li class="pricing-card__feature">
+                                <svg class="pricing-card__icon" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                100+ Components
+                            </li>
+                            <li class="pricing-card__feature">
+                                <svg class="pricing-card__icon" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                Unlimited Themes
+                            </li>
+                            <li class="pricing-card__feature">
+                                <svg class="pricing-card__icon" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                Priority Support
+                            </li>
+                            <li class="pricing-card__feature">
+                                <svg class="pricing-card__icon" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                Advanced Features
+                            </li>
+                            <li class="pricing-card__feature">
+                                <svg class="pricing-card__icon" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                Team Collaboration
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pricing-card__footer">
+                        <button class="btn btn--primary btn--full">Start Free Trial</button>
+                    </div>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-card__header">
+                        <h3 class="pricing-card__title">Enterprise</h3>
+                        <div class="pricing-card__price">
+                            <span class="pricing-card__currency">$</span>
+                            <span class="pricing-card__amount" data-monthly="99" data-annual="79">99</span>
+                            <span class="pricing-card__period">/month</span>
+                        </div>
+                        <p class="pricing-card__description">For large organizations with custom needs</p>
+                    </div>
+                    <div class="pricing-card__content">
+                        <ul class="pricing-card__features">
+                            <li class="pricing-card__feature">
+                                <svg class="pricing-card__icon" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                Everything in Pro
+                            </li>
+                            <li class="pricing-card__feature">
+                                <svg class="pricing-card__icon" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                Custom Themes
+                            </li>
+                            <li class="pricing-card__feature">
+                                <svg class="pricing-card__icon" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                24/7 Support
+                            </li>
+                            <li class="pricing-card__feature">
+                                <svg class="pricing-card__icon" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                SLA Guarantee
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pricing-card__footer">
+                        <button class="btn btn--outline btn--full">Contact Sales</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ready-Made Sections -->
+    <section class="section" id="sections">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Ready-Made Sections</h2>
+                <p class="section__description">
+                    Complete page sections ready to drop into your project
+                </p>
+            </div>
+            
+            <!-- Interactive Showcase -->
+            <div class="demo-section">
+                <h3 class="demo-section__title">Interactive Component Playground</h3>
+                <div class="playground">
+                    <div class="playground__controls">
+                        <button class="btn btn--primary" id="demoAllLoading">
+                            <svg class="icon icon--sm"><use href="#icon-settings"></use></svg>
+                            Demo All Loading States
+                        </button>
+                        <button class="btn btn--accent" id="demoProgressSequence">
+                            <svg class="icon icon--sm"><use href="#icon-star"></use></svg>
+                            Run Progress Sequence
+                        </button>
+                        <button class="btn btn--secondary" id="demoIconAnimation">
+                            <svg class="icon icon--sm"><use href="#icon-heart"></use></svg>
+                            Animate Icons
+                        </button>
+                    </div>
+                    
+                    <div class="playground__demo">
+                        <div class="demo-row">
+                            <div class="demo-card" id="demoCard1">
+                                <div class="demo-card__header">
+                                    <h4>Sample Application</h4>
+                                    <svg class="icon icon--lg icon--primary"><use href="#icon-star"></use></svg>
+                                </div>
+                                <div class="demo-card__content">
+                                    <p>This card demonstrates loading states, progress tracking, and icon animations.</p>
+                                    <div class="demo-progress">
+                                        <div class="progress-bar" data-progress="0" id="demoProgress1">
+                                            <div class="progress-bar__fill"></div>
+                                            <span class="progress-bar__text">0%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="demo-card__footer">
+                                    <button class="btn btn--primary btn--small" id="demoButton1">
+                                        Process
+                                    </button>
+                                    <button class="btn btn--outline btn--small" id="demoButton2">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="demo-card" id="demoCard2">
+                                <div class="demo-card__header">
+                                    <h4>Status Dashboard</h4>
+                                    <div class="spinner-container" id="headerSpinner" style="display: none;">
+                                        <div class="spinner spinner--primary"></div>
+                                    </div>
+                                </div>
+                                <div class="demo-card__content">
+                                    <div class="status-grid">
+                                        <div class="status-item">
+                                            <svg class="icon icon--success"><use href="#icon-check"></use></svg>
+                                            <span>System Online</span>
+                                        </div>
+                                        <div class="status-item">
+                                            <svg class="icon icon--warning"><use href="#icon-warning"></use></svg>
+                                            <span>Updates Available</span>
+                                        </div>
+                                        <div class="status-item">
+                                            <svg class="icon icon--lg" id="statusIcon"><use href="#icon-heart"></use></svg>
+                                            <span>Health Check</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="demo-card__footer">
+                                    <div class="icon-demo-buttons">
+                                        <button class="btn btn--icon-only btn--ghost" title="Refresh">
+                                            <svg class="icon"><use href="#icon-search"></use></svg>
+                                        </button>
+                                        <button class="btn btn--icon-only btn--ghost" title="Settings">
+                                            <svg class="icon"><use href="#icon-settings"></use></svg>
+                                        </button>
+                                        <button class="btn btn--icon-only btn--ghost" title="Download">
+                                            <svg class="icon"><use href="#icon-download"></use></svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonials Carousel -->
+            <div class="demo-section">
+                <h3 class="demo-section__title">Testimonials Carousel</h3>
+                <div class="testimonials" id="testimonials">
+                    <div class="testimonials__container">
+                        <div class="testimonial testimonial--active">
+                            <div class="testimonial__content">
+                                <div class="testimonial__quote">
+                                    "ThemeKit Pro has revolutionized our design workflow. The component library is incredibly comprehensive and the theming system is brilliant."
+                                </div>
+                                <div class="testimonial__author">
+                                    <div class="testimonial__avatar"></div>
+                                    <div class="testimonial__info">
+                                        <div class="testimonial__name">Sarah Johnson</div>
+                                        <div class="testimonial__title">Lead Designer at TechCorp</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial">
+                            <div class="testimonial__content">
+                                <div class="testimonial__quote">
+                                    "The accessibility features are outstanding. We've been able to build fully compliant applications faster than ever before."
+                                </div>
+                                <div class="testimonial__author">
+                                    <div class="testimonial__avatar"></div>
+                                    <div class="testimonial__info">
+                                        <div class="testimonial__name">Michael Chen</div>
+                                        <div class="testimonial__title">Frontend Architect</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial">
+                            <div class="testimonial__content">
+                                <div class="testimonial__quote">
+                                    "Amazing attention to detail and the documentation is fantastic. Our team was productive from day one."
+                                </div>
+                                <div class="testimonial__author">
+                                    <div class="testimonial__avatar"></div>
+                                    <div class="testimonial__info">
+                                        <div class="testimonial__name">Emily Rodriguez</div>
+                                        <div class="testimonial__title">Product Manager</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonials__controls">
+                        <button class="testimonials__btn testimonials__btn--prev" id="prevTestimonial">‹</button>
+                        <div class="testimonials__dots">
+                            <button class="testimonials__dot testimonials__dot--active" data-slide="0"></button>
+                            <button class="testimonials__dot" data-slide="1"></button>
+                            <button class="testimonials__dot" data-slide="2"></button>
+                        </div>
+                        <button class="testimonials__btn testimonials__btn--next" id="nextTestimonial">›</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ Section -->
+            <div class="demo-section">
+                <h3 class="demo-section__title">FAQ Accordion</h3>
+                <div class="faq">
+                    <div class="faq__item">
+                        <button class="faq__question" data-faq="0">
+                            <span>How do I customize the theme colors?</span>
+                            <svg class="faq__icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                            </svg>
+                        </button>
+                        <div class="faq__answer">
+                            <div class="faq__content">
+                                You can customize theme colors by modifying the CSS custom properties in the variables.css file. 
+                                Simply update the color values in the :root selector to match your brand colors.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq__item">
+                        <button class="faq__question" data-faq="1">
+                            <span>Is the system mobile-responsive?</span>
+                            <svg class="faq__icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                            </svg>
+                        </button>
+                        <div class="faq__answer">
+                            <div class="faq__content">
+                                Yes! ThemeKit Pro is built with a mobile-first approach and includes responsive design patterns 
+                                for all screen sizes from 320px to 4K displays.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq__item">
+                        <button class="faq__question" data-faq="2">
+                            <span>What browsers are supported?</span>
+                            <svg class="faq__icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                            </svg>
+                        </button>
+                        <div class="faq__answer">
+                            <div class="faq__content">
+                                ThemeKit Pro supports all modern browsers including Chrome, Firefox, Safari, and Edge. 
+                                We also provide graceful degradation for older browsers.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="section section--newsletter">
+        <div class="container">
+            <div class="newsletter">
+                <div class="newsletter__content">
+                    <h2 class="newsletter__title">Stay Updated</h2>
+                    <p class="newsletter__description">
+                        Get the latest updates, new components, and design tips delivered to your inbox.
+                    </p>
+                </div>
+                <div class="newsletter__form">
+                    <form class="newsletter__form-wrapper" id="newsletterForm">
+                        <div class="input-group input-group--large">
+                            <input 
+                                type="email" 
+                                class="input input--large" 
+                                placeholder="Enter your email address"
+                                required
+                                id="newsletterEmail"
+                            >
+                            <button type="submit" class="btn btn--primary btn--large">
+                                Subscribe
+                            </button>
+                        </div>
+                        <p class="newsletter__privacy">
+                            We respect your privacy. Unsubscribe at any time.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="main-footer">
-        <div class="footer-content">
-            <p>&copy; 2024 Modern Theme System. Built with CSS Variables.</p>
-            <div class="footer-links">
-                <a href="#" class="footer-link">Documentation</a>
-                <a href="#" class="footer-link">GitHub</a>
-                <a href="#" class="footer-link">License</a>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section footer__section--main">
+                    <div class="footer__brand">
+                        <div class="footer__logo">
+                            <div class="logo-icon"></div>
+                            <h3 class="footer__title">ThemeKit Pro</h3>
+                        </div>
+                        <p class="footer__description">
+                            A comprehensive CSS design system for building beautiful, 
+                            accessible, and maintainable web applications.
+                        </p>
+                        <div class="footer__social">
+                            <a href="#" class="footer__social-link" aria-label="Twitter">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="footer__social-link" aria-label="GitHub">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="footer__social-link" aria-label="Discord">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer__section">
+                    <h4 class="footer__heading">Product</h4>
+                    <ul class="footer__links">
+                        <li><a href="#" class="footer__link">Components</a></li>
+                        <li><a href="#" class="footer__link">Templates</a></li>
+                        <li><a href="#" class="footer__link">Themes</a></li>
+                        <li><a href="#" class="footer__link">Icons</a></li>
+                        <li><a href="#" class="footer__link">Plugins</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer__section">
+                    <h4 class="footer__heading">Resources</h4>
+                    <ul class="footer__links">
+                        <li><a href="#" class="footer__link">Documentation</a></li>
+                        <li><a href="#" class="footer__link">Getting Started</a></li>
+                        <li><a href="#" class="footer__link">Examples</a></li>
+                        <li><a href="#" class="footer__link">Blog</a></li>
+                        <li><a href="#" class="footer__link">Changelog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer__section">
+                    <h4 class="footer__heading">Support</h4>
+                    <ul class="footer__links">
+                        <li><a href="#" class="footer__link">Help Center</a></li>
+                        <li><a href="#" class="footer__link">Contact Us</a></li>
+                        <li><a href="#" class="footer__link">Bug Reports</a></li>
+                        <li><a href="#" class="footer__link">Feature Requests</a></li>
+                        <li><a href="#" class="footer__link">Status</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer__section">
+                    <h4 class="footer__heading">Company</h4>
+                    <ul class="footer__links">
+                        <li><a href="#" class="footer__link">About</a></li>
+                        <li><a href="#" class="footer__link">Careers</a></li>
+                        <li><a href="#" class="footer__link">Press</a></li>
+                        <li><a href="#" class="footer__link">Privacy</a></li>
+                        <li><a href="#" class="footer__link">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <div class="footer__copyright">
+                    <p>&copy; 2025 ThemeKit Pro. All rights reserved.</p>
+                </div>
+                <div class="footer__legal">
+                    <a href="#" class="footer__legal-link">Privacy Policy</a>
+                    <a href="#" class="footer__legal-link">Terms of Service</a>
+                    <a href="#" class="footer__legal-link">Cookie Policy</a>
+                </div>
             </div>
         </div>
     </footer>
 
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
-
-    <!-- Modal -->
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title" id="modalTitle">Modal Title</h3>
-                <button class="modal-close" id="modalClose">&times;</button>
-            </div>
-            <div class="modal-body" id="modalBody">
-                Modal content goes here
-            </div>
-        </div>
+    
+    <!-- Loading Indicator -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
     </div>
 
-    <!-- JavaScript -->
+    <!-- SVG Icon Definitions -->
+    <svg width="0" height="0" style="position: absolute;">
+        <defs>
+            <!-- Home Icon -->
+            <symbol id="icon-home" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </symbol>
+            
+            <!-- User Icon -->
+            <symbol id="icon-user" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </symbol>
+            
+            <!-- Settings Icon -->
+            <symbol id="icon-settings" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
+            </symbol>
+            
+            <!-- Heart Icon -->
+            <symbol id="icon-heart" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12,21.35l-1.45-1.32C5.4,15.36,2,12.28,2,8.5 C2,5.42,4.42,3,7.5,3c1.74,0,3.41,0.81,4.5,2.09C13.09,3.81,14.76,3,16.5,3 C19.58,3,22,5.42,22,8.5c0,3.78-3.4,6.86-8.55,11.54L12,21.35z"/>
+            </symbol>
+            
+            <!-- Star Icon -->
+            <symbol id="icon-star" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2L9.19,8.63L2,9.24l5.46,4.73L5.82,21L12,17.27z"/>
+            </symbol>
+            
+            <!-- Download Icon -->
+            <symbol id="icon-download" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M19,9h-4V3H9v6H5l7,7L19,9z M5,18v2h14v-2H5z"/>
+            </symbol>
+            
+            <!-- Mail Icon -->
+            <symbol id="icon-mail" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M20,4H4C2.9,4,2.01,4.9,2.01,6L2,18c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V6C22,4.9,21.1,4,20,4z M20,8l-8,5L4,8V6l8,5l8-5V8z"/>
+            </symbol>
+            
+            <!-- Search Icon -->
+            <symbol id="icon-search" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M15.5,14h-0.79l-0.28-0.27C15.41,12.59,16,11.11,16,9.5 C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5S5.91,16,9.5,16c1.61,0,3.09-0.59,4.23-1.57l0.27,0.28v0.79l5,4.99L20.49,19L15.5,14z M9.5,14C7.01,14,5,11.99,5,9.5S7.01,5,9.5,5S14,7.01,14,9.5S11.99,14,9.5,14z"/>
+            </symbol>
+            
+            <!-- Arrow Right Icon -->
+            <symbol id="icon-arrow-right" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M8.59,16.59L13.17,12L8.59,7.41L10,6l6,6l-6,6L8.59,16.59z"/>
+            </symbol>
+            
+            <!-- Arrow Left Icon -->
+            <symbol id="icon-arrow-left" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M15.41,16.59L10.83,12l4.58-4.59L14,6l-6,6l6,6L15.41,16.59z"/>
+            </symbol>
+            
+            <!-- Check Icon -->
+            <symbol id="icon-check" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M9,16.17L4.83,12l-1.42,1.41L9,19L21,7l-1.41-1.41L9,16.17z"/>
+            </symbol>
+            
+            <!-- Close Icon -->
+            <symbol id="icon-close" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41z"/>
+            </symbol>
+            
+            <!-- Plus Icon -->
+            <symbol id="icon-plus" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M19,13h-6v6h-2v-6H5v-2h6V5h2v6h6V13z"/>
+            </symbol>
+            
+            <!-- Minus Icon -->
+            <symbol id="icon-minus" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M19,13H5v-2h14V13z"/>
+            </symbol>
+            
+            <!-- Menu Icon -->
+            <symbol id="icon-menu" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M3,6h18v2H3V6z M3,12h18v2H3V12z M3,18h18v2H3V18z"/>
+            </symbol>
+            
+            <!-- Moon Icon -->
+            <symbol id="icon-moon" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M17.75,4.09L15.22,6.03L16.13,9.09L13.5,7.28L10.87,9.09L11.78,6.03L9.25,4.09L12.44,4L13.5,1L14.56,4L17.75,4.09M21.25,11L19.61,12.25L20.2,14.23L18.5,13.06L16.8,14.23L17.39,12.25L15.75,11L17.81,10.95L18.5,9L19.19,10.95L21.25,11M18.97,15.95C19.8,15.87 20.69,17.05 20.16,17.8C19.84,18.25 19.5,18.67 19.08,19.07C15.17,23 8.84,23 4.94,19.07C1.03,15.17 1.03,8.83 4.94,4.93C5.34,4.53 5.76,4.17 6.21,3.85C6.96,3.32 8.14,4.21 8.06,5.04C7.79,7.9 8.75,10.87 10.95,13.06C13.14,15.26 16.1,16.22 18.97,15.95M17.33,17.97C14.5,17.81 11.7,16.64 9.53,14.5C7.36,12.31 6.2,9.5 6.04,6.68C3.23,9.82 3.34,14.4 6.35,17.41C9.37,20.43 14,20.54 17.33,17.97Z"/>
+            </symbol>
+            
+            <!-- Sun Icon -->
+            <symbol id="icon-sun" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,15.31L23.31,12L20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31Z"/>
+            </symbol>
+            
+            <!-- Warning Icon -->
+            <symbol id="icon-warning" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M1,21H23L12,2L1,21Z M13,18H11V16H13V18Z M13,14H11V10H13V14Z"/>
+            </symbol>
+            
+            <!-- Info Icon -->
+            <symbol id="icon-info" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M13,17H11V11H13M13,9H11V7H13"/>
+            </symbol>
+            
+            <!-- Upload Icon -->
+            <symbol id="icon-upload" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+            </symbol>
+            
+            <!-- Calendar Icon -->
+            <symbol id="icon-calendar" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V8H19V19Z"/>
+            </symbol>
+            
+            <!-- Clock Icon -->
+            <symbol id="icon-clock" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M16.2,16.2L11,13V7H12.5V12.2L17,14.7L16.2,16.2Z"/>
+            </symbol>
+        </defs>
+    </svg>
+
     <script src="js/script.js"></script>
 </body>
 </html>
