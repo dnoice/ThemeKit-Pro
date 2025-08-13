@@ -1,372 +1,372 @@
-# 🎨 CSS Theming System
+# ThemeKit Pro
 
 <div align="center">
+  <img src="https://via.placeholder.com/128x128/0ea5e9/ffffff?text=TK" alt="ThemeKit Pro Logo" width="128" height="128">
   
-  ![Version](https://img.shields.io/badge/version-3.0.0-blue.svg)
-  ![License](https://img.shields.io/badge/license-MIT-green.svg)
-  ![CSS](https://img.shields.io/badge/CSS-Custom_Properties-1572B6.svg)
-  ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E.svg)
-  ![WCAG](https://img.shields.io/badge/WCAG-AAA_Compliant-success.svg)
+  <h3>🎨 Advanced CSS Design System</h3>
+  <p>A comprehensive, accessible, and beautiful design system for modern web applications</p>
   
-  <h3>A comprehensive, modern CSS variables framework for building beautiful, themeable web applications</h3>
-  
-  [Demo](https://dnoice.github.io/css-themeing-system/) • [Documentation](#documentation) • [Quick Start](#quick-start) • [Contributing](CONTRIBUTING.md)
-  
+  [![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/dnoice/ThemeKit-Pro)
+  [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/dnoice/ThemeKit-Pro/blob/main/LICENSE)
+  [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/dnoice/ThemeKit-Pro)
+  [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://github.com/dnoice/ThemeKit-Pro)
+  [![WCAG](https://img.shields.io/badge/WCAG-2.1%20AA-green.svg)](https://github.com/dnoice/ThemeKit-Pro)
 </div>
-
----
 
 ## ✨ Features
 
-### 🎯 Core Features
-- **150+ CSS Custom Properties** - Complete design token system
-- **4 Built-in Themes** - Light, Dark, Cosmic, and Forest
-- **Custom SVG Icon System** - 15+ scalable icons included
-- **Responsive Grid System** - 12-column and auto-fit layouts
-- **Loading States** - Spinners, progress bars, and skeleton screens
-- **Glassmorphism Effects** - Modern backdrop filters and blur effects
-- **Fluid Typography** - Responsive type scale with perfect vertical rhythm
-
-### 🚀 Developer Experience
-- **Zero Dependencies** - Pure CSS and vanilla JavaScript
-- **Modular Architecture** - Organized, maintainable code structure
-- **Copy-to-Clipboard** - Quick implementation of components
-- **Interactive Demos** - Live component playground
-- **Production Ready** - Optimized and battle-tested
-- **Accessibility First** - WCAG AAA compliant with ARIA support
-
-### 🎨 Design System
-- **Color Palette** - Primary, secondary, accent, and neutral scales
-- **Spacing System** - Consistent 4px/8px grid
-- **Shadow System** - 6 elevation levels + colored shadows
-- **Animation Library** - Smooth transitions and keyframe animations
-- **Component Library** - Buttons, cards, forms, alerts, and more
-
-## 📦 Installation
-
-### Option 1: CDN (Quickest)
-```html
-<!-- CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dnoice/css-themeing-system@main/variables.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dnoice/css-themeing-system@main/css/styles.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dnoice/css-themeing-system@main/css/queries.css">
-
-<!-- JavaScript -->
-<script src="https://cdn.jsdelivr.net/gh/dnoice/css-themeing-system@main/js/script.js"></script>
-```
-
-### Option 2: Download
-```bash
-# Clone the repository
-git clone https://github.com/dnoice/css-themeing-system.git
-
-# Or download as ZIP
-wget https://github.com/dnoice/css-themeing-system/archive/main.zip
-```
-
-### Option 3: NPM
-```bash
-npm install css-themeing-system
-```
+- 🎨 **1000+ Design Tokens** - Comprehensive CSS custom property system
+- 🌙 **Smart Theming** - Automatic light/dark mode with system preference detection
+- ♿ **Accessibility First** - WCAG 2.1 AA compliant with full keyboard navigation
+- 📱 **Mobile-First Responsive** - 7+ breakpoints with container query support
+- 🚀 **Performance Optimized** - Efficient animations and lazy loading
+- 🔧 **Developer Experience** - Complete APIs, TypeScript support, and extensive documentation
+- 🧩 **100+ Components** - Production-ready components for every use case
+- 🎪 **Interactive Demos** - Live playground with real-time interactions
 
 ## 🚀 Quick Start
 
-### Basic Setup
+### CDN Installation (Fastest)
+
+```html
+<!-- Add to your <head> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dnoice/ThemeKit-Pro@main/css/variables.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dnoice/ThemeKit-Pro@main/css/styles.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dnoice/ThemeKit-Pro@main/css/queries.css">
+
+<!-- Add before closing </body> -->
+<script src="https://cdn.jsdelivr.net/gh/dnoice/ThemeKit-Pro@main/js/script.js"></script>
+```
+
+### npm Installation
+
+```bash
+npm install themekit-pro
+```
+
+```javascript
+// Import CSS
+import 'themekit-pro/css/variables.css';
+import 'themekit-pro/css/styles.css';
+import 'themekit-pro/css/queries.css';
+
+// Import JavaScript (optional)
+import 'themekit-pro/js/script.js';
+```
+
+### Download & Self-Host
+
+1. Download the [latest release](https://github.com/dnoice/ThemeKit-Pro/releases)
+2. Extract the files to your project
+3. Include the CSS and JS files in your HTML
+
+## 📚 Documentation
+
+### Basic Usage
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My App</title>
+    <title>My App with ThemeKit Pro</title>
     
-    <!-- Theme System CSS -->
-    <link rel="stylesheet" href="path/to/variables.css">
-    <link rel="stylesheet" href="path/to/css/styles.css">
-    <link rel="stylesheet" href="path/to/css/queries.css">
+    <!-- ThemeKit Pro CSS -->
+    <link rel="stylesheet" href="path/to/themekit-pro/css/variables.css">
+    <link rel="stylesheet" href="path/to/themekit-pro/css/styles.css">
+    <link rel="stylesheet" href="path/to/themekit-pro/css/queries.css">
 </head>
 <body>
-    <!-- Your content here -->
+    <!-- Your content using ThemeKit Pro components -->
+    <div class="container">
+        <h1 class="display-1">Welcome to ThemeKit Pro</h1>
+        <button class="btn btn--primary">Get Started</button>
+    </div>
     
-    <!-- Theme System JS -->
-    <script src="path/to/js/script.js"></script>
+    <!-- ThemeKit Pro JavaScript (optional) -->
+    <script src="path/to/themekit-pro/js/script.js"></script>
 </body>
 </html>
 ```
 
-### Using Components
+## 🧩 Components
 
-#### Buttons
+### Buttons
+
 ```html
-<button class="btn btn-primary">Primary Button</button>
-<button class="btn btn-secondary">Secondary Button</button>
-<button class="btn btn-outline">Outline Button</button>
-<button class="btn btn-ghost">Ghost Button</button>
+<!-- Primary button -->
+<button class="btn btn--primary">Primary</button>
+
+<!-- Button with icon -->
+<button class="btn btn--secondary">
+    <svg class="icon icon--sm"><use href="#icon-download"></use></svg>
+    Download
+</button>
+
+<!-- Loading button -->
+<button class="btn btn--primary btn--loading">Processing...</button>
 ```
 
-#### Icons
+### Progress Indicators
+
 ```html
-<svg class="icon icon-md icon-primary">
+<!-- Linear progress -->
+<div class="progress-bar" data-progress="75">
+    <div class="progress-bar__fill"></div>
+    <span class="progress-bar__text">75%</span>
+</div>
+
+<!-- Circular progress -->
+<div class="progress-ring" data-progress="60">
+    <svg class="progress-ring__svg">
+        <circle class="progress-ring__circle-bg" cx="30" cy="30" r="28"></circle>
+        <circle class="progress-ring__circle" cx="30" cy="30" r="28"></circle>
+    </svg>
+    <div class="progress-ring__text">60%</div>
+</div>
+```
+
+### Loading States
+
+```html
+<!-- Spinners -->
+<div class="spinner spinner--primary"></div>
+<div class="spinner spinner--dots"><div></div><div></div><div></div></div>
+
+<!-- Skeleton loading -->
+<div class="skeleton skeleton--title"></div>
+<div class="skeleton skeleton--text"></div>
+```
+
+### Icons
+
+```html
+<!-- Using the built-in icon system -->
+<svg class="icon icon--lg icon--primary">
     <use href="#icon-star"></use>
 </svg>
+
+<!-- Available icons: home, user, settings, heart, star, download, mail, search, and more -->
 ```
 
-#### Cards
-```html
-<div class="card">
-    <h3 class="card-title">Card Title</h3>
-    <p class="card-text">Card content goes here</p>
-</div>
-```
+## 🎨 Theming
 
-#### Grid System
-```html
-<div class="grid-demo grid-12">
-    <div class="grid-item col-span-6">Half width</div>
-    <div class="grid-item col-span-6">Half width</div>
-</div>
-```
+### CSS Custom Properties
 
-## 📚 Documentation
-
-### File Structure
-```
-css-themeing-system/
-├── index.html          # Demo page with all components
-├── variables.css       # CSS custom properties (design tokens)
-├── css/
-│   ├── styles.css     # Core component styles
-│   └── queries.css    # Responsive breakpoints
-├── js/
-│   └── script.js      # JavaScript functionality
-├── README.md          # Documentation
-├── LICENSE            # MIT License
-└── package.json       # NPM configuration
-```
-
-### CSS Variables
-
-#### Colors
-```css
-/* Primary Colors */
---color-primary-500: #6366f1;
---color-secondary-500: #a855f7;
---color-accent-500: #06b6d4;
-
-/* Semantic Colors */
---color-success: #10b981;
---color-warning: #f59e0b;
---color-error: #ef4444;
---color-info: #3b82f6;
-```
-
-#### Typography
-```css
-/* Font Sizes */
---text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
---text-sm: clamp(0.875rem, 0.825rem + 0.25vw, 1rem);
---text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
---text-lg: clamp(1.125rem, 1.075rem + 0.25vw, 1.25rem);
---text-xl: clamp(1.25rem, 1.175rem + 0.375vw, 1.5rem);
-```
-
-#### Spacing
-```css
-/* Spacing Scale */
---space-1: 0.25rem;   /* 4px */
---space-2: 0.5rem;    /* 8px */
---space-3: 0.75rem;   /* 12px */
---space-4: 1rem;      /* 16px */
---space-6: 1.5rem;    /* 24px */
---space-8: 2rem;      /* 32px */
-```
-
-### JavaScript API
-
-```javascript
-// Theme Management
-ThemeSystem.ThemeManager.setTheme('dark');
-
-// Toast Notifications
-ThemeSystem.Toast.show('Success!', 'success');
-
-// Modal
-ThemeSystem.Modal.open('Title', 'Content here');
-
-// Utilities
-ThemeSystem.Utils.debounce(func, 300);
-ThemeSystem.Utils.throttle(func, 100);
-```
-
-### Themes
-
-The system includes 4 built-in themes:
-
-| Theme | Description | Use Case |
-|-------|-------------|----------|
-| **Light** | Clean, minimal light theme | Default, daytime use |
-| **Dark** | Modern dark theme | Night time, reduced eye strain |
-| **Cosmic** | Purple space theme | Creative, unique applications |
-| **Forest** | Green nature theme | Eco-friendly, outdoor apps |
-
-#### Switching Themes
-```javascript
-// Via JavaScript
-document.documentElement.setAttribute('data-theme', 'dark');
-
-// Via HTML
-<html data-theme="dark">
-```
-
-## 🎨 Components
-
-### Available Components
-- ✅ Buttons (Primary, Secondary, Outline, Ghost)
-- ✅ Cards (Default, Elevated, Interactive)
-- ✅ Forms (Inputs, Selects, Textareas, Checkboxes, Radios)
-- ✅ Navigation (Sticky header with blur effect)
-- ✅ Alerts (Info, Success, Warning, Error)
-- ✅ Badges (Multiple variants)
-- ✅ Modals (Accessible with focus trap)
-- ✅ Toast Notifications
-- ✅ Loading States (Spinners, Progress bars, Skeletons)
-- ✅ Grid System (12-column and auto-fit)
-- ✅ Icons (15+ custom SVG icons)
-
-### Component Customization
-
-All components can be customized using CSS variables:
+ThemeKit Pro uses CSS custom properties for theming. You can easily customize colors:
 
 ```css
-/* Custom button styling */
-.my-custom-btn {
-    --btn-padding-x: var(--space-6);
-    --btn-padding-y: var(--space-3);
-    --btn-font-size: var(--text-lg);
-    --btn-border-radius: var(--radius-full);
+:root {
+    --color-primary-500: #your-brand-color;
+    --color-accent-500: #your-accent-color;
 }
 ```
 
-## 🔧 Advanced Usage
+### Dark Mode
 
-### Creating Custom Themes
-
-```css
-[data-theme="custom"] {
-    /* Override any CSS variables */
-    --bg-primary: #1a1a2e;
-    --bg-secondary: #16213e;
-    --text-primary: #eee;
-    --color-primary-500: #e94560;
-    /* ... more customizations */
-}
-```
-
-### Extending the Icon System
-
-```html
-<!-- Add your custom icon -->
-<svg style="display: none;">
-    <defs>
-        <symbol id="icon-custom" viewBox="0 0 24 24">
-            <!-- Your SVG path here -->
-        </symbol>
-    </defs>
-</svg>
-
-<!-- Use it -->
-<svg class="icon icon-md">
-    <use href="#icon-custom"></use>
-</svg>
-```
-
-### Performance Optimization
+Dark mode is automatically handled, but you can manually control it:
 
 ```javascript
-// Enable lazy loading for images
-<img data-src="image.jpg" data-lazy>
+// Toggle theme
+themeManager.toggleTheme();
 
-// Use intersection observer for animations
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('animate');
-        }
-    });
+// Set specific theme
+themeManager.setTheme('dark');
+themeManager.setTheme('light');
+```
+
+## 🔧 JavaScript APIs
+
+### Progress Management
+
+```javascript
+// Set progress with animation
+progressManager.setProgress('#my-progress', 75, true);
+
+// Increment progress
+progressManager.increment('#my-progress', 10);
+
+// Create new progress bar
+progressManager.createProgressBar('#container', {
+    progress: 50,
+    showText: true,
+    animated: true
 });
 ```
 
-## 📊 Browser Support
+### Loading States
 
-| Browser | Version |
-|---------|---------|
-| Chrome | 88+ |
-| Firefox | 78+ |
-| Safari | 14+ |
-| Edge | 88+ |
-| Opera | 74+ |
+```javascript
+// Button loading
+loadingManager.showButtonLoading('#my-button', 'Processing...');
+loadingManager.hideButtonLoading('#my-button');
 
-### Progressive Enhancement
-- CSS Custom Properties fallbacks
-- Intersection Observer polyfill available
-- Reduced motion media query support
-- High contrast mode support
+// Card loading
+loadingManager.showCardLoading('#my-card');
+loadingManager.hideCardLoading('#my-card');
+```
+
+### Toast Notifications
+
+```javascript
+// Show toast notifications
+toastManager.show('Success message!', 'success');
+toastManager.show('Error occurred', 'error');
+toastManager.show('Info message', 'info', 5000); // Custom duration
+```
+
+### Icon Management
+
+```javascript
+// Create icons dynamically
+const icon = iconManager.createIcon('star', {
+    size: 'lg',
+    color: 'primary',
+    spinning: true
+});
+
+// Add icon to button
+iconManager.addIcon('#my-button', 'download', 'left');
+```
+
+## 📱 Responsive Design
+
+ThemeKit Pro follows a mobile-first approach with 7 breakpoints:
+
+- **xs**: 480px+
+- **sm**: 640px+
+- **md**: 768px+
+- **lg**: 1024px+
+- **xl**: 1280px+
+- **2xl**: 1536px+
+
+## ♿ Accessibility
+
+- **WCAG 2.1 AA Compliant**
+- **Keyboard Navigation**: Full keyboard support for all components
+- **Screen Reader Support**: Proper ARIA labels and announcements
+- **High Contrast Mode**: Automatic adaptation to system preferences
+- **Reduced Motion**: Respects `prefers-reduced-motion` settings
+
+## 🌐 Browser Support
+
+- Chrome 90+
+- Firefox 88+
+- Safari 14+
+- Edge 90+
+
+## 📖 Examples
+
+Check out our [live demo](https://dnoice.github.io/ThemeKit-Pro/) to see all components in action!
+
+### Basic Page
+
+```html
+<div class="container">
+    <header class="header">
+        <nav class="nav">
+            <div class="nav__brand">
+                <h1 class="nav__title">My App</h1>
+            </div>
+            <button class="btn btn--secondary" id="themeToggle">
+                <span class="theme-icon">🌙</span>
+                Toggle Theme
+            </button>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <div class="hero__content">
+                <h1 class="hero__title">Welcome to <span class="gradient-text">ThemeKit Pro</span></h1>
+                <p class="hero__subtitle">Build beautiful interfaces with our comprehensive design system</p>
+                <div class="hero__actions">
+                    <button class="btn btn--primary btn--large">Get Started</button>
+                    <button class="btn btn--outline btn--large">Learn More</button>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+```
+
+## 🛠 Development
+
+### Prerequisites
+
+- Node.js 16+
+- Modern browser for testing
+
+### Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/dnoice/ThemeKit-Pro.git
+
+# Navigate to the project
+cd ThemeKit-Pro
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+### Build
+
+```bash
+# Build for production
+npm run build
+
+# Build and watch for changes
+npm run build:watch
+```
 
 ## 🤝 Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
-### Development Setup
-```bash
-# Clone the repo
-git clone https://github.com/dnoice/css-themeing-system.git
+### Quick Contribution Steps
 
-# Navigate to project
-cd css-themeing-system
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-# Install dependencies (if any)
-npm install
-
-# Start local server
-npm start
-```
-
-## 📝 License
+## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
-- Design inspiration from Material Design, Tailwind CSS, and Bootstrap
-- Icons inspired by Feather Icons and Heroicons
-- Community feedback and contributions
+- Inspired by modern design systems like Material Design, Chakra UI, and Tailwind CSS
+- Built with love for the web development community
+- Special thanks to all contributors and users
 
 ## 📞 Support
 
-- 📧 Email: support@example.com
-- 💬 [Discord Community](https://discord.gg/example)
-- 🐛 [Report Issues](https://github.com/dnoice/css-themeing-system/issues)
-- 📖 [Documentation Wiki](https://github.com/dnoice/css-themeing-system/wiki)
+- 📖 [Documentation](https://dnoice.github.io/ThemeKit-Pro/docs)
+- 🐛 [Report Issues](https://github.com/dnoice/ThemeKit-Pro/issues)
+- 💬 [Discussions](https://github.com/dnoice/ThemeKit-Pro/discussions)
+- 📧 [Email Support](mailto:support@themekit-pro.com)
 
-## 🚀 Roadmap
+## 🗺 Roadmap
 
-- [ ] Additional theme variants
-- [ ] Component playground
+- [ ] React component library
+- [ ] Vue.js component library
+- [ ] Angular component library
 - [ ] Figma design kit
-- [ ] React/Vue/Angular adapters
-- [ ] Theme builder tool
-- [ ] Performance monitoring dashboard
-- [ ] Additional icon packs
-- [ ] RTL support
-- [ ] Print stylesheet optimization
-- [ ] Web Components version
+- [ ] Sketch design kit
+- [ ] Advanced animation library
+- [ ] Form validation system
+- [ ] Data visualization components
 
 ---
 
 <div align="center">
-  
-Made with ❤️ by [dnoice](https://github.com/dnoice)
-
-⭐ Star us on GitHub — it helps!
-
+  <p>Made with ❤️ by the ThemeKit Pro team</p>
+  <p>⭐ Star us on GitHub if you like ThemeKit Pro!</p>
 </div>
